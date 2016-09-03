@@ -4,6 +4,10 @@
     <color name="lightColorPrimaryDark">#3f51b5</color>
     <color name="lightColorAccent">#e53935</color>
 
+    <color name="blackColorPrimary">#212121</color>
+    <color name="blackColorPrimaryDark">#212121</color>
+    <color name="blackColorAccent">#2989ce</color>
+
     <style name="LauncherActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">@color/black_text</item>
         <item name="android:textColorSecondary">@color/black_text_secondary</item>
@@ -36,9 +40,9 @@
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/white_text_secondary</item>
 
-        <item name="colorPrimary">@color/black_light</item>
-        <item name="colorPrimaryDark">@color/black_light</item>
-        <item name="colorAccent">@color/red_400</item>
+        <item name="colorPrimary">@color/blackColorPrimary</item>
+        <item name="colorPrimaryDark">@color/blackColorPrimaryDark</item>
+        <item name="colorAccent">@color/blackColorAccent</item>
 
         <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">@color/white</item>

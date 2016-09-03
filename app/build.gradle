@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "in.softc.money_manager"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 24
         versionCode 3
         versionName "16.9.3"

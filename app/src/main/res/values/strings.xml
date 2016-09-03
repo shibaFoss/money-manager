@@ -1,21 +1,28 @@
 <resources>
-    <string name="str_app_name">App</string>
-    <string name="str_app_icon">App icon</string>
-    <string name="str_softc_apps">SoftC Apps</string>
-    <string name="str_no">No</string>
-    <string name="str_yes">Yes</string>
-    <string name="str_you_received_message_from_developer">You have received a new message from developer.</string>
-    <string name="str_okay">Okay</string>
-    <string name="str_enable">Enable</string>
-    <string name="str_cancel">Cancel</string>
-    <string name="str_purchase_failed_error_msg">Oops! The purchase has failed.</string>
-    <string name="str_purchase_has_not_completed_msg">Oops! The purchase has not completed successfully. </string>
-    <string name="str_granting_app_permissions_msg">Hurray! Permissions have been granted successfully.</string>
-    <string name="str_not_granting_app_permission_msg">Oops! The permissions have not been granted.
+    <string name="str_app_name">Money Manager</string>
+    <string name="app_icon">App icon</string>
+    <string name="softc_apps">SoftC Apps</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="you_received_message_from_developer">You have received a new message from developer.</string>
+    <string name="okay">Okay</string>
+    <string name="enable">Enable</string>
+    <string name="cancel">Cancel</string>
+    <string name="purchase_failed_error_msg">Oops! The purchase has failed.</string>
+    <string name="purchase_has_not_completed_msg">Oops! The purchase has not completed successfully. </string>
+    <string name="granting_app_permissions_msg">Hurray! Permissions have been granted successfully.</string>
+    <string name="not_granting_app_permission_msg">Oops! The permissions have not been granted.
         Without granting the permissions the app is limited in functionality.</string>
-    <string name="str_softc">SoftC</string>
-    <string name="str_app_version">Version : 1.0 beta</string>
-    <string name="str_version">Version</string>
-    <string name="str_the_lion_and_the_mouse_sample_description">Once when a lion, the king of the jungle, was asleep, a little mouse began running up and down on him. This soon awakened the lion, who placed his huge paw on the mouse, and opened his big jaws to swallow him.</string>
-    <string name="str_press_back_once_more_to_exit">Press back once more to exit</string>
+    <string name="softc">SoftC</string>
+    <string name="app_version">Version : 1.0 beta</string>
+    <string name="version">Version</string>
+    <string name="lion_and_the_mouse_sample_description">Once when a lion, the king of the jungle, was asleep, a little mouse began running up and down on him. This soon awakened the lion, who placed his huge paw on the mouse, and opened his big jaws to swallow him.</string>
+    <string name="press_back_once_more_to_exit">Press back once more to exit</string>
+    <string name="select_currency">Select Currency</string>
+    <string name="currency">Currency</string>
+    <string name="initial_balance">Balance </string>
+    <string name="usd">USD</string>
+    <string name="next">Next</string>
+    <string name="_0_00">0.00</string>
+    <string name="wallet_setup">Wallet setup</string>
 </resources>

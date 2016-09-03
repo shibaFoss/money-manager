@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback;
-import com.google.android.gms.ads.InterstitialAd;
 
 import core.App;
 import in.softc.aladindm.R;
@@ -45,7 +44,6 @@ public abstract class BaseActivity extends LocalizationActivity {
 
     private App app;
     private Vibrator vibrator;
-    private InterstitialAd interstitialAd;
 
     private boolean isPremiumUser = false;
     private boolean isActivityRunning = false;
@@ -151,10 +149,10 @@ public abstract class BaseActivity extends LocalizationActivity {
         switch (requestCode) {
             case USES_PERMISSIONS_REQUEST_CODE: {
                 if ((grantResults.length > 0) && (grantResults[0] == PERMISSION_GRANTED)) {
-                    String msg = getString(R.string.str_granting_app_permissions_msg);
+                    String msg = getString(R.string.granting_app_permissions_msg);
                     showSimpleMessageBox(msg);
                 } else {
-                    String msg = getString(R.string.str_not_granting_app_permission_msg);
+                    String msg = getString(R.string.not_granting_app_permission_msg);
                     showSimpleMessageBox(msg);
                 }
             }
@@ -232,7 +230,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             @Override
             public void doInUIThread() {
                 DialogUtility.getDefaultBuilder(BaseActivity.this)
-                        .positiveText(R.string.str_okay)
+                        .positiveText(R.string.okay)
                         .content(message).build().show();
             }
         });
@@ -245,7 +243,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             public void doInUIThread() {
                 DialogUtility.getDefaultBuilder(BaseActivity.this)
                         .title(title)
-                        .positiveText(R.string.str_okay)
+                        .positiveText(R.string.okay)
                         .content(message).build().show();
             }
         });
@@ -259,7 +257,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             public void doInUIThread() {
                 DialogUtility.getDefaultBuilder(BaseActivity.this)
                         .title(title)
-                        .positiveText(R.string.str_okay)
+                        .positiveText(R.string.okay)
                         .cancelable(isCancelable)
                         .content(message).build().show();
             }
@@ -272,7 +270,7 @@ public abstract class BaseActivity extends LocalizationActivity {
             @Override
             public void doInUIThread() {
                 DialogUtility.getDefaultBuilder(BaseActivity.this)
-                        .positiveText(R.string.str_okay)
+                        .positiveText(R.string.okay)
                         .onPositive(callback)
                         .content(message).build().show();
             }
@@ -292,7 +290,7 @@ public abstract class BaseActivity extends LocalizationActivity {
 
                 if (msg != null)
                     DialogUtility.getDefaultBuilder(BaseActivity.this)
-                            .positiveText(R.string.str_okay)
+                            .positiveText(R.string.okay)
                             .content(msg).build().show();
             }
         });
@@ -312,7 +310,7 @@ public abstract class BaseActivity extends LocalizationActivity {
 
                 if (msg != null)
                     DialogUtility.getDefaultBuilder(BaseActivity.this)
-                            .positiveText(R.string.str_okay)
+                            .positiveText(R.string.okay)
                             .onPositive(callback)
                             .content(msg).build().show();
             }
@@ -339,7 +337,7 @@ public abstract class BaseActivity extends LocalizationActivity {
 
     public void exitActivityOnDoublePress() {
         if (isBackPressEventFired == 0) {
-            String msg = getString(R.string.str_press_back_once_more_to_exit);
+            String msg = getString(R.string.press_back_once_more_to_exit);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             isBackPressEventFired = 1;
             new CountDownTimer(2000, 1000) {

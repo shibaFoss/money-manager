@@ -7,7 +7,7 @@
     <application
         android:name="core.App"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher_icon"
+        android:icon="@drawable/app_icon_small"
         android:label="@string/str_app_name"
         android:theme="@style/AppThemeDark">
 
@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="gui.initial_setup.InitialSetUpActivity"/>
 
     </application>
 
