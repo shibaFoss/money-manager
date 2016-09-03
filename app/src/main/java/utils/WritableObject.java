@@ -9,14 +9,14 @@ import java.io.Serializable;
 
 /**
  * Extends the class if you want to save an class to hard disk. It provides two methods
- * {@link WritableObject#writeObjectToSdCard(Serializable, String, String)} and
- * {@link WritableObject#readSerializableObjectsFrom(File)} to it's subclasses.
+ * {@link WritableObject#writeObject(Serializable, String, String)} and
+ * {@link WritableObject#readObject(File)} to it's subclasses.
  */
 public class WritableObject implements Serializable {
 
     static final long serialVersionUID = -8294949271450580006L;
 
-    public static void writeObjectToSdCard(Serializable serializable, String filePath, String fileName) {
+    public static void writeObject(Serializable serializable, String filePath, String fileName) {
         final File objectFile = new File(filePath, fileName);
 
         FileOutputStream fileOutputStream = null;
@@ -70,7 +70,7 @@ public class WritableObject implements Serializable {
         return object;
     }
 
-    public static Serializable readSerializableObjectsFrom(File objectFile) {
+    public static Serializable readObject(File objectFile) {
         Serializable object = null;
 
         FileInputStream fileInputStream = null;

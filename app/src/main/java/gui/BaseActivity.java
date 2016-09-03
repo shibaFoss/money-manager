@@ -16,9 +16,12 @@ import android.text.Spanned;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback;
 
 import core.App;
+import gui.launcher.LauncherActivity;
 import in.softc.aladindm.R;
 import libs.AsyncJob;
 import libs.localization.LocalizationActivity;
@@ -31,7 +34,6 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * Base class of all {@link android.app.Activity} classes of this project.
  * The class have all sort of useful functions that's are ofter used throughout any
  * activity creation.
- *
  * @author Shiba
  */
 @SuppressWarnings("unused")
@@ -53,7 +55,6 @@ public abstract class BaseActivity extends LocalizationActivity {
     /**
      * The call back function is used to get the layout res Id of
      * the activity.
-     *
      * @return the res Id of the activity's layout xml file.
      */
     public abstract int getLayoutResId();
@@ -61,26 +62,16 @@ public abstract class BaseActivity extends LocalizationActivity {
     /**
      * The function get called on {@link android.app.Activity#onPostCreate(Bundle)}
      * function of the activity.
-     *
      * @param bundle the bundle reference that the activity uses to store data in the
      *               activity's whole life cycle.
      */
     public abstract void onInitialize(Bundle bundle);
-
-    public abstract void onPaused();
-
-    public abstract void onResumed();
 
     /**
      * The function get called when the activity's {@link Activity#onBackPressed()}
      * function get executed.
      */
     public abstract void onClosed();
-
-    /**
-     * The function get called when the activity is destroying.
-     */
-    public abstract void onDestroyed();
 
 
     @Override
@@ -101,7 +92,7 @@ public abstract class BaseActivity extends LocalizationActivity {
     public void onResume() {
         super.onResume();
         isActivityRunning = true;
-        onResumed();
+
     }
 
 
@@ -109,7 +100,6 @@ public abstract class BaseActivity extends LocalizationActivity {
     public void onPause() {
         super.onPause();
         isActivityRunning = false;
-        onPaused();
     }
 
 
@@ -122,7 +112,6 @@ public abstract class BaseActivity extends LocalizationActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        onDestroyed();
     }
 
 
@@ -134,7 +123,6 @@ public abstract class BaseActivity extends LocalizationActivity {
      * with the user is interrupted. In this case you will receive empty permissions
      * and results arrays which should be treated as a cancellation.
      * </p>
-     *
      * @param requestCode  The request code passed in {@link #requestPermissions(String[], int)}.
      * @param permissions  The requested permissions. Never null.
      * @param grantResults The grant results for the corresponding permissions
@@ -150,10 +138,22 @@ public abstract class BaseActivity extends LocalizationActivity {
             case USES_PERMISSIONS_REQUEST_CODE: {
                 if ((grantResults.length > 0) && (grantResults[0] == PERMISSION_GRANTED)) {
                     String msg = getString(R.string.granting_app_permissions_msg);
-                    showSimpleMessageBox(msg);
+                    showSimpleMessageBox(msg, new SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            finish();
+                            startActivity(LauncherActivity.class);
+                        }
+                    });
+
                 } else {
                     String msg = getString(R.string.not_granting_app_permission_msg);
-                    showSimpleMessageBox(msg);
+                    showSimpleMessageBox(msg, new SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            finish();
+                        }
+                    });
                 }
             }
         }
@@ -170,7 +170,6 @@ public abstract class BaseActivity extends LocalizationActivity {
 
     /**
      * The function opens the play store app with the given package Id.
-     *
      * @param packageId the app's package id that the function will open in the play store.
      */
     public void openAppPageInPlayStore(String packageId) {
@@ -208,7 +207,6 @@ public abstract class BaseActivity extends LocalizationActivity {
 
     /**
      * The function start the given activity class.
-     *
      * @param activityClass the activity class that need to start.
      */
     public void startActivity(Class activityClass) {

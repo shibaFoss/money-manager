@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:background="?attr/colorPrimary"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_toolbar"
+        style="@style/textTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/bnt_back"
+        android:layout_toStartOf="@+id/bnt_save"
+        android:gravity="center_vertical"
+        android:text="@string/new_account"
+        android:textColor="@color/white_text"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:id="@+id/bnt_back"
+        android:onClick="onBack"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/ic_toolbar_back"
+        />
+
+    <ImageButton
+        android:id="@+id/bnt_save"
+        android:onClick="onSaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/ic_toolbar_done"
+        />
+
+</RelativeLayout>

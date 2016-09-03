@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/toolbar_layout"
-        layout="@layout/activity_initial_setup_toolbar"/>
+        layout="@layout/activity_new_account_toolbar"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,16 +15,34 @@
         android:layout_below="@+id/toolbar_layout"
         android:layout_marginEnd="@dimen/dp_16"
         android:layout_marginStart="@dimen/dp_16"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_8"
         android:orientation="vertical">
 
-        <TextView
-            style="@style/SubHeading"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_8"
-            android:text="@string/wallet_setup"
-            android:textStyle="bold"/>
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/textBodyStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:text="@string/account_name"
+                android:textStyle="bold"
+                />
+
+            <EditText
+                android:id="@+id/edit_account_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="start"
+                android:hint="@string/credit_card"
+                android:inputType="text"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,13 +57,21 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:text="@string/currency"
+                android:textStyle="bold"
                 />
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/bnt_currency_selector"
+            <TextView
+                android:id="@+id/currency_selector_spinner"
+                style="@style/textBodyStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_16"
+                android:background="@drawable/ic_edit_text_border"
+                android:clickable="true"
+                android:padding="@dimen/dp_8"
+                android:text="@string/inr"
+                android:textStyle="bold"
                 />
 
         </LinearLayout>
@@ -53,7 +79,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
             android:orientation="horizontal">
 
             <TextView
@@ -63,6 +89,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/dp_16"
                 android:text="@string/initial_balance"
+                android:textStyle="bold"
                 />
 
             <EditText
@@ -76,12 +103,16 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/bntOk"
+        <EditText
+            android:id="@+id/edit_account_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/next"
+            android:layout_gravity="center_vertical"
+            android:gravity="start"
+            android:hint="@string/note"
+            android:inputType="textLongMessage"
+            android:maxLines="5"
+            android:minLines="2"
             />
 
     </LinearLayout>

@@ -24,5 +24,19 @@
     <string name="usd">USD</string>
     <string name="next">Next</string>
     <string name="_0_00">0.00</string>
-    <string name="wallet_setup">Wallet setup</string>
+    <string name="account_setup">Account setup : </string>
+    <string name="select_ur_currency_name">Please select your currency name</string>
+    <string name="account_name">Account name</string>
+    <string name="bank_account">Bank account</string>
+    <string name="save_account">Save account</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="give_account_name">Give the account a name</string>
+    <string name="inr">INR</string>
+    <string name="credit_card">Credit card</string>
+    <string name="new_account">New Account</string>
+    <string name="note">Note</string>
+    <string
+        name="app_require_write_permissions"><![CDATA[The app requires some permissions to work properly.]]></string>
+    <string name="grant_permission">Grant permissions</string>
+    <string name="restart_app_for_effect">Please restart the app.</string>
 </resources>

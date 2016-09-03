@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="in.softc.aladindm"
-          android:installLocation="internalOnly">
+          package="in.softc.aladindm">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -9,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@drawable/app_icon_small"
         android:label="@string/str_app_name"
-        android:theme="@style/AppThemeDark">
+        android:theme="@style/AppThemeLight">
 
         <activity
             android:name="gui.launcher.LauncherActivity"
@@ -21,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="gui.initial_setup.InitialSetUpActivity"/>
+        <activity android:name="gui.account_create.NewAccountCreateActivity"/>
 
     </application>
 
