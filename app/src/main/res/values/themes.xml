@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lightColorPrimary">#3f51b5</color>
+    <color name="lightColorPrimaryDark">#3f51b5</color>
+    <color name="lightColorAccent">#e53935</color>
+
+    <style name="LauncherActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/black_text</item>
+        <item name="android:textColorSecondary">@color/black_text_secondary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/black_text_disabled</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/transparent_black</item>
+        <item name="colorAccent">@color/black_light</item>
+        <item name="colorControlNormal">@color/black_light</item>
+        <item name="colorControlActivated">@color/black_light</item>
+        <item name="colorControlHighlight">@color/black_lighter</item>
+    </style>
+
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/black_text</item>
+        <item name="android:textColorSecondary">@color/black_text_secondary</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/black_text_disabled</item>
+
+        <item name="colorPrimary">@color/blue_700</item>
+        <item name="colorPrimaryDark">@color/blue_700</item>
+        <item name="colorAccent">@color/red_400</item>
+
+        <item name="colorControlNormal">@color/black_light</item>
+        <item name="colorControlActivated">@color/black_light</item>
+        <item name="colorControlHighlight">@color/black_lighter</item>
+
+        <item name="android:popupMenuStyle">@style/PopupWindowStyle</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white_text_secondary</item>
+
+        <item name="colorPrimary">@color/black_light</item>
+        <item name="colorPrimaryDark">@color/black_light</item>
+        <item name="colorAccent">@color/red_400</item>
+
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/black_lighter</item>
+
+        <item name="android:popupMenuStyle">@style/PopupWindowStyle</item>
+    </style>
+
+</resources>

@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="PopupWindowStyle" parent="@android:style/Widget.PopupMenu">
+        <item name="android:popupBackground" tools:ignore="PrivateResource">
+            @drawable/abc_popup_background_mtrl_mult
+        </item>
+
+        <item name="android:textColor">@color/black_text</item>
+        <item name="android:textSize">@dimen/material_text_button</item>
+        <item name="android:padding">@dimen/dp_8</item>
+    </style>
+
+    <style name="commonTextStyle">
+        <item name="android:textScaleX">1</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="textTitleStyle" parent="textBodyStyle">
+        <item name="android:textSize">@dimen/material_text_title</item>
+    </style>
+
+    <style name="textBodyStyle" parent="commonTextStyle">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/material_text_body1</item>
+    </style>
+
+    <style name="textButtonStyle" parent="textBodyStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:textSize">@dimen/material_text_button</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:padding">@dimen/dp_10</item>
+    </style>
+
+    <style name="SubHeading" parent="textBodyStyle">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">@dimen/material_text_subhead</item>
+    </style>
+
+</resources>
