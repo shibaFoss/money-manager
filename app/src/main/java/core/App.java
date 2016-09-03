@@ -12,7 +12,6 @@ import libs.Remember;
 
 public class App extends Application {
 
-    public static final String appDirectory = Environment.getExternalStorageDirectory() + "/Money Manager";
     public static final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     private AccountManager accountManager;

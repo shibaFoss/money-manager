@@ -74,7 +74,7 @@ public class NewAccountCreateActivity extends BaseActivity {
 
         AccountManager accountManager = getApp().getAccountManager();
         accountManager.totalAccounts.add(account);
-        accountManager.saveAccountManager();
+        accountManager.write(getApp());
 
         //start new activity.
     }

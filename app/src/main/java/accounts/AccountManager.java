@@ -1,46 +1,33 @@
 package accounts;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.SerializedName;
+import android.content.Context;
 
-import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import core.App;
 import utils.WritableObject;
 
-import static utils.WritableObject.readObject;
-import static utils.WritableObject.writeObject;
+public class AccountManager extends WritableObject {
 
-public class AccountManager {
+    public static final String ACCOUNT_JSON_FILE_NAME = "account_manager";
 
-    public final String ACCOUNT_FILE_NAME = "account_manager";
-    public App app;
-    public File accountFile = new File(App.appDirectory, ACCOUNT_FILE_NAME);
-
-    @SerializedName("totalAccount")
     public ArrayList<Account> totalAccounts = new ArrayList<>();
 
 
-    public AccountManager(App app) {
-        this.app = app;
-    }
-
-
     public static AccountManager readData(App app) {
-        AccountManager accountManager = new AccountManager(app);
-        try {
-            String data = (String) readObject(accountManager.accountFile);
-            if (data != null) {
-                AccountManager am = getAccountsData(data);
-                if (am != null) accountManager = am;
+        AccountManager accountManager = new AccountManager();
 
-            } else {
-                Gson gson = new Gson();
-                String jsonData = gson.toJson(accountManager);
-                writeObject(jsonData, App.appDirectory, accountManager.ACCOUNT_FILE_NAME);
-            }
+        try {
+            AccountManager am = accountManager.read(app);
+            if (am != null)
+                accountManager = am;
+            else
+                accountManager.write(app);
+
         } catch (Throwable err) {
             err.printStackTrace();
         }
@@ -49,19 +36,29 @@ public class AccountManager {
     }
 
 
-    private static AccountManager getAccountsData(String data) {
-        Gson gson = new GsonBuilder().create();
-        return gson.fromJson(data, AccountManager.class);
+    public void write(App app) {
+        try {
+            FileOutputStream fileOutput = app.openFileOutput(ACCOUNT_JSON_FILE_NAME, Context.MODE_PRIVATE);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutput);
+            outputStream.writeObject(this);
+            outputStream.close();
+            fileOutput.close();
+
+        } catch (Throwable err) {
+            err.printStackTrace();
+        }
     }
 
 
-    public void saveAccountManager() {
+    public AccountManager read(App app) {
         try {
-            Gson gson = new Gson();
-            String jsonData = gson.toJson(this);
-            writeObject(jsonData, App.appDirectory, ACCOUNT_FILE_NAME);
+            FileInputStream fileInputStream = app.openFileInput(ACCOUNT_JSON_FILE_NAME);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            return (AccountManager) objectInputStream.readObject();
+
         } catch (Throwable err) {
             err.printStackTrace();
+            return null;
         }
     }
 

@@ -34,7 +34,6 @@ public class LauncherActivity extends BaseActivity {
                 AsyncJob.doInBackground(new AsyncJob.BackgroundJob() {
                     @Override
                     public void doInBackground() {
-                        FileUtils.makeDirectory(new File(App.appDirectory));
                         AccountManager am = AccountManager.readData(getApp());
                         getApp().setAccountManager(am);
                         startNextActivity();
@@ -64,7 +63,7 @@ public class LauncherActivity extends BaseActivity {
                     startActivity(NewAccountCreateActivity.class);
 
                 } else {
-                    toast("Test complete! Account is created.");
+                    toast("Test complete! Account is created. " + accountManager.totalAccounts.get(0).accountName);
                 }
             }
         });
