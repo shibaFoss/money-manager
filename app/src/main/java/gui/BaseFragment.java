@@ -1,6 +1,7 @@
 package gui;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +18,13 @@ public abstract class BaseFragment extends Fragment {
     /**
      * The method gets called by the {@link BaseFragment} for getting the
      * fragment layout resource Id.
-     *
      * @return the fragment layout resource id.
      */
     protected abstract int getLayoutResId();
 
-
     /**
      * The method gets called by the {@link BaseFragment} after completion of the
      * fragment layout loading.
-     *
      * @param layoutView         the loaded fragment layout view.
      * @param savedInstanceState the savedInstanceState {@link Bundle} of the fragment.
      */
@@ -44,7 +42,13 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.layoutView = view;
-        this.onAfterLayoutLoad(view, savedInstanceState);
+    }
+
+
+    @Override
+    public void onActivityCreated(Bundle bundle) {
+        super.onActivityCreated(bundle);
+        this.onAfterLayoutLoad(layoutView, bundle);
     }
 
 

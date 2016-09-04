@@ -45,4 +45,8 @@
     <string name="overview">Overview</string>
     <string name="select_ur_prefer_language">Please select your prefer language.</string>
     <string name="choose_default_language">Choose defualt language</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="_60000">₹ 665729500.00</string>
+    <string name="september">September</string>
+    <string name="_2016">4/9/2016</string>
 </resources>

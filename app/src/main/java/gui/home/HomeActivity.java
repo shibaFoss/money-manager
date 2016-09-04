@@ -1,13 +1,18 @@
 package gui.home;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import gui.BaseActivity;
+import gui.home.overview.OverviewFragment;
 import in.softc.aladindm.R;
 
 public class HomeActivity extends BaseActivity {
-    private ViewPager viewPager;
+
+    private OverviewFragment overviewFragment;
 
 
     @Override
@@ -18,7 +23,9 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .add(R.id.fragment_container, getOverviewFragment()).commit();
     }
 
 
@@ -27,4 +34,15 @@ public class HomeActivity extends BaseActivity {
         exitActivityOnDoublePress();
     }
 
+
+    public OverviewFragment getOverviewFragment() {
+        return (overviewFragment == null) ? new OverviewFragment() : overviewFragment;
+    }
+
+
+    public void changeToolbarTitle(String titleName) {
+        TextView txtToolbar = (TextView) findViewById(R.id.txt_toolbar);
+        if (txtToolbar != null)
+            txtToolbar.setText(titleName);
+    }
 }

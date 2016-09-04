@@ -5,6 +5,7 @@
     <color name="transparent">#00000000</color>
     <color name="transparent_black">#6e000000</color>
     <color name="transparent_white">#8effffff</color>
+    <color name="transparent_white_light">#70ffffff</color>
     <color name="black_icon_color">#3E484C</color>
 
     <!-- google's material design colours from
@@ -296,5 +297,6 @@
     <color name="white_text_disabled">#4dffffff</color>
     <color name="white_text_secondary">#b3ffffff</color>
     <color name="white_text">#ffffff</color>
+    <color name="transparent_black_light">#45494949</color>
 
 </resources>
