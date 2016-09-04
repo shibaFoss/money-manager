@@ -39,4 +39,10 @@
         name="app_require_write_permissions"><![CDATA[The app requires some permissions to work properly.]]></string>
     <string name="grant_permission">Grant permissions</string>
     <string name="restart_app_for_effect">Please restart the app.</string>
+    <string name="add_expenses">Add expenses</string>
+    <string name="add_money">Add money</string>
+    <string name="navigation_drawer">Navigation drawer</string>
+    <string name="overview">Overview</string>
+    <string name="select_ur_prefer_language">Please select your prefer language.</string>
+    <string name="choose_default_language">Choose defualt language</string>
 </resources>

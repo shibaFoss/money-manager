@@ -22,6 +22,8 @@
 
         <activity android:name="gui.account_create.NewAccountCreateActivity"/>
 
+        <activity android:name="gui.home.HomeActivity"/>
+
     </application>
 
 </manifest>

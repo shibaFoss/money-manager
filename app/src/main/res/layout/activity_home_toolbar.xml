@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/bnt_navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/navigation_drawer"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/ic_toolbar_navigation_menu"/>
+
+    <TextView
+        android:id="@+id/txt_toolbar"
+        style="@style/textTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/bnt_navigation_drawer"
+        android:layout_toStartOf="@+id/bnt_add_money"
+        android:gravity="center_vertical"
+        android:text="@string/str_app_name"
+        android:textColor="@color/white_text"
+        android:textStyle="bold"
+        />
+
+    <ImageButton
+        android:id="@+id/bnt_add_money"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toStartOf="@+id/bnt_add_expenses"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/add_money"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/ic_toolbar_add_balance"/>
+
+    <ImageButton
+        android:id="@+id/bnt_add_expenses"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/add_expenses"
+        android:padding="@dimen/dp_10"
+        android:src="@drawable/ic_toolbar_add_expense"/>
+
+</RelativeLayout>

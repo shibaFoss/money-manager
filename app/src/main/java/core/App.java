@@ -1,10 +1,8 @@
 package core;
 
-import android.Manifest;
 import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 
 import accounts.AccountManager;
@@ -12,10 +10,7 @@ import libs.Remember;
 
 public class App extends Application {
 
-    public static final String[] REQUIRED_PERMISSIONS = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
-
     private AccountManager accountManager;
-
 
     @Override
     public void onCreate() {

@@ -12,4 +12,5 @@ public class Account implements Serializable {
 
     public String note;
 
+    public String jsonData;
 }

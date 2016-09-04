@@ -1,5 +1,6 @@
 package gui.account_create;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -7,6 +8,7 @@ import android.widget.EditText;
 import accounts.Account;
 import accounts.AccountManager;
 import gui.BaseActivity;
+import gui.home.HomeActivity;
 import in.softc.aladindm.R;
 
 public class NewAccountCreateActivity extends BaseActivity {
@@ -76,6 +78,10 @@ public class NewAccountCreateActivity extends BaseActivity {
         accountManager.totalAccounts.add(account);
         accountManager.write(getApp());
 
-        //start new activity.
+        Intent intent = getIntent();
+        if (intent.getBooleanExtra("isLauncherFired", false))
+            startActivity(HomeActivity.class);
+
+        finish();
     }
 }

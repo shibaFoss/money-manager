@@ -110,9 +110,9 @@
             android:layout_gravity="center_vertical"
             android:gravity="start"
             android:hint="@string/note"
-            android:inputType="textLongMessage"
             android:maxLines="5"
             android:minLines="2"
+            android:singleLine="false"
             />
 
     </LinearLayout>

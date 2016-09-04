@@ -1,23 +1,14 @@
 package gui.launcher;
 
-import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-
-import java.io.File;
 
 import accounts.AccountManager;
-import core.App;
 import gui.BaseActivity;
 import gui.account_create.NewAccountCreateActivity;
-import gui.static_dialogs.YesNoDialog;
+import gui.home.HomeActivity;
 import in.softc.aladindm.R;
-import libs.AsyncJob;
-import utils.FileUtils;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -29,22 +20,17 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        if (App.isPermissionGranted(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            if (getApp().getAccountManager() == null) {
-                AsyncJob.doInBackground(new AsyncJob.BackgroundJob() {
-                    @Override
-                    public void doInBackground() {
-                        AccountManager am = AccountManager.readData(getApp());
-                        getApp().setAccountManager(am);
-                        startNextActivity();
-                    }
-                });
-            } else {
+        //the account manager is not set yet. so initialize it first.
+        if (getApp().getAccountManager() == null) {
+            AccountManager am = AccountManager.readData(getApp());
+            getApp().setAccountManager(am);
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 startNextActivity();
             }
-        } else {
-            askForSdcardWritingPermission();
-        }
+        }, 1500);
     }
 
 
@@ -55,44 +41,19 @@ public class LauncherActivity extends BaseActivity {
 
 
     private void startNextActivity() {
-        AsyncJob.doInMainThread(new AsyncJob.MainThreadJob() {
-            @Override
-            public void doInUIThread() {
-                AccountManager accountManager = getApp().getAccountManager();
-                if (accountManager.totalAccounts.size() == 0) {
-                    startActivity(NewAccountCreateActivity.class);
+        AccountManager am = getApp().getAccountManager();
+        if (am != null) {
+            if (am.totalAccounts.size() == 0) {
+                Intent intent = new Intent(LauncherActivity.this, NewAccountCreateActivity.class);
+                intent.putExtra("isLauncherFired", true);
+                startActivity(intent);
 
-                } else {
-                    toast("Test complete! Account is created. " + accountManager.totalAccounts.get(0).accountName);
-                }
+            } else {
+                startActivity(HomeActivity.class);
             }
-        });
-    }
+        }
 
-
-    private void askForSdcardWritingPermission() {
-        YesNoDialog yesNoDialog = new YesNoDialog(this) {
-
-            @Override
-            public void onYes(Dialog dialog) {
-                dialog.dismiss();
-                ActivityCompat.requestPermissions(LauncherActivity.this,
-                        App.REQUIRED_PERMISSIONS,
-                        USES_PERMISSIONS_REQUEST_CODE);
-            }
-
-
-            @Override
-            public void onNo(Dialog dialog) {
-                dialog.dismiss();
-                finish();
-            }
-        };
-
-        yesNoDialog.show(
-                R.string.grant_permission,
-                R.string.cancel,
-                R.string.app_require_write_permissions);
+        finish();
     }
 
 }
