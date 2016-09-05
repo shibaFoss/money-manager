@@ -65,17 +65,12 @@ public class AccountManager extends WritableObject {
 
 
     public static double getTotalAvailableBalance(ArrayList<Account> accounts, int month, int year) {
-        ArrayList<Transaction> transactions = new ArrayList<>();
-        for (Account acc : accounts)
-            transactions.addAll(acc.transactions);
-
+        ArrayList<Transaction> transactions = getTransactionsOf(accounts);
         double totalBalance = 0;
         for (Transaction tran : transactions) {
             if (tran.year <= year && tran.month <= month) {
-                if (tran.isExpense)
-                    totalBalance -= tran.transactionAmount;
-                else
-                    totalBalance += tran.transactionAmount;
+                if (tran.isExpense) totalBalance -= tran.transactionAmount;
+                else totalBalance += tran.transactionAmount;
             }
         }
 
@@ -85,7 +80,8 @@ public class AccountManager extends WritableObject {
 
     public static double getTotalBudget(ArrayList<Account> accounts) {
         double money = 0;
-        for (Account acc : accounts) money += acc.monthlyBudget;
+        for (Account acc : accounts)
+            money += acc.monthlyBudget;
         return money;
     }
 
@@ -103,12 +99,12 @@ public class AccountManager extends WritableObject {
 
     public static double getTotalExpensesOfTheMonth(ArrayList<Account> accounts, int month, int year) {
         ArrayList<Transaction> transactions = findTransactions(accounts, month, year);
-        double income = 0;
+        double expenses = 0;
         for (Transaction tran : transactions)
             if (tran.isExpense)
-                income += tran.transactionAmount;
+                expenses += tran.transactionAmount;
 
-        return income;
+        return expenses;
     }
 
 

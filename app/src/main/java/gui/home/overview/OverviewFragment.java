@@ -15,12 +15,12 @@ import accounts.Transaction;
 import gui.BaseFragment;
 import gui.home.HomeActivity;
 import in.softc.aladindm.R;
-import libs.Remember;
 import utils.OsUtility;
 
-public class OverviewFragment extends BaseFragment {
+import static accounts.AccountManager.*;
 
-    private HomeActivity activity;
+public class OverviewFragment extends BaseFragment implements ExpenseListAdapter.OnTransactionClick {
+
     private ListView expensesList;
     private ExpenseListAdapter expenseListAdapter;
 
@@ -33,11 +33,11 @@ public class OverviewFragment extends BaseFragment {
 
     @Override
     protected void onAfterLayoutLoad(View layoutView, Bundle savedInstanceState) {
-        activity = (HomeActivity) getBaseActivity();
-        activity.changeToolbarTitle(getString(R.string.overview));
+        HomeActivity activity = (HomeActivity) getBaseActivity();
+        activity.changeToolbarTitle(getString(R.string.all_accounts));
 
         expensesList = (ListView) layoutView.findViewById(R.id.list_transaction);
-        expenseListAdapter = new ExpenseListAdapter(getBaseActivity());
+        expenseListAdapter = new ExpenseListAdapter(this);
         expensesList.setAdapter(expenseListAdapter);
 
         int month = Calendar.getInstance().get(Calendar.MONTH);
@@ -71,13 +71,18 @@ public class OverviewFragment extends BaseFragment {
 
         TextView overviewBudget = (TextView) accountOverview.findViewById(R.id.txt_overview_budget);
         TextView overviewTotalExpense = (TextView) accountOverview.findViewById(R.id.txt_total_expenses);
+        if (expensesList != null)
+            expensesList.addHeaderView(accountOverview);
+
         //----------------------------------------------------------------------------------------//
         String currency = accounts.get(0).currency;
         String monthName = OsUtility.getFullMonthName(month) + " " + year;
-        double totalAvailableBalance = AccountManager.getTotalAvailableBalance(accounts, month, year);
-        double totalBudget = AccountManager.getTotalBudget(accounts);
-        double totalIncomeOfTheMonth = AccountManager.getTotalIncomeOfTheMonth(accounts, month, year);
-        double totalExpensesOfTheMonth = AccountManager.getTotalExpensesOfTheMonth(accounts, month, year);
+        double totalAvailableBalance = getTotalAvailableBalance(accounts, month, year);
+
+        double totalIncomeOfTheMonth = getTotalIncomeOfTheMonth(accounts, month, year);
+        double totalExpensesOfTheMonth = getTotalExpensesOfTheMonth(accounts, month, year);
+
+        double totalBudget = getTotalBudget(accounts);
         double totalSaving = totalIncomeOfTheMonth - totalExpensesOfTheMonth;
 
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
@@ -92,9 +97,15 @@ public class OverviewFragment extends BaseFragment {
         overviewSavingsAmount.setText(String.valueOf(currency + " " + totalSaving));
         overviewTotalIncome.setText(String.valueOf(currency + " " + totalIncomeOfTheMonth));
 
-        overviewBudget.setText(totalBudget < 1 ? "Can not show" : String.valueOf(currency + " " + totalBudget));
+        overviewBudget.setText(totalBudget < 1 ? "Can't show" : String.valueOf(currency + " " + totalBudget));
         overviewTotalExpense.setText(String.valueOf(currency + " " + totalExpensesOfTheMonth));
     }
 
+
+    @Override
+    public void onTransactionClick(Transaction transaction, int listPosition) {
+        getBaseActivity().toast(String.valueOf("Amount  = " + transaction.account.currency + " " + transaction
+                .transactionAmount));
+    }
 }
 

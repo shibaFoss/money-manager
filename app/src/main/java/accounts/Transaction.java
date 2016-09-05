@@ -28,7 +28,7 @@ public class Transaction implements Serializable {
 
 
     public void updateTransactionTime() {
-        this.date = OsUtility.getCurrentDate("dd/MM/YYYY");
+        this.date = OsUtility.getCurrentDate("dd/MM/yyyy");
         this.month = Calendar.getInstance().get(Calendar.MONTH);
         this.year = Calendar.getInstance().get(Calendar.YEAR);
         this.day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);

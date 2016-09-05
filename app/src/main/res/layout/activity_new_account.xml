@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="start"
-                android:hint="@string/credit_card"
+                android:hint="@string/bank_account"
                 android:inputType="text"/>
 
         </LinearLayout>

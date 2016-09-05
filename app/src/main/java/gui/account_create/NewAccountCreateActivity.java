@@ -52,7 +52,10 @@ public class NewAccountCreateActivity extends BaseActivity {
 
         String enteredName = accountName.getText().toString();
         if (enteredName.length() > 1) account.name = enteredName;
-        else toast(getString(R.string.give_account_name));
+        else {
+            toast(getString(R.string.give_account_name));
+            return;
+        }
 
         account.note = accountNote.getText().toString();
         account.currency = getCurrencySymbolByTimeZone();
@@ -64,10 +67,9 @@ public class NewAccountCreateActivity extends BaseActivity {
 
         String enteredAmount = accountBalance.getText().toString();
         if (enteredAmount.length() > 1) transaction.transactionAmount = Double.valueOf(enteredAmount);
-        else transaction.transactionAmount = 0.00;
+        else transaction.transactionAmount = 0;
 
-        transaction.transactionNote = "Initial balance. This is the available amount of money I have " +
-                "right now.";
+        transaction.transactionNote = "Initial balance.";
         transaction.transactionCategory = "Initial Balance";
 
         transaction.memoImagePath = null;

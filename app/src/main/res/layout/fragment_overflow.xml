@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:divider="@color/transparent"
         android:dividerHeight="@dimen/dp_5"
-        android:listSelector="?attr/selectableItemBackground"
+        android:listSelector="@color/transparent"
         />
 
 </LinearLayout>

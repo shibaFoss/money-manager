@@ -10,10 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_8"
+        android:background="@drawable/ic_button_selector"
+        android:clickable="true"
         card_view:cardCornerRadius="2dp"
         card_view:cardElevation="@dimen/dp_1">
 
         <LinearLayout
+            android:id="@+id/transaction_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -45,6 +48,7 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:layout_toEndOf="@+id/bnt_category_color"
                     android:layout_toStartOf="@+id/txt_transaction_amount"
+                    android:maxLines="3"
                     android:text="@string/dinner_with_dip"
                     android:textSize="@dimen/sp_15"
                     />
@@ -58,7 +62,7 @@
                     android:layout_marginStart="@dimen/dp_4"
                     android:gravity="end"
                     android:text="@string/__600"
-                    android:textColor="@color/green_500"
+                    android:textColor="@color/red_500"
                     android:textSize="@dimen/sp_20"
                     />
 
