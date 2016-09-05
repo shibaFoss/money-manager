@@ -7,13 +7,13 @@ import android.widget.EditText;
 
 import accounts.Account;
 import accounts.AccountManager;
+import accounts.Transaction;
 import gui.BaseActivity;
 import gui.home.HomeActivity;
 import in.softc.aladindm.R;
 
 public class NewAccountCreateActivity extends BaseActivity {
 
-    private Account account;
     private EditText accountName, accountBalance, accountNote;
 
 
@@ -25,23 +25,9 @@ public class NewAccountCreateActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        generateEmptyAccount();
-        setupViews();
-    }
-
-
-    private void setupViews() {
         accountName = (EditText) findViewById(R.id.edit_account_name);
         accountBalance = (EditText) findViewById(R.id.edit_starting_balance);
         accountNote = (EditText) findViewById(R.id.edit_account_note);
-    }
-
-
-    private void generateEmptyAccount() {
-        account = new Account();
-        account.availableBalance = 0.0;
-        account.currency = getCurrencyByTimeZone();
-        account.note = "";
     }
 
 
@@ -51,8 +37,8 @@ public class NewAccountCreateActivity extends BaseActivity {
     }
 
 
-    private String getCurrencyByTimeZone() {
-        return "";
+    private String getCurrencySymbolByTimeZone() {
+        return "₹";
     }
 
 
@@ -62,17 +48,34 @@ public class NewAccountCreateActivity extends BaseActivity {
 
 
     public void onSaveAccount(View view) {
-        String balance = accountBalance.getText().toString();
-        if (balance.length() > 1)
-            account.availableBalance = Double.valueOf(balance);
+        Account account = new Account();
 
-        account.accountName = accountName.getText().toString();
+        String enteredName = accountName.getText().toString();
+        if (enteredName.length() > 1) account.name = enteredName;
+        else toast(getString(R.string.give_account_name));
+
         account.note = accountNote.getText().toString();
+        account.currency = getCurrencySymbolByTimeZone();
+        account.monthlyBudget = 0.0;
 
-        if (account.accountName.length() < 1) {
-            toast(getString(R.string.give_account_name));
-            return;
-        }
+        Transaction transaction = new Transaction();
+        transaction.account = account;
+        transaction.isExpense = false;
+
+        String enteredAmount = accountBalance.getText().toString();
+        if (enteredAmount.length() > 1) transaction.transactionAmount = Double.valueOf(enteredAmount);
+        else transaction.transactionAmount = 0.00;
+
+        transaction.transactionNote = "Initial balance. This is the available amount of money I have " +
+                "right now.";
+        transaction.transactionCategory = "Initial Balance";
+
+        transaction.memoImagePath = null;
+        transaction.colorCode = "#66bb6a";
+
+        transaction.updateTransactionTime();
+
+        account.addNewTransaction(transaction);
 
         AccountManager accountManager = getApp().getAccountManager();
         accountManager.totalAccounts.add(account);

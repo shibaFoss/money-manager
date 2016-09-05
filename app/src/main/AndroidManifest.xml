@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@drawable/app_icon_small"
         android:label="@string/str_app_name"
-        android:theme="@style/AppThemeDark">
+        android:theme="@style/AppThemeLight">
 
         <activity
             android:name="gui.launcher.LauncherActivity"

@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/dp_16"
-                android:text="@string/initial_balance"
+                android:text="@string/current_balance"
                 android:textStyle="bold"
                 />
 
@@ -111,7 +111,7 @@
             android:gravity="start"
             android:hint="@string/note"
             android:maxLines="5"
-            android:minLines="2"
+            android:minLines="1"
             android:singleLine="false"
             />
 

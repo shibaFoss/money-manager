@@ -33,5 +33,4 @@ public class App extends Application {
     public AccountManager getAccountManager() {
         return accountManager;
     }
-
 }

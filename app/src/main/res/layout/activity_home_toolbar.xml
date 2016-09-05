@@ -24,7 +24,7 @@
         android:layout_toEndOf="@+id/bnt_navigation_drawer"
         android:layout_toStartOf="@+id/bnt_add_money"
         android:gravity="center_vertical"
-        android:text="@string/str_app_name"
+        android:text="@string/overview"
         android:textColor="@color/white_text"
         android:textStyle="bold"
         />

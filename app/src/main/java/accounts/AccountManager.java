@@ -12,6 +12,7 @@ import core.App;
 import utils.WritableObject;
 
 public class AccountManager extends WritableObject {
+    private static final long serialVersionUID = 296984946043256L;
 
     public static final String ACCOUNT_JSON_FILE_NAME = "account_manager";
 
@@ -62,4 +63,83 @@ public class AccountManager extends WritableObject {
         }
     }
 
+
+    public static double getTotalAvailableBalance(ArrayList<Account> accounts, int month, int year) {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        for (Account acc : accounts)
+            transactions.addAll(acc.transactions);
+
+        double totalBalance = 0;
+        for (Transaction tran : transactions) {
+            if (tran.year <= year && tran.month <= month) {
+                if (tran.isExpense)
+                    totalBalance -= tran.transactionAmount;
+                else
+                    totalBalance += tran.transactionAmount;
+            }
+        }
+
+        return totalBalance;
+    }
+
+
+    public static double getTotalBudget(ArrayList<Account> accounts) {
+        double money = 0;
+        for (Account acc : accounts) money += acc.monthlyBudget;
+        return money;
+    }
+
+
+    public static double getTotalIncomeOfTheMonth(ArrayList<Account> accounts, int month, int year) {
+        ArrayList<Transaction> transactions = findTransactions(accounts, month, year);
+        double income = 0;
+        for (Transaction tran : transactions)
+            if (!tran.isExpense)
+                income += tran.transactionAmount;
+
+        return income;
+    }
+
+
+    public static double getTotalExpensesOfTheMonth(ArrayList<Account> accounts, int month, int year) {
+        ArrayList<Transaction> transactions = findTransactions(accounts, month, year);
+        double income = 0;
+        for (Transaction tran : transactions)
+            if (tran.isExpense)
+                income += tran.transactionAmount;
+
+        return income;
+    }
+
+
+    public static ArrayList<Transaction> findTransactions(ArrayList<Account> accounts, int month, int year) {
+        ArrayList<Transaction> trans = new ArrayList<>();
+        for (Transaction tran : getTransactionsOf(accounts)) {
+            if (tran.month == month && tran.year == year)
+                trans.add(tran);
+        }
+
+        return trans;
+    }
+
+
+    public static ArrayList<Transaction> findTransactions(ArrayList<Account> accounts, int day, int month, int year) {
+        ArrayList<Transaction> trans = new ArrayList<>();
+        for (Transaction tran : getTransactionsOf(accounts)) {
+            if (tran.day == day && tran.month == month && tran.year == year)
+                trans.add(tran);
+        }
+
+        return trans;
+    }
+
+
+    public static ArrayList<Transaction> getTransactionsOf(ArrayList<Account> accounts) {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+        for (Account acc : accounts)
+            if (!acc.transactions.isEmpty())
+                transactions.addAll(acc.transactions);
+
+        return transactions;
+    }
 }
