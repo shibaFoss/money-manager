@@ -39,7 +39,11 @@ public class OverviewFragment extends BaseFragment implements ExpenseListAdapter
         expensesList = (ListView) layoutView.findViewById(R.id.list_transaction);
         expenseListAdapter = new ExpenseListAdapter(this);
         expensesList.setAdapter(expenseListAdapter);
+        updateTransactions();
+    }
 
+
+    public void updateTransactions() {
         int month = Calendar.getInstance().get(Calendar.MONTH);
         int year = Calendar.getInstance().get(Calendar.YEAR);
         AccountManager accountManager = getApp().getAccountManager();
@@ -107,5 +111,6 @@ public class OverviewFragment extends BaseFragment implements ExpenseListAdapter
         getBaseActivity().toast(String.valueOf("Amount  = " + transaction.account.currency + " " + transaction
                 .transactionAmount));
     }
+
 }
 

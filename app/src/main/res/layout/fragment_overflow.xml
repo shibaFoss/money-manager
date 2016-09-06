@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@color/transparent"
-        android:dividerHeight="@dimen/dp_5"
+        android:dividerHeight="@dimen/dp_0"
         android:listSelector="@color/transparent"
         />
 

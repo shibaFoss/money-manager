@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@drawable/app_icon_small"
         android:label="@string/str_app_name"
-        android:theme="@style/AppThemeLight">
+        android:theme="@style/AppThemeDark">
 
         <activity
             android:name="gui.launcher.LauncherActivity"
@@ -23,6 +23,8 @@
         <activity android:name="gui.account_create.NewAccountCreateActivity"/>
 
         <activity android:name="gui.home.HomeActivity"/>
+
+        <activity android:name="gui.transaction.TransactionActivity"/>
 
     </application>
 

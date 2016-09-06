@@ -2,24 +2,36 @@ package utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.annotation.AttrRes;
+import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
+import android.util.TypedValue;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import gui.BaseActivity;
-import in.softc.aladindm.R;
 
 public class DialogUtility {
 
     public static MaterialDialog.Builder getDefaultBuilder(BaseActivity activity) {
         return new MaterialDialog.Builder(activity)
-                .contentColor(activity.getColorFrom(R.color.black_text))
-                .positiveColor(activity.getColorFrom(R.color.black_text))
-                .negativeColor(activity.getColorFrom(R.color.black_text_secondary))
-                .neutralColor(activity.getColorFrom(R.color.black_text_secondary));
+                .contentColor(getThemeColor(activity, android.R.attr.textColorPrimary))
+                .positiveColor(getThemeColor(activity, android.R.attr.textColorPrimary))
+                .negativeColor(getThemeColor(activity, android.R.attr.textColorSecondary))
+                .neutralColor(getThemeColor(activity, android.R.attr.textColorSecondary));
+    }
+
+
+    @ColorInt
+    public static int getThemeColor(@NonNull final Context context, @AttrRes final int attributeColor) {
+        final TypedValue value = new TypedValue();
+        context.getTheme().resolveAttribute(attributeColor, value, true);
+        return value.data;
     }
 
 

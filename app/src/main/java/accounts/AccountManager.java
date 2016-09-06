@@ -17,6 +17,28 @@ public class AccountManager extends WritableObject {
     public static final String ACCOUNT_JSON_FILE_NAME = "account_manager";
 
     public ArrayList<Account> totalAccounts = new ArrayList<>();
+    public ArrayList<String> incomeCategories = new ArrayList<>();
+    public ArrayList<String> expenseCategories = new ArrayList<>();
+
+
+    public AccountManager() {
+        if (incomeCategories.size() < 1) {
+            incomeCategories.add("Job");
+            incomeCategories.add("Salary");
+            incomeCategories.add("Other");
+        }
+
+        if (expenseCategories.size() < 1) {
+            expenseCategories.add("Food & Drinks");
+            expenseCategories.add("Shopping");
+            expenseCategories.add("Rent");
+            expenseCategories.add("Daily Needs");
+            expenseCategories.add("Transportation");
+            expenseCategories.add("Leisure");
+            expenseCategories.add("Other");
+        }
+
+    }
 
 
     public static AccountManager readData(App app) {

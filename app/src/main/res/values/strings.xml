@@ -56,9 +56,8 @@
     <string name="over_budget_warning">Over Budget</string>
     <string name="date_example">04 Sep</string>
     <string name="_600">₹ 600</string>
-    <string name="__600">+ ₹ 600</string>
-    <string name="dinner_with_dip">Dinner with amiyo, also did lot of fun and also we discuss about the new
-        project.</string>
+    <string name="__600">₹ 600</string>
+    <string name="dinner_with_dip">Dinner with amiyo.</string>
     <string name="_4300">₹ 4300</string>
     <string name="total_income">Total Income</string>
     <string name="savings">Savings</string>
@@ -70,4 +69,19 @@
     <string name="september_2016">September 2016</string>
     <string name="month">Month</string>
     <string name="all_accounts">All accounts</string>
+    <string name="new_transaction">New Transaction</string>
+    <string name="amount">Amount</string>
+    <string name="category">Category</string>
+    <string name="additional_info">Additional Information</string>
+    <string name="transaction_amount">Transaction Amount</string>
+    <string name="date">Date</string>
+    <string name="give_transaction_amount">Give the transaction amount.</string>
+    <string name="select_category">Select a category</string>
+    <string name="select_account">Select account</string>
+    <string name="select">Select</string>
+    <string name="total_amount">Total amount</string>
+    <string name="_0">₹ 0</string>
+    <string name="transaction_note">Transaction note</string>
+    <string name="food_amp_drink"><![CDATA[Food & Drink]]></string>
+    <string name="income">Income</string>
 </resources>
