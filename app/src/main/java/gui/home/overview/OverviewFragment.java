@@ -19,10 +19,10 @@ import utils.OsUtility;
 
 import static accounts.AccountManager.*;
 
-public class OverviewFragment extends BaseFragment implements ExpenseListAdapter.OnTransactionClick {
+public class OverviewFragment extends BaseFragment implements TransactionListAdapter.OnTransactionClick {
 
     private ListView expensesList;
-    private ExpenseListAdapter expenseListAdapter;
+    private TransactionListAdapter transactionListAdapter;
 
 
     @Override
@@ -37,8 +37,8 @@ public class OverviewFragment extends BaseFragment implements ExpenseListAdapter
         activity.changeToolbarTitle(getString(R.string.all_accounts));
 
         expensesList = (ListView) layoutView.findViewById(R.id.list_transaction);
-        expenseListAdapter = new ExpenseListAdapter(this);
-        expensesList.setAdapter(expenseListAdapter);
+        transactionListAdapter = new TransactionListAdapter(this);
+        expensesList.setAdapter(transactionListAdapter);
         updateTransactions();
     }
 
@@ -53,14 +53,10 @@ public class OverviewFragment extends BaseFragment implements ExpenseListAdapter
 
 
     public void updateOverviewInformation(ArrayList<Account> accounts, int month, int year) {
-        if (expensesList != null && expenseListAdapter != null) {
+        if (expensesList != null && transactionListAdapter != null) {
             updateOverviewHeader(accounts, month, year);
-
-            ArrayList<Transaction> transactionOfTheMonth = AccountManager.findTransactions(accounts, month, year);
-            Collections.sort(transactionOfTheMonth, Collections.reverseOrder());
-            expenseListAdapter.setTransactions(transactionOfTheMonth);
-
-            expenseListAdapter.notifyDataSetChanged();
+            transactionListAdapter.setTransactions(accounts, month, year);
+            transactionListAdapter.notifyDataSetChanged();
         }
     }
 

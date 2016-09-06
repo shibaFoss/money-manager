@@ -17,7 +17,7 @@ public class Transaction implements Serializable, Comparable<Transaction> {
     public String transactionCategory;
 
     public String memoImagePath;
-    public String colorCode;
+    public String colorCode = "#797979";
 
     public String date;
 

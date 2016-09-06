@@ -20,7 +20,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
-            android:text="@string/savings"
+            android:text="@string/savings_of_the_moth"
             android:textStyle="bold"
             />
 
@@ -72,7 +72,6 @@
             android:gravity="end"
             android:singleLine="true"
             android:text="@string/_5000"
-            android:textColor="@color/green_500"
             android:textSize="@dimen/sp_24"
             />
 

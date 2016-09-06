@@ -150,7 +150,8 @@ public class TransactionActivity extends BaseActivity implements OnDateSetListen
         categoryRadioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int position) {
-                transaction.transactionCategory = category[position - 1].toString();
+                transaction.transactionCategory = categories.get(position - 1);
+                toast("Position is " + position);
             }
         });
     }

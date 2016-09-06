@@ -1,96 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/transaction_layout"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_4"
         android:layout_marginEnd="@dimen/dp_8"
         android:layout_marginStart="@dimen/dp_8"
-        android:layout_marginTop="@dimen/dp_2"
-        android:orientation="horizontal">
+        android:background="@drawable/ic_button_selector"
+        android:clickable="true"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="@dimen/dp_1">
 
-        <ImageView
-            android:id="@+id/bnt_category_color"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="@dimen/dp_4"
-            android:background="@color/red_300"
-            android:contentDescription="@string/category_color"/>
-
-        <TextView
-            android:id="@+id/txt_transaction_note"
-            style="@style/textBodyStyle"
+        <LinearLayout
+            android:id="@+id/transaction_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_8"
-            android:layout_toEndOf="@+id/bnt_category_color"
-            android:layout_toStartOf="@+id/txt_transaction_amount"
-            android:maxLines="3"
-            android:text="@string/dinner_with_dip"
-            android:textSize="@dimen/sp_15"
-            />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_transaction_amount"
-            style="@style/textBodyStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/dp_4"
-            android:gravity="end"
-            android:text="@string/__600"
-            android:textColor="@color/red_300"
-            android:textSize="@dimen/sp_20"
-            android:textStyle="bold"
-            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:layout_marginStart="@dimen/dp_8"
+                android:layout_marginTop="@dimen/dp_2"
+                android:orientation="horizontal">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/txt_transaction_note"
+                    style="@style/textBodyStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_toStartOf="@+id/txt_transaction_amount"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:drawableStart="@drawable/ic_note"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                    android:gravity="start|center_vertical"
+                    android:maxLines="3"
+                    android:text="@string/dinner_with_dip"
+                    android:textSize="@dimen/sp_15"
+                    />
 
-        <TextView
-            android:id="@+id/txt_transactional_account"
-            style="@style/textBodyStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_2"
-            android:layout_weight="1"
-            android:drawableStart="@drawable/ic_acc"
-            android:gravity="center_vertical"
-            android:singleLine="true"
-            android:text="@string/via_bank_account"
-            android:textStyle="bold"
-            />
+                <TextView
+                    android:id="@+id/txt_transaction_amount"
+                    style="@style/textBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/dp_4"
+                    android:gravity="end"
+                    android:text="@string/__600"
+                    android:textColor="@color/red_500"
+                    android:textSize="@dimen/sp_20"
+                    />
 
-        <TextView
-            android:id="@+id/txt_transaction_category"
-            style="@style/textBodyStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="@dimen/dp_8"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="@string/income"
-            android:textStyle="bold"
-            />
+            </RelativeLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_1"
-        android:background="@drawable/ic_border_line" />
+                <TextView
+                    android:id="@+id/txt_transactional_account"
+                    style="@style/textBodyStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
 
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:layout_marginEnd="@dimen/dp_4"
+                    android:layout_marginStart="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_2"
+
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:drawableStart="@drawable/ic_acc"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:text="@string/via_bank_account"
+                    android:textSize="@dimen/sp_13"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_transaction_category"
+                    style="@style/textBodyStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/dp_4"
+                    android:layout_marginEnd="@dimen/dp_8"
+                    android:layout_marginStart="@dimen/dp_4"
+                    android:layout_marginTop="@dimen/dp_2"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:drawableStart="@drawable/ic_action_label"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/food_amp_drink"
+                    android:textSize="@dimen/sp_13"
+                    android:textStyle="bold"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

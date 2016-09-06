@@ -64,7 +64,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="end"
-            android:text="@string/total_balance"
+            android:text="@string/total_available_balance"
             android:textStyle="bold"/>
 
         <TextView
