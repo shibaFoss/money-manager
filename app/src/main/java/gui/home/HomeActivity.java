@@ -29,6 +29,7 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
     private ListView transactionList;
     private View overviewHeaderLayout;
+    private AccountManager accountManager;
     private int month, year;
 
     @Override
@@ -38,6 +39,7 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
     @Override
     public void onInitialize(Bundle bundle) {
+        accountManager = getApp().getAccountManager();
         transactionList = (ListView) findViewById(R.id.list_transaction);
 
         month = Calendar.getInstance().get(Calendar.MONTH);
@@ -58,31 +60,17 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
     }
 
     public void onAddExpense(View view) {
-        final AccountManager am = getApp().getAccountManager();
-        String accountNameArray[] = new String[am.totalAccounts.size()];
-        for (int i = 0; i < accountNameArray.length; i++)
-            accountNameArray[i] = am.totalAccounts.get(i).name;
-
-        DialogUtility.getDefaultBuilder(this)
-                .title(R.string.select_account)
-                .items(accountNameArray)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        Intent intent = new Intent(HomeActivity.this, TransactionActivity.class);
-                        intent.putExtra(TransactionActivity.ACCOUNT_ARRAY_POSITION, which);
-                        intent.putExtra(TransactionActivity.IS_EXPENSE, true);
-                        startActivity(intent);
-                        dialog.dismiss();
-                    }
-                }).show();
+        addNewTransaction(true);
     }
 
     public void onAddIncome(View view) {
-        final AccountManager am = getApp().getAccountManager();
-        String accountNameArray[] = new String[am.totalAccounts.size()];
+        addNewTransaction(false);
+    }
+
+    private void addNewTransaction(final boolean isExpense) {
+        String accountNameArray[] = new String[accountManager.totalAccounts.size()];
         for (int i = 0; i < accountNameArray.length; i++)
-            accountNameArray[i] = am.totalAccounts.get(i).name;
+            accountNameArray[i] = accountManager.totalAccounts.get(i).name;
 
         DialogUtility.getDefaultBuilder(this)
                 .title(R.string.select_account)
@@ -92,7 +80,7 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                         Intent intent = new Intent(HomeActivity.this, TransactionActivity.class);
                         intent.putExtra(TransactionActivity.ACCOUNT_ARRAY_POSITION, which);
-                        intent.putExtra(TransactionActivity.IS_EXPENSE, false);
+                        intent.putExtra(TransactionActivity.IS_EXPENSE, isExpense);
                         startActivity(intent);
                         dialog.dismiss();
                     }
@@ -100,18 +88,13 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
     }
 
     public void updateTransactions(int month, int year) {
-        AccountManager accountManager = getApp().getAccountManager();
         updateOverviewInformation(accountManager.totalAccounts, month, year);
     }
 
     public void updateOverviewInformation(ArrayList<Account> accounts, int month, int year) {
-        if (transactionList != null) {
-            updateOverviewHeader(accounts, month, year);
-            transactionList.setAdapter(null);
-            TransactionListAdapter adapter = new TransactionListAdapter(this);
-            adapter.setTransactions(accounts, month, year);
-            transactionList.setAdapter(adapter);
-        }
+        updateOverviewHeader(accounts, month, year);
+        TransactionListAdapter adapter = new TransactionListAdapter(this, accounts, month, year);
+        transactionList.setAdapter(adapter);
     }
 
     private void updateOverviewHeader(ArrayList<Account> accounts, int month, int year) {
