@@ -7,7 +7,6 @@
 
     <LinearLayout
         android:id="@+id/bnt_date_selector"
-        android:onClick="onDateChanger"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/dp_8"
@@ -51,7 +50,6 @@
 
     <LinearLayout
         android:id="@+id/bnt_amount_selector"
-        android:onClick="onAmountEnter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="@dimen/dp_8"

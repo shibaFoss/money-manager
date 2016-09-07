@@ -1,7 +1,5 @@
 package gui.home.overview;
 
-import android.graphics.Color;
-import android.system.Os;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -76,7 +74,7 @@ public class TransactionListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         if (items.get(position).isSelectionHeader) {
-            view = View.inflate(activity, R.layout.layout_transaction_date_header, null);
+            view = View.inflate(activity, R.layout.layout_list_item_transaction_date_plugin, null);
             ((TextView) view.findViewById(R.id.txt_date)).setText(items.get(position).date);
             return view;
         }

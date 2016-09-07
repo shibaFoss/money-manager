@@ -16,12 +16,10 @@ public class NewAccountCreateActivity extends BaseActivity {
 
     private EditText accountName, accountBalance, accountNote;
 
-
     @Override
     public int getLayoutResId() {
         return R.layout.activity_new_account;
     }
-
 
     @Override
     public void onInitialize(Bundle bundle) {
@@ -30,22 +28,18 @@ public class NewAccountCreateActivity extends BaseActivity {
         accountNote = (EditText) findViewById(R.id.edit_account_note);
     }
 
-
     @Override
     public void onClosed() {
         exitActivityOnDoublePress();
     }
 
-
     private String getCurrencySymbolByTimeZone() {
         return "₹";
     }
 
-
     public void onBack(View view) {
         exitActivityOnDoublePress();
     }
-
 
     public void onSaveAccount(View view) {
         Account account = new Account();
@@ -66,15 +60,16 @@ public class NewAccountCreateActivity extends BaseActivity {
         transaction.isExpense = false;
 
         String enteredAmount = accountBalance.getText().toString();
-        if (enteredAmount.length() > 1) transaction.transactionAmount = Double.valueOf(enteredAmount);
-        else transaction.transactionAmount = 0;
+        if (enteredAmount.length() > 1) {
+            double result = Double.valueOf(enteredAmount);
+            result = Math.floor(result * 100) / 100;
+            transaction.transactionAmount = result;
+        } else {
+            transaction.transactionAmount = 0;
+        }
 
         transaction.transactionNote = "Initial balance.";
         transaction.transactionCategory = "Initial Balance";
-
-        transaction.memoImagePath = null;
-        transaction.colorCode = "#66bb6a";
-
         transaction.updateTransactionTime();
 
         account.addNewTransaction(transaction);

@@ -88,4 +88,13 @@
     <string name="savings_of_the_moth">Savings Of The Month</string>
     <string name="budget_of_the_month">Budget Of The  Month</string>
     <string name="_4_sep">4 Sep</string>
+    <string name="done">Done</string>
+    <string name="camera">Camera</string>
+    <string name="memo_picture">Memo Picture</string>
+    <string name="take_a_photo">Take a photo</string>
+    <string name="gallery">Gallery</string>
+    <string name="select_file">Select File</string>
+    <string name="choose">Choose</string>
+    <string name="delete_img">Delete Image</string>
+    <string name="memo_image">Memo Image</string>
 </resources>

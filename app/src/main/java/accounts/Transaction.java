@@ -11,13 +11,10 @@ public class Transaction implements Serializable, Comparable<Transaction> {
 
     public Account account;
     public boolean isExpense = true;
-    public double transactionAmount;
+    public double transactionAmount = 0;
 
-    public String transactionNote;
-    public String transactionCategory;
-
-    public String memoImagePath;
-    public String colorCode = "#797979";
+    public String transactionNote = "";
+    public String transactionCategory = "Other";
 
     public String date;
 
@@ -27,14 +24,12 @@ public class Transaction implements Serializable, Comparable<Transaction> {
 
     public long id;
 
-
     public void updateTransactionTime() {
         this.date = OsUtility.getCurrentDate("dd/MM/yyyy");
         this.month = Calendar.getInstance().get(Calendar.MONTH);
         this.year = Calendar.getInstance().get(Calendar.YEAR);
         this.day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
-
 
     @Override
     public int compareTo(Transaction tran) {

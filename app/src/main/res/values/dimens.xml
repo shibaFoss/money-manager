@@ -41,5 +41,6 @@
     <dimen name="sp_17">17sp</dimen>
     <dimen name="sp_19">19sp</dimen>
     <dimen name="sp_13">13sp</dimen>
+    <dimen name="sp_16">16sp</dimen>
 
 </resources>

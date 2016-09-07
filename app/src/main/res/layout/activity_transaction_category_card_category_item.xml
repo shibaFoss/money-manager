@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/textBodyStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableEnd="@drawable/ic_white_box"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_2"
+    android:paddingEnd="@dimen/dp_8"
+    android:paddingStart="@dimen/dp_8"
+    android:paddingTop="@dimen/dp_2"
+    android:text="@string/food_amp_drink"
+    >
+
+</TextView>

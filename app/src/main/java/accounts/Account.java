@@ -13,14 +13,11 @@ public class Account implements Serializable {
 
     public ArrayList<Transaction> transactions = new ArrayList<>();
 
-
     public void addNewTransaction(Transaction transaction) {
-        transaction.id = generateId();
         this.transactions.add(0, transaction);
     }
 
-
-    private long generateId() {
+    public long generateId() {
         long id = 1;
         for (Transaction tran : transactions)
             if (tran.id >= id)
