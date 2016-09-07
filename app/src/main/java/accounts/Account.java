@@ -22,11 +22,9 @@ public class Account implements Serializable {
 
     private long generateId() {
         long id = 1;
-        for (Transaction tran : transactions) {
-            if (tran.id >= id) {
+        for (Transaction tran : transactions)
+            if (tran.id >= id)
                 id += tran.id;
-            }
-        }
         return id;
     }
 }

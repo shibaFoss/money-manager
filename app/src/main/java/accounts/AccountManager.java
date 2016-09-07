@@ -43,18 +43,13 @@ public class AccountManager extends WritableObject {
 
     public static AccountManager readData(App app) {
         AccountManager accountManager = new AccountManager();
-
         try {
             AccountManager am = accountManager.read(app);
-            if (am != null)
-                accountManager = am;
-            else
-                accountManager.write(app);
-
+            if (am != null)  accountManager = am;
+            else accountManager.write(app);
         } catch (Throwable err) {
             err.printStackTrace();
         }
-
         return accountManager;
     }
 
@@ -66,7 +61,6 @@ public class AccountManager extends WritableObject {
             outputStream.writeObject(this);
             outputStream.close();
             fileOutput.close();
-
         } catch (Throwable err) {
             err.printStackTrace();
         }
@@ -78,7 +72,6 @@ public class AccountManager extends WritableObject {
             FileInputStream fileInputStream = app.openFileInput(ACCOUNT_JSON_FILE_NAME);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             return (AccountManager) objectInputStream.readObject();
-
         } catch (Throwable err) {
             err.printStackTrace();
             return null;
