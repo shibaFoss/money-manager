@@ -1,4 +1,4 @@
-package gui.home.overview;
+package gui.home;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +22,14 @@ public class TransactionListAdapter extends BaseAdapter {
     private BaseActivity activity;
     private OnTransactionClick onTransactionClick;
 
-
-    public TransactionListAdapter(OverviewFragment overviewFragment) {
-        this.onTransactionClick = overviewFragment;
-        this.activity = overviewFragment.getBaseActivity();
+    public TransactionListAdapter(HomeActivity homeActivity) {
+        this.onTransactionClick = homeActivity;
+        this.activity = homeActivity;
     }
 
-
     public void setTransactions(ArrayList<Account> accounts, int month, int year) {
+        items.clear();
+
         for (int day = 31; day > 0; day--) {
             ArrayList<Transaction> transactions = AccountManager.findTransactions(accounts, day, month, year);
             if (!transactions.isEmpty()) {
@@ -52,36 +52,32 @@ public class TransactionListAdapter extends BaseAdapter {
 
     }
 
-
     @Override
     public int getCount() {
         return items.size();
     }
-
 
     @Override
     public Object getItem(int i) {
         return items.get(i);
     }
 
-
     @Override
     public long getItemId(int i) {
         return 0;
     }
 
-
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         if (items.get(position).isSelectionHeader) {
-            view = View.inflate(activity, R.layout.layout_list_item_transaction_date_plugin, null);
+            view = View.inflate(activity, R.layout.activity_home_transaction_date_header, null);
             ((TextView) view.findViewById(R.id.txt_date)).setText(items.get(position).date);
             return view;
         }
 
         ViewHolder viewHolder;
         if (view == null) {
-            view = View.inflate(activity, R.layout.layout_transaction, null);
+            view = View.inflate(activity, R.layout.activity_home_transaction, null);
             viewHolder = new ViewHolder();
             viewHolder.transactionLayout = view.findViewById(R.id.transaction_layout);
             viewHolder.transactionNote = (TextView) view.findViewById(R.id.txt_transaction_note);
@@ -125,7 +121,6 @@ public class TransactionListAdapter extends BaseAdapter {
 
         return view;
     }
-
 
     public interface OnTransactionClick {
         void onTransactionClick(Transaction transaction, int listPosition);

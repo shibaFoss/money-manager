@@ -18,11 +18,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/layout_overview_available_balance"/>
+            <include layout="@layout/activity_home_overview_total_balance"/>
 
-            <include layout="@layout/layout_overview_total_income"/>
+            <include layout="@layout/activity_home_overview_total_income"/>
 
-            <include layout="@layout/layout_overview_total_expense"/>
+            <include layout="@layout/activity_home_overview_total_expenses"/>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

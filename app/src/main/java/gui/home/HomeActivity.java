@@ -2,26 +2,34 @@ package gui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import accounts.Account;
 import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
-import gui.home.overview.OverviewFragment;
 import gui.transaction.TransactionActivity;
 import in.softc.aladindm.R;
 import utils.DialogUtility;
+import utils.OsUtility;
 
-public class HomeActivity extends BaseActivity {
+import static accounts.AccountManager.getTotalAvailableBalance;
+import static accounts.AccountManager.getTotalBudget;
+import static accounts.AccountManager.getTotalExpensesOfTheMonth;
+import static accounts.AccountManager.getTotalIncomeOfTheMonth;
 
-    private OverviewFragment overviewFragment;
+public class HomeActivity extends BaseActivity implements TransactionListAdapter.OnTransactionClick {
+
+    private ListView transactionList;
+    private View overviewHeaderLayout;
+    private int month, year;
 
     @Override
     public int getLayoutResId() {
@@ -30,31 +38,23 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .add(R.id.fragment_container, getOverviewFragment()).commit();
+        transactionList = (ListView) findViewById(R.id.list_transaction);
+
+        month = Calendar.getInstance().get(Calendar.MONTH);
+        year = Calendar.getInstance().get(Calendar.YEAR);
+
+        updateTransactions(month, year);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (overviewFragment != null)
-            overviewFragment.updateTransactions();
+        updateTransactions(month, year);
     }
 
     @Override
     public void onClosed() {
         exitActivityOnDoublePress();
-    }
-
-    public OverviewFragment getOverviewFragment() {
-        return (overviewFragment == null) ? new OverviewFragment() : overviewFragment;
-    }
-
-    public void changeToolbarTitle(String titleName) {
-        TextView txtToolbar = (TextView) findViewById(R.id.txt_toolbar);
-        if (txtToolbar != null)
-            txtToolbar.setText(titleName);
     }
 
     public void onAddExpense(View view) {
@@ -75,8 +75,7 @@ public class HomeActivity extends BaseActivity {
                         startActivity(intent);
                         dialog.dismiss();
                     }
-                })
-                .show();
+                }).show();
     }
 
     public void onAddIncome(View view) {
@@ -97,7 +96,78 @@ public class HomeActivity extends BaseActivity {
                         startActivity(intent);
                         dialog.dismiss();
                     }
-                })
-                .show();
+                }).show();
     }
+
+    public void updateTransactions(int month, int year) {
+        AccountManager accountManager = getApp().getAccountManager();
+        updateOverviewInformation(accountManager.totalAccounts, month, year);
+    }
+
+    public void updateOverviewInformation(ArrayList<Account> accounts, int month, int year) {
+        if (transactionList != null) {
+            updateOverviewHeader(accounts, month, year);
+            transactionList.setAdapter(null);
+            TransactionListAdapter adapter = new TransactionListAdapter(this);
+            adapter.setTransactions(accounts, month, year);
+            transactionList.setAdapter(adapter);
+        }
+    }
+
+    private void updateOverviewHeader(ArrayList<Account> accounts, int month, int year) {
+        View accountOverview;
+        if (overviewHeaderLayout != null) {
+            accountOverview = overviewHeaderLayout;
+        } else {
+            overviewHeaderLayout = View.inflate(this, R.layout.activity_home_overview, null);
+            accountOverview = overviewHeaderLayout;
+        }
+
+        TextView overviewDate = (TextView) accountOverview.findViewById(R.id.txt_overview_month);
+        TextView overviewTotalBalance = (TextView) accountOverview.findViewById(R.id.txt_total_balance);
+
+        TextView overviewSavingsAmount = (TextView) accountOverview.findViewById(R.id.txt_overview_savings);
+        TextView overviewTotalIncome = (TextView) accountOverview.findViewById(R.id.txt_total_income);
+
+        TextView overviewBudget = (TextView) accountOverview.findViewById(R.id.txt_overview_budget);
+        TextView overviewTotalExpense = (TextView) accountOverview.findViewById(R.id.txt_total_expenses);
+
+        if (transactionList != null) {
+            if (transactionList.getHeaderViewsCount() < 1) {
+                transactionList.addHeaderView(accountOverview);
+            }
+        }
+
+        //----------------------------------------------------------------------------------------//
+        String currency = accounts.get(0).currency;
+        String monthName = OsUtility.getFullMonthName(month) + " " + year;
+        double totalAvailableBalance = getTotalAvailableBalance(accounts, month, year);
+
+        double totalIncomeOfTheMonth = getTotalIncomeOfTheMonth(accounts, month, year);
+        double totalExpensesOfTheMonth = getTotalExpensesOfTheMonth(accounts, month, year);
+
+        double totalBudget = getTotalBudget(accounts);
+        double totalSaving = totalIncomeOfTheMonth - totalExpensesOfTheMonth;
+
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+        if (currentMonth != month && currentYear != year)
+            totalBudget = 0;
+
+        overviewDate.setText(monthName);
+        overviewTotalBalance.setText(String.valueOf(currency + " " + totalAvailableBalance));
+
+        overviewSavingsAmount.setText(String.valueOf(currency + " " + totalSaving));
+        overviewTotalIncome.setText(String.valueOf(currency + " " + totalIncomeOfTheMonth));
+
+        overviewBudget.setText(totalBudget < 1 ? "Can't show" : String.valueOf(currency + " " + totalBudget));
+        overviewTotalExpense.setText(String.valueOf(currency + " " + totalExpensesOfTheMonth));
+    }
+
+    @Override
+    public void onTransactionClick(Transaction transaction, int listPosition) {
+
+    }
+
 }

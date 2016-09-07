@@ -31,23 +31,23 @@
 
     <ImageButton
         android:id="@+id/bnt_add_money"
-        android:onClick="onAddIncome"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toStartOf="@+id/bnt_add_expenses"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/add_money"
+        android:onClick="onAddIncome"
         android:padding="@dimen/dp_10"
         android:src="@drawable/ic_toolbar_add_balance"/>
 
     <ImageButton
         android:id="@+id/bnt_add_expenses"
-        android:onClick="onAddExpense"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/add_expenses"
+        android:onClick="onAddExpense"
         android:padding="@dimen/dp_10"
         android:src="@drawable/ic_toolbar_add_expense"/>
 

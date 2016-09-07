@@ -8,12 +8,15 @@
         android:id="@+id/toolbar_layout"
         layout="@layout/activity_home_toolbar"/>
 
-    <LinearLayout
-        android:id="@+id/fragment_container"
+    <ListView
+        android:id="@+id/list_transaction"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_layout"
-        android:orientation="vertical"/>
+        android:divider="@color/transparent"
+        android:dividerHeight="@dimen/dp_0"
+        android:listSelector="@color/transparent"
+        />
 
     <View
         android:layout_width="match_parent"
