@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 
 import accounts.AccountManager;
 import libs.Remember;
+import utils.Font;
 
 public class App extends Application {
 
@@ -21,6 +22,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Remember.init(this, "App");
+        Font.init(this);
     }
 
 

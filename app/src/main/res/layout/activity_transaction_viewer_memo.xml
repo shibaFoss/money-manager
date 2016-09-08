@@ -1,0 +1,33 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/textBodyStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableStart="@drawable/ic_memo"
+        android:gravity="start|center_vertical"
+        android:text="@string/memo_picture"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/bnt_memo_photo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/dp_4"
+        android:background="@color/blue_50"
+        android:clickable="true"
+        android:contentDescription="@string/memo_image"
+        android:scaleType="center"
+        android:src="@drawable/ic_no_photo_available"
+        android:visibility="visible"/>
+
+</LinearLayout>

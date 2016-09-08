@@ -13,8 +13,8 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
 import in.softc.aladindm.R;
+import utils.Font;
 import utils.OsUtility;
-import utils.ViewUtility;
 
 import static utils.ViewUtility.makeRoundedValue;
 
@@ -33,7 +33,7 @@ public class TransactionListAdapter extends BaseAdapter {
     private void setTransactions(ArrayList<Account> accounts, int month, int year) {
         items.clear();
         for (int day = 31; day > 0; day--) {
-            ArrayList<Transaction> transactions = AccountManager.findTransactions(accounts, day, month, year);
+            ArrayList<Transaction> transactions = AccountManager.getTransactions(accounts, day, month, year);
             if (!transactions.isEmpty()) {
                 Collections.sort(transactions, Collections.reverseOrder());
                 Item selectionItem = new Item();
@@ -43,8 +43,8 @@ public class TransactionListAdapter extends BaseAdapter {
 
                 for (Transaction tran : transactions) {
                     Item item = new Item();
-                    item.date = tran.date;
-                    item.day = tran.day;
+                    item.date = tran.transactionDate;
+                    item.day = tran.dayCode;
                     item.isSelectionHeader = false;
                     item.transaction = tran;
                     items.add(item);
@@ -74,7 +74,10 @@ public class TransactionListAdapter extends BaseAdapter {
         Item item = items.get(position);
         if (item.isSelectionHeader) {
             view = View.inflate(activity, R.layout.activity_home_transaction_date_header, null);
-            ((TextView) view.findViewById(R.id.txt_date)).setText(items.get(position).date);
+            TextView txtDate = ((TextView) view.findViewById(R.id.txt_date));
+            txtDate.setText(items.get(position).date);
+            txtDate.setTypeface(Font.LatoMedium);
+
             return view;
         }
 
@@ -92,9 +95,16 @@ public class TransactionListAdapter extends BaseAdapter {
             }
         }
 
+        Font.setFont(Font.LatoRegular, view, R.id.txt_transaction_note);
+        Font.setFont(Font.LatoLight, view, R.id.txt_transaction_amount);
+        Font.setFont(Font.LatoLight, view, R.id.txt_transactional_account, R.id.txt_transaction_category);
+
         final Transaction transaction = items.get(position).transaction;
         String moneyAmount = makeRoundedValue(transaction.transactionAmount);
-        String currency = transaction.account.currency;
+        Account account = activity.getApp().getAccountManager().getAccountByName(transaction.accountName);
+        String currency = "";
+        if (account != null)
+            currency = account.currencySymbol;
 
         viewHolder.transactionNote.setText(transaction.transactionNote);
 
@@ -110,13 +120,12 @@ public class TransactionListAdapter extends BaseAdapter {
             viewHolder.transactionAmount.setText(transactionAmount);
         }
 
-        viewHolder.assosiateAccount.setText(transaction.account.name);
+        viewHolder.assosiateAccount.setText(transaction.accountName);
         viewHolder.transactionCategory.setText(transaction.transactionCategory);
-        viewHolder.transactionLayout.setOnLongClickListener(new View.OnLongClickListener() {
+        viewHolder.transactionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onLongClick(View view) {
+            public void onClick(View view) {
                 onTransactionClick.onTransactionClick(transaction, position);
-                return true;
             }
         });
 

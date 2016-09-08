@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_saving"
             style="@style/textBodyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
-            android:text="@string/savings_of_the_moth"
+            android:text="@string/savings"
             android:textStyle="bold"
             />
 
@@ -47,6 +48,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_total_income_preview"
             style="@style/textBodyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

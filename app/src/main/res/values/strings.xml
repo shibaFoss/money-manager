@@ -99,4 +99,13 @@
     <string name="memo_image">Memo Image</string>
     <string name="none">None</string>
     <string name="cant_show">Can\'t show</string>
+    <string name="transaction">Transaction</string>
+    <string name="example_note">Example note</string>
+    <string name="account">Account</string>
+    <string name="are_you_sure_want_to_delete">Are you sure want to delete ?</string>
+    <string name="delete">Delete</string>
+    <string name="deleted">Deleted</string>
+    <string name="atm_card">ATM Card</string>
+    <string name="initial_balance">Initial balance.</string>
+    <string name="starting_balance">Starting Balance</string>
 </resources>

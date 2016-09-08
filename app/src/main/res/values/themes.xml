@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="lightColorPrimary">#3f51b5</color>
-    <color name="lightColorPrimaryDark">#3f51b5</color>
+    <color name="lightColorPrimary">@color/indigo_500</color>
+    <color name="lightColorPrimaryDark">@color/indigo_500</color>
     <color name="lightColorAccent">#333333</color>
 
     <color name="blackColorPrimary">#212121</color>
@@ -25,9 +25,9 @@
         <item name="android:textColorSecondary">@color/black_text_secondary</item>
         <item name="android:textColorPrimaryDisableOnly">@color/black_text_disabled</item>
 
-        <item name="colorPrimary">@color/blue_700</item>
-        <item name="colorPrimaryDark">@color/blue_700</item>
-        <item name="colorAccent">@color/red_400</item>
+        <item name="colorPrimary">@color/indigo_600</item>
+        <item name="colorPrimaryDark">@color/indigo_600</item>
+        <item name="colorAccent">@color/grey_900</item>
 
         <item name="colorControlNormal">@color/black_light</item>
         <item name="colorControlActivated">@color/black_light</item>

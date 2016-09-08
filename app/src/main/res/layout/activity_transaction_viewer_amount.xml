@@ -6,16 +6,12 @@
     android:orientation="horizontal">
 
     <LinearLayout
-        android:id="@+id/bnt_date_selector"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/dp_8"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_month"
             style="@style/textBodyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,11 +20,11 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
-            android:text="@string/month"
+            android:text="@string/date"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txt_overview_month"
+            android:id="@+id/txt_transaction_date"
             style="@style/textBodyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,15 +33,8 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_4"
             android:gravity="start"
-            android:text="@string/september_2016"
+            android:text="@string/_2016"
             />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
-            android:layout_marginEnd="@dimen/dp_4"
-            android:layout_marginStart="@dimen/dp_4"
-            android:background="?android:attr/textColorSecondary"/>
 
     </LinearLayout>
 
@@ -56,7 +45,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_total_available_balance"
             style="@style/textBodyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,11 +54,11 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="end"
-            android:text="@string/total_available_balance"
+            android:text="@string/total_amount"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txt_total_balance"
+            android:id="@+id/txt_transaction_amount"
             style="@style/textBodyStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,9 +68,8 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_0"
             android:gravity="end"
-            android:textColor="@color/blue_500"
             android:singleLine="true"
-            android:text="@string/_60000"
+            android:text="@string/_0"
             android:textSize="@dimen/sp_24"
             />
 

@@ -31,6 +31,8 @@
 
         <activity android:name="gui.transaction.TransactionActivity"/>
 
+        <activity android:name="gui.transaction_viewer.TransactionViewer"/>
+
     </application>
 
 </manifest>

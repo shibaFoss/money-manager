@@ -11,10 +11,11 @@ import accounts.Transaction;
 import gui.BaseActivity;
 import gui.home.HomeActivity;
 import in.softc.aladindm.R;
+import utils.Font;
 
 public class NewAccountCreateActivity extends BaseActivity {
 
-    private EditText accountName, accountBalance, accountNote;
+    private EditText accountName, accountBalance;
 
     @Override
     public int getLayoutResId() {
@@ -23,18 +24,14 @@ public class NewAccountCreateActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
+        initFonts();
         accountName = (EditText) findViewById(R.id.edit_account_name);
         accountBalance = (EditText) findViewById(R.id.edit_starting_balance);
-        accountNote = (EditText) findViewById(R.id.edit_account_note);
     }
 
     @Override
     public void onClosed() {
         exitActivityOnDoublePress();
-    }
-
-    private String getCurrencySymbolByTimeZone() {
-        return "₹";
     }
 
     public void onBack(View view) {
@@ -43,20 +40,22 @@ public class NewAccountCreateActivity extends BaseActivity {
 
     public void onSaveAccount(View view) {
         Account account = new Account();
+        account.uniqueId = getApp().getAccountManager().getUniqueAccountId();
 
         String enteredName = accountName.getText().toString();
-        if (enteredName.length() > 1) account.name = enteredName;
+        if (enteredName.length() > 1) account.accountName = enteredName;
         else {
             toast(getString(R.string.give_account_name));
             return;
         }
+        account.currencySymbol = getCurrencySymbolByTimeZone();
+        account.monthlyBudget = 0;
 
-        account.note = accountNote.getText().toString();
-        account.currency = getCurrencySymbolByTimeZone();
-        account.monthlyBudget = 0.0;
-
+        //---------------------------------------------------------------//
         Transaction transaction = new Transaction();
-        transaction.account = account;
+        transaction.uniqueId = account.getNewTransactionUniqueId();
+        transaction.accountName = account.accountName;
+        transaction.associateAccountId = account.uniqueId;
         transaction.isExpense = false;
 
         String enteredAmount = accountBalance.getText().toString();
@@ -68,8 +67,8 @@ public class NewAccountCreateActivity extends BaseActivity {
             transaction.transactionAmount = 0;
         }
 
-        transaction.transactionNote = "Initial balance.";
-        transaction.transactionCategory = "Initial Balance";
+        transaction.transactionNote = getString(R.string.initial_balance);
+        transaction.transactionCategory = getString(R.string.starting_balance);
         transaction.updateTransactionTime();
 
         account.addNewTransaction(transaction);
@@ -83,5 +82,16 @@ public class NewAccountCreateActivity extends BaseActivity {
             startActivity(HomeActivity.class);
 
         finish();
+    }
+
+    private void initFonts() {
+        int[] ids = new int[]{R.id.txt_account_name, R.id.edit_account_name, R.id.txt_currency, R.id
+                .currency_selector_spinner, R.id.txt_current_balance, R.id.edit_starting_balance};
+        Font.setFont(Font.LatoRegular, this, ids);
+        Font.setFont(Font.LatoRegular, this, R.id.txt_toolbar);
+    }
+
+    private String getCurrencySymbolByTimeZone() {
+        return "₹";
     }
 }

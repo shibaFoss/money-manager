@@ -13,8 +13,7 @@
         android:layout_marginBottom="@dimen/dp_4"
         android:layout_marginEnd="@dimen/dp_8"
         android:layout_marginStart="@dimen/dp_8"
-        android:background="@drawable/ic_button_selector"
-        android:clickable="true"
+        android:layout_marginTop="@dimen/dp_4"
         card_view:cardCornerRadius="2dp"
         card_view:cardElevation="@dimen/dp_1">
 
@@ -22,6 +21,8 @@
             android:id="@+id/transaction_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/ic_button_selector"
+            android:clickable="true"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -41,13 +42,12 @@
                     android:layout_marginEnd="@dimen/dp_8"
                     android:layout_marginTop="@dimen/dp_8"
                     android:layout_toStartOf="@+id/txt_transaction_amount"
-                    android:drawablePadding="@dimen/dp_8"
+                    android:drawablePadding="@dimen/dp_4"
                     android:drawableStart="@drawable/ic_note"
-
                     android:gravity="start|center_vertical"
                     android:maxLines="3"
                     android:text="@string/dinner_with_dip"
-                    android:textSize="@dimen/sp_15"
+                    android:textSize="@dimen/sp_16"
                     />
 
                 <TextView
@@ -76,20 +76,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-
                     android:layout_marginBottom="@dimen/dp_4"
                     android:layout_marginEnd="@dimen/dp_4"
                     android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_weight="1"
-
-                    android:drawablePadding="@dimen/dp_8"
-                    android:drawableStart="@drawable/ic_acc"
+                    android:drawablePadding="@dimen/dp_4"
+                    android:drawableStart="@drawable/ic_account"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="@string/via_bank_account"
                     android:textSize="@dimen/sp_12"
-                    android:textStyle="bold"
                     />
 
                 <TextView
@@ -103,12 +100,11 @@
                     android:layout_marginStart="@dimen/dp_4"
                     android:layout_marginTop="@dimen/dp_2"
                     android:layout_weight="1"
-                    android:drawablePadding="@dimen/dp_8"
-                    android:drawableStart="@drawable/ic_action_label"
+                    android:drawablePadding="@dimen/dp_4"
+                    android:drawableStart="@drawable/ic_category_tag"
                     android:gravity="start|center_vertical"
                     android:text="@string/food_amp_drink"
                     android:textSize="@dimen/sp_12"
-                    android:textStyle="bold"
                     />
 
             </LinearLayout>

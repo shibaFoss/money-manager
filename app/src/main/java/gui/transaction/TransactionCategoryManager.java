@@ -25,7 +25,7 @@ public class TransactionCategoryManager {
 
     private void addChildCategory(final LinearLayout categoryContainer, AccountManager accountManager) {
         ArrayList<String> categoryList = transaction.isExpense ?
-                accountManager.expenseCategories : accountManager.incomeCategories;
+                accountManager.expenseCates : accountManager.totalIncomeCates;
 
         if (categoryList != null) {
             if (categoryList.size() > 0) {

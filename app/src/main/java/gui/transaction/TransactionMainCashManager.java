@@ -8,14 +8,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
 import accounts.Transaction;
 import in.softc.aladindm.R;
-import utils.ViewUtility;
 
-import static utils.ViewUtility.*;
 import static utils.ViewUtility.makeRoundedValue;
 
 public class TransactionMainCashManager implements View.OnClickListener {
@@ -70,16 +65,16 @@ public class TransactionMainCashManager implements View.OnClickListener {
     }
 
     private void onTransactionDateSelect() {
-        int year = transaction.year;
-        int month = transaction.month;
-        int day = transaction.day;
+        int year = transaction.yearCode;
+        int month = transaction.monthCode;
+        int day = transaction.dayCode;
         DatePickerDialog datePickerDialog = new DatePickerDialog(activity, new OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                transaction.date = day + "/" + (month + 1) + "/" + year;
-                transaction.day = day;
-                transaction.month = month;
-                transaction.year = year;
+                transaction.transactionDate = day + "/" + (month + 1) + "/" + year;
+                transaction.dayCode = day;
+                transaction.monthCode = month;
+                transaction.yearCode = year;
                 updateViews();
             }
         }, year, month, day);
@@ -93,9 +88,9 @@ public class TransactionMainCashManager implements View.OnClickListener {
     }
 
     private void updateViews() {
-        transactionDatePreview.setText(String.valueOf(transaction.day + "/" + (transaction.month + 1) + "/" +
-                transaction.year));
-        String currency = transaction.account.currency;
+        transactionDatePreview.setText(String.valueOf(transaction.dayCode + "/" + (transaction.monthCode + 1) + "/" +
+                transaction.yearCode));
+        String currency = activity.getApp().getAccountManager().getAccountByName(transaction.accountName).currencySymbol;
         transactionAmountPreview.setText(String.valueOf(currency + " " + makeRoundedValue(transaction.transactionAmount)));
 
         if (transaction.isExpense)

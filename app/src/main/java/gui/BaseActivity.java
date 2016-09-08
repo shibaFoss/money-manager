@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.inputmethod.InputMethodManager;
@@ -325,6 +326,10 @@ public abstract class BaseActivity extends LocalizationActivity {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+
+    public void toast(@StringRes int stringId) {
+        Toast.makeText(this, getString(stringId), Toast.LENGTH_LONG).show();
+    }
 
     public void vibrate(int duration) {
         if (vibrator != null) {

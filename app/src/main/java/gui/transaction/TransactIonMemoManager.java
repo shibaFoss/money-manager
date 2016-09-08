@@ -42,7 +42,7 @@ public class TransactIonMemoManager implements View.OnClickListener {
         if (view.getId() == R.id.bnt_memo_photo_taker) {
             if (App.isPermissionGranted(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 if (bntPickerTake.getText().toString().equals(activity.getString(R.string.delete_img))) {
-                    File imageFile = new File(App.appDirectory, transaction.id + ".jpg");
+                    File imageFile = new File(App.appDirectory, transaction.uniqueId + ".jpg");
                     if (imageFile.exists())
                         imageFile.delete();
                     bntPickerTake.setText(activity.getString(R.string.take_a_photo));

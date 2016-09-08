@@ -46,8 +46,8 @@ public class TransactionActivity extends BaseActivity {
 
         Account account = accountManager.totalAccounts.get(accountPosition);
         transaction = new Transaction();
-        transaction.account = account;
-        transaction.id = transaction.account.generateId();
+        transaction.accountName = account.accountName;
+        transaction.uniqueId = account.getNewTransactionUniqueId();
         transaction.isExpense = isExpenseTransaction;
         transaction.updateTransactionTime();
 
@@ -94,7 +94,7 @@ public class TransactionActivity extends BaseActivity {
         }
 
         transaction.transactionNote = cashManager.getTransactionNote();
-        Account account = transaction.account;
+        Account account = getApp().getAccountManager().getAccountByName(transaction.accountName);
         account.addNewTransaction(transaction);
         getApp().getAccountManager().write(getApp());
         finish();
@@ -108,7 +108,7 @@ public class TransactionActivity extends BaseActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
         FileUtils.makeDirectory(new File(App.appDirectory));
-        File destination = new File(App.appDirectory, memoManager.transaction.id + ".jpg");
+        File destination = new File(App.appDirectory, memoManager.transaction.uniqueId + ".jpg");
         FileOutputStream outputStream;
 
         try {
@@ -137,7 +137,7 @@ public class TransactionActivity extends BaseActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
                 FileUtils.makeDirectory(new File(App.appDirectory));
-                File destination = new File(App.appDirectory, memoManager.transaction.id + ".jpg");
+                File destination = new File(App.appDirectory, memoManager.transaction.uniqueId + ".jpg");
                 FileOutputStream outputStream;
 
                 try {
