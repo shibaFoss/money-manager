@@ -13,6 +13,10 @@ import java.text.NumberFormat;
 
 import accounts.Transaction;
 import in.softc.aladindm.R;
+import utils.ViewUtility;
+
+import static utils.ViewUtility.*;
+import static utils.ViewUtility.makeRoundedValue;
 
 public class TransactionMainCashManager implements View.OnClickListener {
     public TransactionActivity activity;
@@ -52,7 +56,7 @@ public class TransactionMainCashManager implements View.OnClickListener {
 
     private void onTransactionAmountSelect() {
         CalculatorDialog calculatorDialog = new CalculatorDialog(activity,
-                (transaction.transactionAmount < 1 ? "" : "" + transaction.transactionAmount));
+                (transaction.transactionAmount < 1 ? "" : makeRoundedValue(transaction.transactionAmount)));
         calculatorDialog.setOnSubmitResultListener(new CalculatorDialog.OnSubmitResult() {
             @Override
             public void onSubmitResult(double result, Dialog dialog) {
@@ -92,7 +96,7 @@ public class TransactionMainCashManager implements View.OnClickListener {
         transactionDatePreview.setText(String.valueOf(transaction.day + "/" + (transaction.month + 1) + "/" +
                 transaction.year));
         String currency = transaction.account.currency;
-        transactionAmountPreview.setText(String.valueOf(currency + " " + transaction.transactionAmount));
+        transactionAmountPreview.setText(String.valueOf(currency + " " + makeRoundedValue(transaction.transactionAmount)));
 
         if (transaction.isExpense)
             transactionAmountPreview.setTextColor(activity.getColorFrom(R.color.md_red_500));

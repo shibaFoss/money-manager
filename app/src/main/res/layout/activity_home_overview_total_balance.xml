@@ -78,6 +78,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_0"
             android:gravity="end"
+            android:textColor="@color/blue_500"
             android:singleLine="true"
             android:text="@string/_60000"
             android:textSize="@dimen/sp_24"

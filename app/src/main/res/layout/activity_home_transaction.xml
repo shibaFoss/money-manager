@@ -81,14 +81,14 @@
                     android:layout_marginEnd="@dimen/dp_4"
                     android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginTop="@dimen/dp_2"
-
                     android:layout_weight="1"
+
                     android:drawablePadding="@dimen/dp_8"
                     android:drawableStart="@drawable/ic_acc"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="@string/via_bank_account"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_12"
                     android:textStyle="bold"
                     />
 
@@ -107,7 +107,7 @@
                     android:drawableStart="@drawable/ic_action_label"
                     android:gravity="start|center_vertical"
                     android:text="@string/food_amp_drink"
-                    android:textSize="@dimen/sp_13"
+                    android:textSize="@dimen/sp_12"
                     android:textStyle="bold"
                     />
 

@@ -82,7 +82,7 @@
             android:gravity="end"
             android:singleLine="true"
             android:text="@string/_4300"
-            android:textColor="@color/md_red_700"
+            android:textColor="@color/red_500"
             android:textSize="@dimen/sp_24"
             />
 

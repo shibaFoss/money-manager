@@ -14,6 +14,9 @@ import accounts.Transaction;
 import gui.BaseActivity;
 import in.softc.aladindm.R;
 import utils.OsUtility;
+import utils.ViewUtility;
+
+import static utils.ViewUtility.makeRoundedValue;
 
 public class TransactionListAdapter extends BaseAdapter {
 
@@ -90,7 +93,7 @@ public class TransactionListAdapter extends BaseAdapter {
         }
 
         final Transaction transaction = items.get(position).transaction;
-        String moneyAmount = String.valueOf(transaction.transactionAmount);
+        String moneyAmount = makeRoundedValue(transaction.transactionAmount);
         String currency = transaction.account.currency;
 
         viewHolder.transactionNote.setText(transaction.transactionNote);

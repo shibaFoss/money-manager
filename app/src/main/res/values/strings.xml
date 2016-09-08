@@ -97,4 +97,6 @@
     <string name="choose">Choose</string>
     <string name="delete_img">Delete Image</string>
     <string name="memo_image">Memo Image</string>
+    <string name="none">None</string>
+    <string name="cant_show">Can\'t show</string>
 </resources>

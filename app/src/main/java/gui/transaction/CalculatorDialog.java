@@ -45,7 +45,7 @@ public class CalculatorDialog implements View.OnClickListener {
     private void initDialog(String startingNumber) {
         dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_calculator);
         preview = (TextView) dialog.findViewById(R.id.txt_preview);
-        preview.setText(String.valueOf(startingNumber));
+        preview.setText(startingNumber);
 
         bntClear = (ImageButton) dialog.findViewById(R.id.bntClear);
 

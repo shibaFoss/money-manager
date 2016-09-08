@@ -19,11 +19,13 @@ import gui.transaction.TransactionActivity;
 import in.softc.aladindm.R;
 import utils.DialogUtility;
 import utils.OsUtility;
+import utils.ViewUtility;
 
 import static accounts.AccountManager.getTotalAvailableBalance;
 import static accounts.AccountManager.getTotalBudget;
 import static accounts.AccountManager.getTotalExpensesOfTheMonth;
 import static accounts.AccountManager.getTotalIncomeOfTheMonth;
+import static utils.ViewUtility.makeRoundedValue;
 
 public class HomeActivity extends BaseActivity implements TransactionListAdapter.OnTransactionClick {
 
@@ -139,13 +141,21 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
             totalBudget = 0;
 
         overviewDate.setText(monthName);
-        overviewTotalBalance.setText(String.valueOf(currency + " " + totalAvailableBalance));
+        if (totalAvailableBalance < 1)
+            overviewTotalBalance.setTextColor(getColorFrom(R.color.red_500));
+        else
+            overviewTotalBalance.setTextColor(getColorFrom(R.color.blue_500));
 
-        overviewSavingsAmount.setText(String.valueOf(currency + " " + totalSaving));
-        overviewTotalIncome.setText(String.valueOf(currency + " " + totalIncomeOfTheMonth));
+        overviewTotalBalance.setText(String.valueOf(currency + " " + makeRoundedValue(totalAvailableBalance)));
+        if (totalSaving < 1)
+            overviewSavingsAmount.setText(R.string.none);
+        else
+            overviewSavingsAmount.setText(String.valueOf(currency + " " + makeRoundedValue(totalSaving)));
 
-        overviewBudget.setText(totalBudget < 1 ? "Can't show" : String.valueOf(currency + " " + totalBudget));
-        overviewTotalExpense.setText(String.valueOf(currency + " " + totalExpensesOfTheMonth));
+        overviewTotalIncome.setText(String.valueOf(currency + " " + makeRoundedValue(totalIncomeOfTheMonth)));
+        overviewBudget.setText(totalBudget < 1 ?
+                getString(R.string.cant_show) : String.valueOf(currency + " " + totalBudget));
+        overviewTotalExpense.setText(String.valueOf(currency + " " + makeRoundedValue(totalExpensesOfTheMonth)));
     }
 
     @Override
