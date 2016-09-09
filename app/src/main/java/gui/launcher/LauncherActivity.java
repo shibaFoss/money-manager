@@ -9,6 +9,7 @@ import gui.BaseActivity;
 import gui.account_create.NewAccountCreateActivity;
 import gui.home.HomeActivity;
 import in.softc.aladindm.R;
+import utils.Font;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -20,6 +21,8 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
+        Font.setFont(Font.LatoMedium, this, R.id.txt_company_name);
+
         //the account manager is not set yet. so initialize it first.
         if (getApp().getAccountManager() == null) {
             AccountManager am = AccountManager.readData(getApp());
@@ -43,7 +46,7 @@ public class LauncherActivity extends BaseActivity {
     private void startNextActivity() {
         AccountManager am = getApp().getAccountManager();
         if (am != null) {
-            if (am.totalAccounts.size() == 0) {
+            if (am.accounts.size() == 0) {
                 Intent intent = new Intent(LauncherActivity.this, NewAccountCreateActivity.class);
                 intent.putExtra("isLauncherFired", true);
                 startActivity(intent);

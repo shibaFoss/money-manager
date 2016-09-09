@@ -45,7 +45,8 @@ public class TransactionViewer extends BaseActivity {
                 if (transaction != null) {
                     AccountManager manager = getApp().getAccountManager();
                     Account account = manager.getAccountByName(transaction.accountName);
-                    manager.removeTransaction(account.transactions, transaction);
+                    account.removeTransaction(transaction.uniqueId);
+
                     manager.write(getApp());
                     vibrate(5);
                     toast(R.string.deleted);

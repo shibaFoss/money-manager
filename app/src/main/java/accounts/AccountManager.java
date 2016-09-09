@@ -14,9 +14,10 @@ import utils.WritableObject;
 public class AccountManager extends WritableObject {
     private static final long serialVersionUID = 296984946043256L;
 
-    public static final String ACCOUNT_JSON_FILE_NAME = "account_manager";
+    public static final String ACCOUNT_JSON_FILE_NAME = "account_manager.db";
 
-    public ArrayList<Account> totalAccounts = new ArrayList<>();
+    public ArrayList<Account> accounts = new ArrayList<>();
+
     public ArrayList<String> totalIncomeCates = new ArrayList<>();
     public ArrayList<String> expenseCates = new ArrayList<>();
 
@@ -75,14 +76,6 @@ public class AccountManager extends WritableObject {
             expenseCates.add("Transportation");
             expenseCates.add("Leisure");
             expenseCates.add("Other");
-        }
-    }
-
-
-    public void removeTransaction(ArrayList<Transaction> allTransactions, Transaction tranToDelete) {
-        for (Transaction tran : allTransactions) {
-            if (tran.uniqueId == tranToDelete.uniqueId)
-                allTransactions.remove(tran);
         }
     }
 
@@ -157,14 +150,14 @@ public class AccountManager extends WritableObject {
 
     public long getUniqueAccountId() {
         long id = 1;
-        for (Account acc : totalAccounts)
+        for (Account acc : accounts)
             if (acc.uniqueId >= id)
                 id += acc.uniqueId;
         return id;
     }
 
     public Account getAccountByName(String accountName) {
-        for (Account ac : totalAccounts)
+        for (Account ac : accounts)
             if (ac.accountName.equals(accountName))
                 return ac;
 

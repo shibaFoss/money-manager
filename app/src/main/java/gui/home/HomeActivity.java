@@ -71,9 +71,9 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
     }
 
     private void addNewTransaction(final boolean isExpense) {
-        String accountNameArray[] = new String[accountManager.totalAccounts.size()];
+        String accountNameArray[] = new String[accountManager.accounts.size()];
         for (int i = 0; i < accountNameArray.length; i++)
-            accountNameArray[i] = accountManager.totalAccounts.get(i).accountName;
+            accountNameArray[i] = accountManager.accounts.get(i).accountName;
 
         DialogUtility.getDefaultBuilder(this)
                 .title(R.string.select_account)
@@ -91,7 +91,7 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
     }
 
     public void updateTransactions(int month, int year) {
-        updateOverviewInformation(accountManager.totalAccounts, month, year);
+        updateOverviewInformation(accountManager.accounts, month, year);
     }
 
     public void updateOverviewInformation(ArrayList<Account> accounts, int month, int year) {
@@ -149,9 +149,9 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
         overviewDate.setText(monthName);
         if (totalAvailableBalance < 1)
-            overviewTotalBalance.setTextColor(getColorFrom(R.color.red_500));
+            overviewTotalBalance.setTextColor(getColorFrom(R.color.red_900));
         else
-            overviewTotalBalance.setTextColor(getColorFrom(R.color.blue_500));
+            overviewTotalBalance.setTextColor(getColorFrom(R.color.indigo_900));
 
         overviewTotalBalance.setText(String.valueOf(currency + " " + makeRoundedValue(totalAvailableBalance)));
         if (totalSaving < 1)
@@ -161,7 +161,7 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
         overviewTotalIncome.setText(String.valueOf(currency + " " + makeRoundedValue(totalIncomeOfTheMonth)));
         overviewBudget.setText(totalBudget < 1 ?
-                getString(R.string.cant_show) : String.valueOf(currency + " " + totalBudget));
+                getString(R.string.none) : String.valueOf(currency + " " + totalBudget));
         overviewTotalExpense.setText(String.valueOf(currency + " " + makeRoundedValue(totalExpensesOfTheMonth)));
     }
 

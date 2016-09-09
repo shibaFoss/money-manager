@@ -44,7 +44,7 @@ public class TransactionActivity extends BaseActivity {
 
         if (!validateAccount(accountPosition)) return;
 
-        Account account = accountManager.totalAccounts.get(accountPosition);
+        Account account = accountManager.accounts.get(accountPosition);
         transaction = new Transaction();
         transaction.accountName = account.accountName;
         transaction.uniqueId = account.getNewTransactionUniqueId();

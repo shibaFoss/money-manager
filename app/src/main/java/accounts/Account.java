@@ -16,6 +16,12 @@ public class Account implements Serializable {
         this.transactions.add(0, transaction);
     }
 
+    public void removeTransaction(long transactionId) {
+        for (int index = 0; index < transactions.size(); index++)
+            if (transactions.get(index).uniqueId == transactionId)
+                transactions.remove(index);
+    }
+
     public long getNewTransactionUniqueId() {
         long id = 1;
         for (Transaction tran : transactions)

@@ -111,12 +111,12 @@ public class TransactionListAdapter extends BaseAdapter {
         String transactionAmount;
         if (transaction.isExpense) {
             transactionAmount = currency + " " + moneyAmount;
-            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.red_500));
+            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.red_900));
             viewHolder.transactionAmount.setText(transactionAmount);
 
         } else {
             transactionAmount = currency + " " + moneyAmount;
-            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.green_500));
+            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.green_900));
             viewHolder.transactionAmount.setText(transactionAmount);
         }
 

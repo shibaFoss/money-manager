@@ -74,7 +74,7 @@ public class NewAccountCreateActivity extends BaseActivity {
         account.addNewTransaction(transaction);
 
         AccountManager accountManager = getApp().getAccountManager();
-        accountManager.totalAccounts.add(account);
+        accountManager.accounts.add(account);
         accountManager.write(getApp());
 
         Intent intent = getIntent();

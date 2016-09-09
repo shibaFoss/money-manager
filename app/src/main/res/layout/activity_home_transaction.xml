@@ -59,7 +59,7 @@
                     android:layout_marginStart="@dimen/dp_4"
                     android:gravity="end"
                     android:text="@string/__600"
-                    android:textColor="@color/red_500"
+                    android:textColor="@color/red_900"
                     android:textSize="@dimen/sp_20"
                     />
 
