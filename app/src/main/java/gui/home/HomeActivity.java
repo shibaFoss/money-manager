@@ -16,7 +16,7 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
 import gui.transaction.TransactionActivity;
-import gui.transaction_viewer.TransactionViewer;
+import gui.transaction_viewer.TransactionViewerActivity;
 import in.softc.aladindm.R;
 import utils.DialogUtility;
 import utils.Font;
@@ -35,21 +35,25 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
     private AccountManager accountManager;
     private int month, year;
 
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_home;
     }
 
+
     @Override
     public void onInitialize(Bundle bundle) {
+        Font.setFont(Font.LatoMedium, this, R.id.txt_toolbar);
+
         accountManager = getApp().getAccountManager();
         transactionList = (ListView) findViewById(R.id.list_transaction);
 
         month = Calendar.getInstance().get(Calendar.MONTH);
         year = Calendar.getInstance().get(Calendar.YEAR);
-
         updateTransactions(month, year);
     }
+
 
     @Override
     public void onResume() {
@@ -57,18 +61,22 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
         updateTransactions(month, year);
     }
 
+
     @Override
     public void onClosed() {
         exitActivityOnDoublePress();
     }
 
+
     public void onAddExpense(View view) {
         addNewTransaction(true);
     }
 
+
     public void onAddIncome(View view) {
         addNewTransaction(false);
     }
+
 
     private void addNewTransaction(final boolean isExpense) {
         String accountNameArray[] = new String[accountManager.accounts.size()];
@@ -90,15 +98,18 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
                 }).show();
     }
 
+
     public void updateTransactions(int month, int year) {
         updateOverviewInformation(accountManager.accounts, month, year);
     }
+
 
     public void updateOverviewInformation(ArrayList<Account> accounts, int month, int year) {
         updateOverviewHeader(accounts, month, year);
         TransactionListAdapter adapter = new TransactionListAdapter(this, accounts, month, year);
         transactionList.setAdapter(adapter);
     }
+
 
     /**
      * Build a header view and update the view's property with the newest transactions info.
@@ -122,7 +133,6 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
         Font.setFont(Font.LatoLight, accountOverview, R.id.txt_overview_month, R.id.txt_total_balance,
                 R.id.txt_overview_savings, R.id.txt_total_income, R.id.txt_overview_budget,
                 R.id.txt_total_expenses);
-
 
         if (transactionList != null) {
             if (transactionList.getHeaderViewsCount() < 1) {
@@ -165,10 +175,11 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
         overviewTotalExpense.setText(String.valueOf(currency + " " + makeRoundedValue(totalExpensesOfTheMonth)));
     }
 
+
     @Override
     public void onTransactionClick(Transaction transaction, int listPosition) {
-        Intent intent = new Intent(this, TransactionViewer.class);
-        intent.putExtra(TransactionViewer.TRANSACTION_KEY, transaction);
+        Intent intent = new Intent(this, TransactionViewerActivity.class);
+        intent.putExtra(TransactionViewerActivity.TRANSACTION_KEY, transaction);
         startActivity(intent);
     }
 

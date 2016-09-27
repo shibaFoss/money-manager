@@ -20,6 +20,7 @@ public class DialogUtility {
 
     public static MaterialDialog.Builder getDefaultBuilder(BaseActivity activity) {
         return new MaterialDialog.Builder(activity)
+                .typeface(Font.LatoMedium, Font.LatoRegular)
                 .contentColor(getThemeColor(activity, android.R.attr.textColorPrimary))
                 .positiveColor(getThemeColor(activity, android.R.attr.textColorPrimary))
                 .negativeColor(getThemeColor(activity, android.R.attr.textColorSecondary))

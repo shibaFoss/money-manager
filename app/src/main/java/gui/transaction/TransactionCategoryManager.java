@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import accounts.AccountManager;
 import accounts.Transaction;
 import in.softc.aladindm.R;
+import utils.Font;
 
 public class TransactionCategoryManager {
     public TransactionActivity activity;
@@ -33,6 +34,7 @@ public class TransactionCategoryManager {
                     final TextView categoryItemChild = (TextView) View.inflate(activity, R.layout
                             .activity_transaction_category_card_category_item, null);
                     if (categoryItemChild != null) {
+                        categoryItemChild.setTypeface(Font.LatoLight);
                         categoryItemChild.setText(name);
                         categoryContainer.addView(categoryItemChild);
                         categoryItemChild.setOnClickListener(new View.OnClickListener() {

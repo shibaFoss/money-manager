@@ -11,6 +11,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import gui.BaseActivity;
 import in.softc.aladindm.R;
 import utils.DialogUtility;
+import utils.Font;
 
 public class CalculatorDialog implements View.OnClickListener {
 
@@ -25,22 +26,27 @@ public class CalculatorDialog implements View.OnClickListener {
         void onSubmitResult(double result, Dialog dialog);
     }
 
+
     public CalculatorDialog(BaseActivity activity, String startingNumber) {
         this.activity = activity;
         initDialog(startingNumber);
     }
 
+
     public void setOnSubmitResultListener(OnSubmitResult listener) {
         this.resultListener = listener;
     }
+
 
     public void show() {
         dialog.show();
     }
 
+
     public void dismiss() {
         dialog.dismiss();
     }
+
 
     private void initDialog(String startingNumber) {
         dialog = DialogUtility.generateNewDialog(activity, R.layout.dialog_calculator);
@@ -74,8 +80,12 @@ public class CalculatorDialog implements View.OnClickListener {
 
         View[] views = new View[]{bntClear, bnt1, bnt2, bnt3, bnt4, bnt5, bnt6, bnt7, bnt8, bnt9, bnt0,
                 bntDot, bntMinus, bntPlus, bntMultiply, bntDivision, bntEqual, bntCancel, bntDone};
-        for (View view : views)
+
+        for (View view : views) {
+            if (view instanceof TextView)
+                ((TextView) view).setTypeface(Font.LatoRegular);
             view.setOnClickListener(this);
+        }
 
         bntClear.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -85,6 +95,7 @@ public class CalculatorDialog implements View.OnClickListener {
             }
         });
     }
+
 
     @Override
     public void onClick(View view) {
@@ -143,6 +154,7 @@ public class CalculatorDialog implements View.OnClickListener {
             }
         }
     }
+
 
     private void backspacePreview() {
         activity.vibrate(5);

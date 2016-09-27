@@ -18,6 +18,7 @@ import core.App;
 import gui.BaseActivity;
 import in.softc.aladindm.R;
 import utils.FileUtils;
+import utils.Font;
 
 public class TransactionActivity extends BaseActivity {
 
@@ -29,20 +30,30 @@ public class TransactionActivity extends BaseActivity {
     private TransactIonMemoManager memoManager;
     private Transaction transaction;
 
+
     @Override
     public int getLayoutResId() {
         return R.layout.activity_transaction;
     }
 
+
     @Override
     public void onInitialize(Bundle bundle) {
+        Font.setFont(Font.LatoMedium, this, R.id.txt_toolbar,R.id.txt_date,
+                R.id.txt_total_amount, R.id.txt_transaction_note, R.id.txt_category, R.id.txt_memo);
+
+        Font.setFont(Font.LatoLight, this, R.id.txt_transaction_date, R.id.txt_transaction_amount);
+        Font.setFont(Font.OpenSansRegular, this, R.id.edit_transaction_note, R.id.bnt_memo_photo_taker);
+
+
         AccountManager accountManager = getApp().getAccountManager();
 
         Intent intent = getIntent();
         int accountPosition = intent.getIntExtra(ACCOUNT_ARRAY_POSITION, -1);
         boolean isExpenseTransaction = intent.getBooleanExtra(IS_EXPENSE, true);
 
-        if (!validateAccount(accountPosition)) return;
+        if (!validateAccount(accountPosition))
+            return;
 
         Account account = accountManager.accounts.get(accountPosition);
         transaction = new Transaction();
@@ -56,6 +67,7 @@ public class TransactionActivity extends BaseActivity {
         memoManager = new TransactIonMemoManager(this, transaction);
     }
 
+
     private boolean validateAccount(int accountPosition) {
         if (accountPosition == -1) {
             vibrate(10);
@@ -66,10 +78,12 @@ public class TransactionActivity extends BaseActivity {
         return true;
     }
 
+
     @Override
     public void onClosed() {
         finish();
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -82,9 +96,11 @@ public class TransactionActivity extends BaseActivity {
         }
     }
 
+
     public void onBack(View view) {
         finish();
     }
+
 
     public void onSaveTransaction(View view) {
         if (transaction.transactionAmount == 0) {
@@ -99,6 +115,7 @@ public class TransactionActivity extends BaseActivity {
         getApp().getAccountManager().write(getApp());
         finish();
     }
+
 
     private void onCaptureImageResult(Intent data) {
         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
@@ -125,6 +142,7 @@ public class TransactionActivity extends BaseActivity {
         memoManager.imagePreview.setVisibility(View.VISIBLE);
         memoManager.imagePreview.setImageBitmap(bitmap);
     }
+
 
     private void onSelectFromGalleryResult(Intent data) {
         Bitmap bitmap = null;

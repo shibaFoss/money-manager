@@ -49,7 +49,7 @@ public class TransactIonMemoManager implements View.OnClickListener {
 
                 } else {
                     DialogUtility.getDefaultBuilder(activity)
-                            .title(R.string.choose)
+                            .title(R.string.choose_option)
                             .items(new String[]{activity.getString(R.string.camera), activity.getString(R.string.gallery)})
                             .itemsCallback(new MaterialDialog.ListCallback() {
                                 @Override

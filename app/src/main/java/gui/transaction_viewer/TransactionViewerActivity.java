@@ -12,7 +12,7 @@ import gui.BaseActivity;
 import gui.static_dialogs.YesNoDialog;
 import in.softc.aladindm.R;
 
-public class TransactionViewer extends BaseActivity {
+public class TransactionViewerActivity extends BaseActivity {
     public static final String TRANSACTION_KEY = "TRANSACTION_KEY";
 
     private Transaction transaction;
