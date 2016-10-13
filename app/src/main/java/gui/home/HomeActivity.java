@@ -17,7 +17,7 @@ import accounts.Transaction;
 import gui.BaseActivity;
 import gui.transaction.TransactionActivity;
 import gui.transaction_viewer.TransactionViewerActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
 import utils.Font;
 import utils.OsUtility;

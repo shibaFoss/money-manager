@@ -12,7 +12,7 @@ import accounts.Account;
 import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.Font;
 import utils.OsUtility;
 

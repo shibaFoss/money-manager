@@ -5,7 +5,7 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import in.softc.aladindm.BuildConfig;
+import in.mobi_space.money_manager.BuildConfig;
 
 /**
  * <p>LogHelper is a utility class that helps you to print a log message

@@ -118,7 +118,8 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="start"
                     android:hint="@string/_0"
-                    android:textColor="@color/green_500"
+                    android:ems="9"
+                    android:textColor="@color/green_900"
                     android:inputType="numberDecimal"/>
 
             </LinearLayout>

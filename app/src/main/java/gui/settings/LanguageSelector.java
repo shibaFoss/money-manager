@@ -13,7 +13,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.HashMap;
 
 import gui.BaseActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 
 public class LanguageSelector implements ListView.OnItemClickListener {
 

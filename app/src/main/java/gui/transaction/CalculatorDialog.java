@@ -9,7 +9,7 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
 import gui.BaseActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
 import utils.Font;
 

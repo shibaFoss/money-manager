@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import accounts.Transaction;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 
 import static utils.ViewUtility.makeRoundedValue;
 

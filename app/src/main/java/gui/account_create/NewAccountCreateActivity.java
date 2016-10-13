@@ -10,7 +10,7 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
 import gui.home.HomeActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.Font;
 
 public class NewAccountCreateActivity extends BaseActivity {
@@ -85,10 +85,12 @@ public class NewAccountCreateActivity extends BaseActivity {
     }
 
     private void initFonts() {
-        int[] ids = new int[]{R.id.txt_account_name, R.id.edit_account_name, R.id.txt_currency, R.id
-                .currency_selector_spinner, R.id.txt_current_balance, R.id.edit_starting_balance};
+        int[] ids = new int[]{R.id.txt_account_name, R.id.edit_account_name, R.id.txt_currency,
+                R.id.currency_selector_spinner, R.id.txt_current_balance};
+
         Font.setFont(Font.LatoRegular, this, ids);
-        Font.setFont(Font.LatoRegular, this, R.id.txt_toolbar);
+        Font.setFont(Font.LatoMedium, this, R.id.edit_starting_balance);
+        Font.setFont(Font.LatoMedium, this, R.id.txt_toolbar);
     }
 
     private String getCurrencySymbolByTimeZone() {

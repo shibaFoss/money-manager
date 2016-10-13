@@ -16,7 +16,7 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import core.App;
 import gui.BaseActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.FileUtils;
 import utils.Font;
 

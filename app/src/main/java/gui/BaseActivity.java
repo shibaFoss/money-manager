@@ -23,7 +23,7 @@ import com.afollestad.materialdialogs.MaterialDialog.SingleButtonCallback;
 
 import core.App;
 import gui.launcher.LauncherActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import libs.AsyncJob;
 import libs.localization.LocalizationActivity;
 import utils.DialogUtility;
@@ -37,7 +37,6 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
  * activity creation.
  * @author Shiba
  */
-@SuppressWarnings("unused")
 public abstract class BaseActivity extends LocalizationActivity {
 
     /**

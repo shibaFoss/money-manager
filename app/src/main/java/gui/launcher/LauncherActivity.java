@@ -8,7 +8,7 @@ import accounts.AccountManager;
 import gui.BaseActivity;
 import gui.account_create.NewAccountCreateActivity;
 import gui.home.HomeActivity;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.Font;
 
 public class LauncherActivity extends BaseActivity {

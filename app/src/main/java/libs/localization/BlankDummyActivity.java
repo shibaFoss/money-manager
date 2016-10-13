@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 
 public class BlankDummyActivity extends Activity {
 

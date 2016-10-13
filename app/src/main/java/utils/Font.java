@@ -14,14 +14,16 @@ import android.widget.TextView;
  */
 public class Font {
 
-    public static final String Lato_Regular = "fonts/Lato-Regular.ttf";
-    public static final String Lato_Medium = "fonts/Lato-Medium.ttf";
-    public static final String Lato_Light = "fonts/Lato-Light.ttf";
-    public static final String OpenSans_Regular = "fonts/OpenSans-Regular.ttf";
+    private static final String Lato_Regular = "fonts/Lato-Regular.ttf";
+    private static final String Lato_Medium = "fonts/Lato-Medium.ttf";
+    private static final String Lato_Light = "fonts/Lato-Light.ttf";
+    private static final String OpenSans_Regular = "fonts/OpenSans-Regular.ttf";
+    private static final String Toolbar_Regular = "fonts/toolbar_font.ttf";
 
     public static Typeface LatoRegular;
     public static Typeface LatoMedium;
     public static Typeface LatoLight;
+    public static Typeface ToolbarRegular;
     public static Typeface OpenSansRegular;
 
     public static void init(Context context) {
@@ -29,6 +31,7 @@ public class Font {
         LatoRegular = Typeface.createFromAsset(context.getAssets(), Lato_Regular);
         LatoMedium = Typeface.createFromAsset(context.getAssets(), Lato_Medium);
         LatoLight = Typeface.createFromAsset(context.getAssets(), Lato_Light);
+        ToolbarRegular = Typeface.createFromAsset(context.getAssets(), Toolbar_Regular);
     }
 
     public static void setFontFromAssetManager(String fontName, TextView textView) {

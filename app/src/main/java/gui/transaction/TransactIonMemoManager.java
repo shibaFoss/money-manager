@@ -17,7 +17,7 @@ import accounts.Transaction;
 import core.App;
 import gui.BaseActivity;
 import gui.static_dialogs.YesNoDialog;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
 
 public class TransactIonMemoManager implements View.OnClickListener {

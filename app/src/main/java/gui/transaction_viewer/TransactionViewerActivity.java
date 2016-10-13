@@ -10,7 +10,7 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
 import gui.static_dialogs.YesNoDialog;
-import in.softc.aladindm.R;
+import in.mobi_space.money_manager.R;
 
 public class TransactionViewerActivity extends BaseActivity {
     public static final String TRANSACTION_KEY = "TRANSACTION_KEY";
