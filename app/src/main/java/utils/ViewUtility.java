@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 public class ViewUtility {
 
     /**
@@ -66,8 +70,8 @@ public class ViewUtility {
 
     public static String makeRoundedValue(double number) {
         try {
-            String result = "";
-            String numberString = String.valueOf(number);
+            String result = getFullNumber(number);
+            String numberString = getFullNumber(number);
             if (numberString.contains(".")) {
                 String numberDivider[] = numberString.split("\\.");
 
@@ -90,5 +94,12 @@ public class ViewUtility {
             err.printStackTrace();
             return String.valueOf(number);
         }
+    }
+
+
+    private static String getFullNumber(double input) {
+        DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        df.setMaximumFractionDigits(340); //340 = DecimalFormat.DOUBLE_FRACTION_DIGITS
+        return df.format(input);
     }
 }
