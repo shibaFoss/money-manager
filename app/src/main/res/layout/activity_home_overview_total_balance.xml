@@ -24,12 +24,11 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
-            android:text="@string/month"
-            android:textStyle="bold"/>
+            android:text="@string/month"/>
 
         <TextView
             android:id="@+id/txt_overview_month"
-            style="@style/textBodyStyle"
+            style="@style/SubHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_8"
@@ -67,7 +66,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="end"
             android:text="@string/total_available_balance"
-            android:textStyle="bold"/>
+            android:textStyle="normal"/>
 
         <TextView
             android:id="@+id/txt_total_balance"
@@ -80,7 +79,7 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_0"
             android:gravity="end"
-            android:textColor="@color/indigo_900"
+            android:textColor="@color/indigo_500"
             android:singleLine="true"
             android:text="@string/_60000"
             android:textSize="@dimen/sp_24"

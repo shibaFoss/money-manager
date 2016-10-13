@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="lightColorPrimary">@color/green_500</color>
-    <color name="lightColorPrimaryDark">@color/green_500</color>
+    <color name="lightColorPrimary">@color/green_700</color>
+    <color name="lightColorPrimaryDark">@color/green_700</color>
     <color name="lightColorAccent">@color/black</color>
 
     <style name="LauncherActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">

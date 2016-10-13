@@ -13,18 +13,17 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
 import in.mobi_space.money_manager.R;
-import utils.Font;
 import utils.OsUtility;
 
 import static utils.ViewUtility.makeRoundedValue;
 
-public class TransactionListAdapter extends BaseAdapter {
+class TransactionListAdapter extends BaseAdapter {
 
     private BaseActivity activity;
     private OnTransactionClick onTransactionClick;
     private ArrayList<Item> items = new ArrayList<>();
 
-    public TransactionListAdapter(HomeActivity homeActivity, ArrayList<Account> accounts, int month, int year) {
+    TransactionListAdapter(HomeActivity homeActivity, ArrayList<Account> accounts, int month, int year) {
         this.onTransactionClick = homeActivity;
         this.activity = homeActivity;
         setTransactions(accounts, month, year);
@@ -76,8 +75,6 @@ public class TransactionListAdapter extends BaseAdapter {
             view = View.inflate(activity, R.layout.activity_home_transaction_date_header, null);
             TextView txtDate = ((TextView) view.findViewById(R.id.txt_date));
             txtDate.setText(items.get(position).date);
-            txtDate.setTypeface(Font.LatoMedium);
-
             return view;
         }
 
@@ -95,10 +92,6 @@ public class TransactionListAdapter extends BaseAdapter {
             }
         }
 
-        Font.setFont(Font.LatoRegular, view, R.id.txt_transaction_note);
-        Font.setFont(Font.LatoLight, view, R.id.txt_transaction_amount);
-        Font.setFont(Font.LatoLight, view, R.id.txt_transactional_account, R.id.txt_transaction_category);
-
         final Transaction transaction = items.get(position).transaction;
         String moneyAmount = makeRoundedValue(transaction.transactionAmount);
         Account account = activity.getApp().getAccountManager().getAccountByName(transaction.accountName);
@@ -111,16 +104,16 @@ public class TransactionListAdapter extends BaseAdapter {
         String transactionAmount;
         if (transaction.isExpense) {
             transactionAmount = currency + " " + moneyAmount;
-            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.red_900));
+            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.red_600));
             viewHolder.transactionAmount.setText(transactionAmount);
 
         } else {
             transactionAmount = currency + " " + moneyAmount;
-            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.green_900));
+            viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.green_500));
             viewHolder.transactionAmount.setText(transactionAmount);
         }
 
-        viewHolder.assosiateAccount.setText(transaction.accountName);
+        viewHolder.associatedAccount.setText(transaction.accountName);
         viewHolder.transactionCategory.setText(transaction.transactionCategory);
         viewHolder.transactionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,24 +129,24 @@ public class TransactionListAdapter extends BaseAdapter {
         viewHolder.transactionLayout = view.findViewById(R.id.transaction_layout);
         viewHolder.transactionNote = (TextView) view.findViewById(R.id.txt_transaction_note);
         viewHolder.transactionAmount = (TextView) view.findViewById(R.id.txt_transaction_amount);
-        viewHolder.assosiateAccount = (TextView) view.findViewById(R.id.txt_transactional_account);
+        viewHolder.associatedAccount = (TextView) view.findViewById(R.id.txt_transactional_account);
         viewHolder.transactionCategory = (TextView) view.findViewById(R.id.txt_transaction_category);
         view.setTag(viewHolder);
     }
 
-    public interface OnTransactionClick {
+    interface OnTransactionClick {
         void onTransactionClick(Transaction transaction, int listPosition);
     }
 
-    public static class ViewHolder {
-        public View transactionLayout;
-        public TextView transactionNote, transactionAmount, assosiateAccount, transactionCategory;
+    private static class ViewHolder {
+        View transactionLayout;
+        TextView transactionNote, transactionAmount, associatedAccount, transactionCategory;
     }
 
-    public static class Item {
-        public String date;
-        public int day;
-        public boolean isSelectionHeader = false;
+    private static class Item {
+        String date;
+        int day;
+        boolean isSelectionHeader = false;
         public Transaction transaction;
     }
 }

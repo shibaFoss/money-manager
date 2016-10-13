@@ -13,7 +13,7 @@
         android:layout_marginEnd="@dimen/dp_8"
         android:layout_marginStart="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_4"
-        app:cardBackgroundColor="@color/indigo_600"
+        app:cardBackgroundColor="?attr/colorPrimaryDark"
         app:cardCornerRadius="@dimen/dp_2"
         app:cardElevation="@dimen/dp_1">
 

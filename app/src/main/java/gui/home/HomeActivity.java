@@ -15,11 +15,11 @@ import accounts.Account;
 import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
+import gui.home.TransactionListAdapter.OnTransactionClick;
 import gui.transaction.TransactionActivity;
 import gui.transaction_viewer.TransactionViewerActivity;
 import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
-import utils.Font;
 import utils.OsUtility;
 
 import static accounts.AccountManager.getTotalAvailableBalance;
@@ -28,7 +28,7 @@ import static accounts.AccountManager.getTotalExpenses;
 import static accounts.AccountManager.getTotalIncome;
 import static utils.ViewUtility.makeRoundedValue;
 
-public class HomeActivity extends BaseActivity implements TransactionListAdapter.OnTransactionClick {
+public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
     private ListView transactionList;
     private View overviewHeaderLayout;
@@ -44,8 +44,6 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
     @Override
     public void onInitialize(Bundle bundle) {
-        Font.setFont(Font.LatoMedium, this, R.id.txt_toolbar);
-
         accountManager = getApp().getAccountManager();
         transactionList = (ListView) findViewById(R.id.list_transaction);
 
@@ -85,7 +83,7 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
         DialogUtility.getDefaultBuilder(this)
                 .title(R.string.select_account)
-                .items(accountNameArray)
+                .items((CharSequence[]) accountNameArray)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
@@ -126,14 +124,6 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
         TextView overviewBudget = (TextView) accountOverview.findViewById(R.id.txt_overview_budget);
         TextView overviewTotalExpense = (TextView) accountOverview.findViewById(R.id.txt_total_expenses);
 
-        Font.setFont(Font.LatoMedium, accountOverview, R.id.txt_month, R.id.txt_total_available_balance,
-                R.id.txt_saving, R.id.txt_total_income_preview, R.id.txt_budget,
-                R.id.txt_total_expenses_preview);
-
-        Font.setFont(Font.LatoLight, accountOverview, R.id.txt_overview_month, R.id.txt_total_balance,
-                R.id.txt_overview_savings, R.id.txt_total_income, R.id.txt_overview_budget,
-                R.id.txt_total_expenses);
-
         if (transactionList != null) {
             if (transactionList.getHeaderViewsCount() < 1) {
                 transactionList.addHeaderView(accountOverview);
@@ -159,9 +149,9 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
 
         overviewDate.setText(monthName);
         if (totalAvailableBalance < 1)
-            overviewTotalBalance.setTextColor(getColorFrom(R.color.red_900));
+            overviewTotalBalance.setTextColor(getColorFrom(R.color.red_500));
         else
-            overviewTotalBalance.setTextColor(getColorFrom(R.color.indigo_900));
+            overviewTotalBalance.setTextColor(getColorFrom(R.color.indigo_500));
 
         overviewTotalBalance.setText(String.valueOf(currency + " " + makeRoundedValue(totalAvailableBalance)));
         if (totalSaving < 1)
@@ -172,7 +162,8 @@ public class HomeActivity extends BaseActivity implements TransactionListAdapter
         overviewTotalIncome.setText(String.valueOf(currency + " " + makeRoundedValue(totalIncomeOfTheMonth)));
         overviewBudget.setText(totalBudget < 1 ?
                 getString(R.string.none) : String.valueOf(currency + " " + totalBudget));
-        overviewTotalExpense.setText(String.valueOf(currency + " " + makeRoundedValue(totalExpensesOfTheMonth)));
+
+        overviewTotalExpense.setText(currency + " " + makeRoundedValue(totalExpensesOfTheMonth));
     }
 
 

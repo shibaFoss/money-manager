@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
             android:text="@string/memo_picture"
-            android:textStyle="bold"/>
+            android:textStyle="normal"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

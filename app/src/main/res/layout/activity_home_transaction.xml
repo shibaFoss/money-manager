@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_transaction"
     android:layout_width="match_parent"
@@ -47,8 +46,7 @@
                     android:gravity="start|center_vertical"
                     android:maxLines="3"
                     android:text="@string/dinner_with_dip"
-                    android:textSize="@dimen/sp_16"
-                    />
+                    android:textSize="@dimen/sp_17" />
 
                 <TextView
                     android:id="@+id/txt_transaction_amount"
@@ -59,9 +57,8 @@
                     android:layout_marginStart="@dimen/dp_4"
                     android:gravity="end"
                     android:text="@string/__600"
-                    android:textColor="@color/red_900"
-                    android:textSize="@dimen/sp_20"
-                    />
+                    android:textColor="@color/red_600"
+                    android:textSize="@dimen/sp_20" />
 
             </RelativeLayout>
 
@@ -72,7 +69,7 @@
 
                 <TextView
                     android:id="@+id/txt_transactional_account"
-                    style="@style/textBodyStyle"
+                    style="@style/SubHeading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -87,11 +84,11 @@
                     android:singleLine="true"
                     android:text="@string/via_bank_account"
                     android:textSize="@dimen/sp_12"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txt_transaction_category"
-                    style="@style/textBodyStyle"
+                    style="@style/SubHeading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -105,7 +102,7 @@
                     android:gravity="start|center_vertical"
                     android:text="@string/food_amp_drink"
                     android:textSize="@dimen/sp_12"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

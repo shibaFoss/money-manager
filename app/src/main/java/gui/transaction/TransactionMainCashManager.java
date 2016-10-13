@@ -10,16 +10,18 @@ import android.widget.TextView;
 
 import accounts.Transaction;
 import in.mobi_space.money_manager.R;
+import utils.ViewUtility;
 
 import static utils.ViewUtility.makeRoundedValue;
 
-public class TransactionMainCashManager implements View.OnClickListener {
+class TransactionMainCashManager implements View.OnClickListener {
+
     public TransactionActivity activity;
     public Transaction transaction;
     private EditText transactionNoteEdit;
     private TextView transactionAmountPreview, transactionDatePreview;
 
-    public TransactionMainCashManager(TransactionActivity activity, Transaction transaction) {
+    TransactionMainCashManager(TransactionActivity activity, Transaction transaction) {
         this.activity = activity;
         this.transaction = transaction;
 
@@ -55,7 +57,7 @@ public class TransactionMainCashManager implements View.OnClickListener {
         calculatorDialog.setOnSubmitResultListener(new CalculatorDialog.OnSubmitResult() {
             @Override
             public void onSubmitResult(double result, Dialog dialog) {
-                result = Math.floor(result * 100) / 100;
+                result = Double.valueOf(ViewUtility.makeRoundedValue(result));
                 transaction.transactionAmount = result;
                 updateViews();
             }
@@ -81,7 +83,7 @@ public class TransactionMainCashManager implements View.OnClickListener {
         datePickerDialog.show();
     }
 
-    public String getTransactionNote() {
+    String getTransactionNote() {
         String input = transactionNoteEdit.getText().toString();
         if (input.length() > 1) return input;
         else return "Untitled transaction";
@@ -94,9 +96,10 @@ public class TransactionMainCashManager implements View.OnClickListener {
         transactionAmountPreview.setText(String.valueOf(currency + " " + makeRoundedValue(transaction.transactionAmount)));
 
         if (transaction.isExpense)
-            transactionAmountPreview.setTextColor(activity.getColorFrom(R.color.md_red_500));
+            transactionAmountPreview.setTextColor(activity.getColorFrom(R.color.md_red_600));
         else
             transactionAmountPreview.setTextColor(activity.getColorFrom(R.color.md_green_500));
     }
+
 
 }

@@ -22,12 +22,12 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
             android:text="@string/savings"
-            android:textStyle="bold"
+            android:textStyle="normal"
             />
 
         <TextView
             android:id="@+id/txt_overview_savings"
-            style="@style/textBodyStyle"
+            style="@style/SubHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="end"
             android:text="@string/total_income"
-            android:textStyle="bold"/>
+            android:textStyle="normal"/>
 
         <TextView
             android:id="@+id/txt_total_income"
@@ -74,7 +74,7 @@
             android:gravity="end"
             android:singleLine="true"
             android:text="@string/_5000"
-            android:textColor="@color/green_900"
+            android:textColor="@color/green_500"
             android:textSize="@dimen/sp_24"
             />
 

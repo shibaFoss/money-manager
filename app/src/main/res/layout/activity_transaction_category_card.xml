@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
             android:text="@string/category"
-            android:textStyle="bold"/>
+            android:textStyle="normal"/>
 
         <LinearLayout
             android:id="@+id/transaction_category_container"

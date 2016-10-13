@@ -20,16 +20,16 @@ import gui.static_dialogs.YesNoDialog;
 import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
 
-public class TransactIonMemoManager implements View.OnClickListener {
-    public static final int REQUEST_CAMERA = 1;
-    public static final int SELECT_FILE_REQUEST = 2;
+class TransactIonMemoManager implements View.OnClickListener {
+    static final int REQUEST_CAMERA = 1;
+    static final int SELECT_FILE_REQUEST = 2;
 
     public TransactionActivity activity;
     public Transaction transaction;
-    public ImageView imagePreview;
-    public TextView bntPickerTake;
+    ImageView imagePreview;
+    TextView bntPickerTake;
 
-    public TransactIonMemoManager(TransactionActivity activity, Transaction transaction) {
+    TransactIonMemoManager(TransactionActivity activity, Transaction transaction) {
         this.activity = activity;
         this.transaction = transaction;
         imagePreview = (ImageView) activity.findViewById(R.id.img_memo_photo);
@@ -50,7 +50,7 @@ public class TransactIonMemoManager implements View.OnClickListener {
                 } else {
                     DialogUtility.getDefaultBuilder(activity)
                             .title(R.string.choose_option)
-                            .items(new String[]{activity.getString(R.string.camera), activity.getString(R.string.gallery)})
+                            .items((CharSequence[]) new String[]{activity.getString(R.string.camera), activity.getString(R.string.gallery)})
                             .itemsCallback(new MaterialDialog.ListCallback() {
                                 @Override
                                 public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {

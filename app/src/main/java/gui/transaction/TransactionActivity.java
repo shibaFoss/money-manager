@@ -18,7 +18,6 @@ import core.App;
 import gui.BaseActivity;
 import in.mobi_space.money_manager.R;
 import utils.FileUtils;
-import utils.Font;
 
 public class TransactionActivity extends BaseActivity {
 
@@ -39,13 +38,6 @@ public class TransactionActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        Font.setFont(Font.LatoMedium, this, R.id.txt_toolbar,R.id.txt_date,
-                R.id.txt_total_amount, R.id.txt_transaction_note, R.id.txt_category, R.id.txt_memo);
-
-        Font.setFont(Font.LatoLight, this, R.id.txt_transaction_date, R.id.txt_transaction_amount);
-        Font.setFont(Font.OpenSansRegular, this, R.id.edit_transaction_note, R.id.bnt_memo_photo_taker);
-
-
         AccountManager accountManager = getApp().getAccountManager();
 
         Intent intent = getIntent();

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.support.annotation.IdRes;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -74,12 +73,15 @@ public class ViewUtility {
 
                 result = numberDivider[0];
                 if (numberDivider[1] != null) {
+                    if (numberDivider[1].length() > 2)
+                        numberDivider[1] = numberDivider[1].substring(0, 2);
+
                     int value = Integer.parseInt(numberDivider[1]);
                     if (value > 1) {
                         if (value > 9)
-                            result += String.valueOf("." + value);
+                            result += String.valueOf("." + numberDivider[1].substring(0, 2));
                         else
-                            result += String.valueOf(value) + "0";
+                            result += "." + String.valueOf(value) + "0";
                     }
                 }
             }

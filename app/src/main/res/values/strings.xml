@@ -81,7 +81,7 @@
     <string name="select">Select</string>
     <string name="total_amount">Total amount</string>
     <string name="_0">₹ 0</string>
-    <string name="transaction_note">Transaction note</string>
+    <string name="transaction_note">Transaction Note</string>
     <string name="food_amp_drink"><![CDATA[Food & Drink]]></string>
     <string name="income">Income</string>
     <string name="total_available_balance">Total Available Balance</string>

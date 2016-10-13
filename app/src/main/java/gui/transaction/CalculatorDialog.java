@@ -8,12 +8,19 @@ import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
 import gui.BaseActivity;
 import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
-import utils.Font;
 
-public class CalculatorDialog implements View.OnClickListener {
+/**
+ * The class shows a calculator dialog to the user, where user can calculate basic maths.
+ * The calculation result can get by {@link OnSubmitResult} callback interface.
+ */
+class CalculatorDialog implements View.OnClickListener {
 
     private Dialog dialog;
     private BaseActivity activity;
@@ -22,18 +29,18 @@ public class CalculatorDialog implements View.OnClickListener {
     private ImageButton bntClear;
     private OnSubmitResult resultListener;
 
-    public interface OnSubmitResult {
+    interface OnSubmitResult {
         void onSubmitResult(double result, Dialog dialog);
     }
 
 
-    public CalculatorDialog(BaseActivity activity, String startingNumber) {
+    CalculatorDialog(BaseActivity activity, String startingNumber) {
         this.activity = activity;
         initDialog(startingNumber);
     }
 
 
-    public void setOnSubmitResultListener(OnSubmitResult listener) {
+    void setOnSubmitResultListener(OnSubmitResult listener) {
         this.resultListener = listener;
     }
 
@@ -43,7 +50,7 @@ public class CalculatorDialog implements View.OnClickListener {
     }
 
 
-    public void dismiss() {
+    private void dismiss() {
         dialog.dismiss();
     }
 
@@ -81,11 +88,8 @@ public class CalculatorDialog implements View.OnClickListener {
         View[] views = new View[]{bntClear, bnt1, bnt2, bnt3, bnt4, bnt5, bnt6, bnt7, bnt8, bnt9, bnt0,
                 bntDot, bntMinus, bntPlus, bntMultiply, bntDivision, bntEqual, bntCancel, bntDone};
 
-        for (View view : views) {
-            if (view instanceof TextView)
-                ((TextView) view).setTypeface(Font.LatoRegular);
+        for (View view : views)
             view.setOnClickListener(this);
-        }
 
         bntClear.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -125,15 +129,20 @@ public class CalculatorDialog implements View.OnClickListener {
 
         if (id == bnt9.getId()) preview.setText(String.valueOf(preview.getText().toString() + 9));
 
-        if (id == bntDot.getId()) preview.setText(String.valueOf(preview.getText().toString() + "."));
+        if (id == bntDot.getId())
+            preview.setText(String.valueOf(preview.getText().toString() + "."));
 
-        if (id == bntDivision.getId()) preview.setText(String.valueOf(preview.getText().toString() + "/"));
+        if (id == bntDivision.getId())
+            preview.setText(String.valueOf(preview.getText().toString() + "/"));
 
-        if (id == bntMultiply.getId()) preview.setText(String.valueOf(preview.getText().toString() + "*"));
+        if (id == bntMultiply.getId())
+            preview.setText(String.valueOf(preview.getText().toString() + "*"));
 
-        if (id == bntPlus.getId()) preview.setText(String.valueOf(preview.getText().toString() + "+"));
+        if (id == bntPlus.getId())
+            preview.setText(String.valueOf(preview.getText().toString() + "+"));
 
-        if (id == bntMinus.getId()) preview.setText(String.valueOf(preview.getText().toString() + "-"));
+        if (id == bntMinus.getId())
+            preview.setText(String.valueOf(preview.getText().toString() + "-"));
 
         if (id == bntDone.getId() || id == bntEqual.getId()) {
             try {
@@ -142,9 +151,13 @@ public class CalculatorDialog implements View.OnClickListener {
 
                 if (id == bntDone.getId()) {
                     dismiss();
-                    if (resultListener != null) resultListener.onSubmitResult(result, dialog);
+                    if (resultListener != null)
+                        resultListener.onSubmitResult(result, dialog);
+
                 } else {
-                    preview.setText(String.valueOf(result));
+                    DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+                    df.setMaximumFractionDigits(340); //340 = DecimalFormat.DOUBLE_FRACTION_DIGITS
+                    preview.setText(df.format(result));
                 }
 
             } catch (Exception err) {

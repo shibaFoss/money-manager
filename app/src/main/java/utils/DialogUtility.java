@@ -20,7 +20,6 @@ public class DialogUtility {
 
     public static MaterialDialog.Builder getDefaultBuilder(BaseActivity activity) {
         return new MaterialDialog.Builder(activity)
-                .typeface(Font.LatoMedium, Font.LatoRegular)
                 .contentColor(getThemeColor(activity, android.R.attr.textColorPrimary))
                 .positiveColor(getThemeColor(activity, android.R.attr.textColorPrimary))
                 .negativeColor(getThemeColor(activity, android.R.attr.textColorSecondary))
@@ -29,7 +28,7 @@ public class DialogUtility {
 
 
     @ColorInt
-    public static int getThemeColor(@NonNull final Context context, @AttrRes final int attributeColor) {
+    private static int getThemeColor(@NonNull final Context context, @AttrRes final int attributeColor) {
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(attributeColor, value, true);
         return value.data;
@@ -48,7 +47,7 @@ public class DialogUtility {
     }
 
 
-    public static void fillParent(Dialog dialog) {
+    private static void fillParent(Dialog dialog) {
         WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         dialog.getWindow().setAttributes(params);

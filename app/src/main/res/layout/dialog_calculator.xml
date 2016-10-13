@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="@dimen/dp_16"
-              android:background="@drawable/ic_dialog_bg"
-              android:minHeight="200dp"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_16"
+    android:background="@drawable/ic_dialog_bg"
+    android:minHeight="200dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:gravity="end|center_vertical"
                 android:padding="@dimen/dp_10"
                 android:singleLine="true"
-                android:textSize="@dimen/sp_24"/>
+                android:textSize="@dimen/sp_24" />
 
             <ImageButton
                 android:id="@+id/bntClear"
@@ -35,7 +35,7 @@
                 android:layout_alignParentEnd="true"
                 android:background="?attr/selectableItemBackground"
                 android:padding="@dimen/dp_10"
-                android:src="@drawable/ic_content_clear"/>
+                android:src="@drawable/ic_content_clear" />
         </RelativeLayout>
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_weight="1"
                 android:text="1"
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt2"
@@ -61,7 +61,7 @@
                 android:layout_weight="1"
                 android:text="2"
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt3"
@@ -72,7 +72,7 @@
                 android:text="3"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bntDivision"
@@ -81,9 +81,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="÷"
-
+                android:textColor="@color/indigo_500"
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -101,7 +101,7 @@
                 android:text="4"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt5"
@@ -112,7 +112,7 @@
                 android:text="5"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt6"
@@ -123,7 +123,7 @@
                 android:text="6"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bntMultiply"
@@ -132,9 +132,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="×"
+                android:textColor="@color/indigo_500"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -152,7 +153,7 @@
                 android:text="7"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt8"
@@ -163,7 +164,7 @@
                 android:text="8"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt9"
@@ -174,7 +175,7 @@
                 android:text="9"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bntMinus"
@@ -183,9 +184,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="−"
+                android:textColor="@color/indigo_500"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
@@ -203,7 +205,7 @@
                 android:text="."
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bnt0"
@@ -214,7 +216,7 @@
                 android:text="0"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bntEqual"
@@ -223,9 +225,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="="
+                android:textColor="@color/indigo_500"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <Button
                 android:id="@+id/bntPlus"
@@ -234,16 +237,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="+"
+                android:textColor="@color/indigo_500"
 
                 android:textSize="@dimen/sp_20"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/transparent_black_light"/>
+            android:background="@color/transparent_black_light" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -258,12 +262,12 @@
                 android:layout_weight="1"
                 android:text="@string/cancel"
 
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
             <View
                 android:layout_width="@dimen/dp_1"
                 android:layout_height="match_parent"
-                android:background="@color/transparent_black_light"/>
+                android:background="@color/transparent_black_light" />
 
             <Button
                 android:id="@+id/bntDone"
@@ -272,7 +276,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/done"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </LinearLayout>
 

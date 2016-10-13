@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,11 +15,11 @@
         android:layout_marginTop="@dimen/dp_8"
         android:gravity="start"
         android:text="@string/transaction_note"
-        android:textStyle="bold"/>
+        android:textStyle="normal" />
 
     <EditText
         android:id="@+id/edit_transaction_note"
-        style="@style/textBodyStyle"
+        style="@style/SubHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -31,7 +30,8 @@
         android:hint="@string/note"
         android:maxLines="3"
         android:minLines="2"
+        android:textColor="#333333"
         android:singleLine="false"
-        />
+        android:textSize="@dimen/sp_17" />
 
 </LinearLayout>
