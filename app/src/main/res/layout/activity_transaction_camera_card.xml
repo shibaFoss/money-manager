@@ -1,5 +1,4 @@
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,11 +26,20 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
             android:text="@string/memo_picture"
-            android:textStyle="normal"/>
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_4"
+            android:background="?android:attr/textColorSecondary" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8">
 
             <Button
                 android:id="@+id/bnt_memo_photo_taker"
@@ -39,17 +47,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/take_a_photo"
-                android:textSize="@dimen/sp_16"
-                />
+                android:textSize="@dimen/sp_16" />
 
             <ImageView
                 android:id="@+id/img_memo_photo"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_below="@+id/bnt_memo_photo_taker"
+                android:contentDescription="@string/memo_image"
                 android:scaleType="centerCrop"
-                android:visibility="gone"
-                android:contentDescription="@string/memo_image"/>
+                android:visibility="gone" />
 
         </RelativeLayout>
 

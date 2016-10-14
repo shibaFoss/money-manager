@@ -25,6 +25,10 @@
         <item name="android:textSize">@dimen/material_text_body1</item>
     </style>
 
+    <style name="textEditStyle" parent="textBodyStyle">
+        <item name="android:textSize">@dimen/sp_17</item>
+    </style>
+
     <style name="textButtonStyle" parent="textBodyStyle">
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">true</item>

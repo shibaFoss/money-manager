@@ -97,9 +97,15 @@ public class ViewUtility {
     }
 
 
-    private static String getFullNumber(double input) {
+    public static String getFullNumber(double input) {
         DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-        df.setMaximumFractionDigits(340); //340 = DecimalFormat.DOUBLE_FRACTION_DIGITS
+        df.setMaximumFractionDigits(340);
         return df.format(input);
     }
+
+    public static String getFormattedNumber(double input) {
+        DecimalFormat formatter = new DecimalFormat("#,###.##");
+        return formatter.format(input);
+    }
+
 }

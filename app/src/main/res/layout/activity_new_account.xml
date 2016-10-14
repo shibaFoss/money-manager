@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,22 +7,18 @@
 
     <include
         android:id="@+id/toolbar_layout"
-        layout="@layout/activity_new_account_toolbar"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_3"
-        android:layout_below="@+id/toolbar_layout"
-        android:background="@drawable/tool_bar_drop_down"
-        android:id="@+id/view" />
+        layout="@layout/activity_new_account_toolbar" />
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_layout"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_16"
         card_view:cardCornerRadius="2dp"
-        card_view:cardElevation="@dimen/dp_2"
-        android:layout_below="@+id/view"
-        android:layout_centerHorizontal="true">
+        card_view:cardElevation="@dimen/dp_2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,18 +43,17 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:text="@string/account_name"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="normal"
-                    />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edit_account_name"
+                    style="@style/textEditStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="start"
                     android:hint="@string/atm_card"
-                    android:inputType="text"/>
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -77,9 +71,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:text="@string/currency"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="normal"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/currency_selector_spinner"
@@ -92,8 +84,7 @@
                     android:clickable="true"
                     android:padding="@dimen/dp_8"
                     android:text="@string/inr"
-                    android:textStyle="normal"
-                    />
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -111,25 +102,29 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/dp_16"
                     android:text="@string/current_balance"
-                    android:textSize="@dimen/sp_16"
-                    android:textStyle="normal"
-                    />
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edit_starting_balance"
+                    style="@style/textEditStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="start"
                     android:hint="@string/_0"
-                    android:ems="9"
-                    android:textColor="@color/green_500"
-                    android:inputType="numberDecimal"/>
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/green_500" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_3"
+        android:layout_below="@+id/toolbar_layout"
+        android:background="@drawable/tool_bar_drop_down" />
 
 </RelativeLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
@@ -24,7 +23,15 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="start"
-            android:text="@string/month"/>
+            android:text="@string/month"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_4"
+            android:background="?android:attr/textColorSecondary" />
 
         <TextView
             android:id="@+id/txt_overview_month"
@@ -36,15 +43,8 @@
             android:layout_marginStart="@dimen/dp_8"
             android:layout_marginTop="@dimen/dp_4"
             android:gravity="start"
-            android:text="@string/september_2016"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
-            android:layout_marginEnd="@dimen/dp_4"
-            android:layout_marginStart="@dimen/dp_4"
-            android:background="?android:attr/textColorSecondary"/>
+            android:textSize="@dimen/sp_14"
+            android:text="@string/september_2016" />
 
     </LinearLayout>
 
@@ -66,7 +66,13 @@
             android:layout_marginTop="@dimen/dp_8"
             android:gravity="end"
             android:text="@string/total_available_balance"
-            android:textStyle="normal"/>
+            android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_4"
+            android:background="?android:attr/textColorSecondary" />
 
         <TextView
             android:id="@+id/txt_total_balance"
@@ -74,16 +80,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_0"
             android:layout_marginEnd="@dimen/dp_8"
             android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_0"
+            android:layout_marginTop="@dimen/dp_4"
             android:gravity="end"
-            android:textColor="@color/indigo_500"
             android:singleLine="true"
             android:text="@string/_60000"
-            android:textSize="@dimen/sp_24"
-            />
+            android:textColor="@color/indigo_500"
+            android:textSize="@dimen/sp_24" />
 
     </LinearLayout>
 

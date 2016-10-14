@@ -14,24 +14,18 @@ import android.widget.TextView;
  */
 public class Font {
 
-    private static final String Lato_Regular = "fonts/Lato-Regular.ttf";
-    private static final String Lato_Medium = "fonts/Lato-Medium.ttf";
-    private static final String Lato_Light = "fonts/Lato-Light.ttf";
-    private static final String OpenSans_Regular = "fonts/OpenSans-Regular.ttf";
-    private static final String Toolbar_Regular = "fonts/toolbar_font.ttf";
+    private static final String Roboto_Light = "fonts/RobotoCondensed-Light.ttf";
+    private static final String Roboto_Regular = "fonts/RobotoCondensed-Regular.ttf";
+    private static final String Roboto_Italic = "fonts/RobotoCondensed-Italic.ttf";
 
-    public static Typeface LatoRegular;
-    public static Typeface LatoMedium;
-    public static Typeface LatoLight;
-    public static Typeface ToolbarRegular;
-    public static Typeface OpenSansRegular;
+    public static Typeface RobotoRegular;
+    public static Typeface RobotoLight;
+    public static Typeface RobotoRegularItalic;
 
     public static void init(Context context) {
-        OpenSansRegular = Typeface.createFromAsset(context.getAssets(), OpenSans_Regular);
-        LatoRegular = Typeface.createFromAsset(context.getAssets(), Lato_Regular);
-        LatoMedium = Typeface.createFromAsset(context.getAssets(), Lato_Medium);
-        LatoLight = Typeface.createFromAsset(context.getAssets(), Lato_Light);
-        ToolbarRegular = Typeface.createFromAsset(context.getAssets(), Toolbar_Regular);
+        RobotoRegularItalic = Typeface.createFromAsset(context.getAssets(), Roboto_Italic);
+        RobotoRegular = Typeface.createFromAsset(context.getAssets(), Roboto_Regular);
+        RobotoLight = Typeface.createFromAsset(context.getAssets(), Roboto_Light);
     }
 
     public static void setFontFromAssetManager(String fontName, TextView textView) {

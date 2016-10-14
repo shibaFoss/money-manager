@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <include
         android:id="@+id/toolbar_layout"
-        layout="@layout/activity_transaction_toolbar"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_layout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/activity_transaction_main_card"/>
-
-            <include layout="@layout/activity_transaction_category_card"/>
-
-            <include layout="@layout/activity_transaction_camera_card"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        layout="@layout/activity_transaction_toolbar" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_3"
         android:layout_below="@+id/toolbar_layout"
-        android:background="@drawable/tool_bar_drop_down"/>
+        android:background="@drawable/tool_bar_drop_down"
+        android:id="@+id/view" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="vertical">
+
+            <include layout="@layout/activity_transaction_main_card" />
+
+            <include layout="@layout/activity_transaction_category_card" />
+
+            <include layout="@layout/activity_transaction_camera_card" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

@@ -13,9 +13,9 @@ import accounts.AccountManager;
 import accounts.Transaction;
 import gui.BaseActivity;
 import in.mobi_space.money_manager.R;
+import utils.Font;
 import utils.OsUtility;
-
-import static utils.ViewUtility.makeRoundedValue;
+import utils.ViewUtility;
 
 class TransactionListAdapter extends BaseAdapter {
 
@@ -75,6 +75,7 @@ class TransactionListAdapter extends BaseAdapter {
             view = View.inflate(activity, R.layout.activity_home_transaction_date_header, null);
             TextView txtDate = ((TextView) view.findViewById(R.id.txt_date));
             txtDate.setText(items.get(position).date);
+            txtDate.setTypeface(Font.RobotoRegular);
             return view;
         }
 
@@ -92,8 +93,11 @@ class TransactionListAdapter extends BaseAdapter {
             }
         }
 
+        Font.setFont(Font.RobotoRegular, view, R.id.txt_transaction_note);
+        Font.setFont(Font.RobotoRegular, view, R.id.txt_transaction_amount);
+        Font.setFont(Font.RobotoLight, view, R.id.txt_transactional_account, R.id.txt_transaction_category);
+
         final Transaction transaction = items.get(position).transaction;
-        String moneyAmount = makeRoundedValue(transaction.transactionAmount);
         Account account = activity.getApp().getAccountManager().getAccountByName(transaction.accountName);
         String currency = "";
         if (account != null)
@@ -103,12 +107,12 @@ class TransactionListAdapter extends BaseAdapter {
 
         String transactionAmount;
         if (transaction.isExpense) {
-            transactionAmount = currency + " " + moneyAmount;
+            transactionAmount = currency + " " + ViewUtility.getFormattedNumber(transaction.transactionAmount);
             viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.red_600));
             viewHolder.transactionAmount.setText(transactionAmount);
 
         } else {
-            transactionAmount = currency + " " + moneyAmount;
+            transactionAmount = currency + " " + ViewUtility.getFormattedNumber(transaction.transactionAmount);
             viewHolder.transactionAmount.setTextColor(activity.getColorFrom(R.color.green_500));
             viewHolder.transactionAmount.setText(transactionAmount);
         }

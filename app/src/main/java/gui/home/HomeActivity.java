@@ -20,7 +20,9 @@ import gui.transaction.TransactionActivity;
 import gui.transaction_viewer.TransactionViewerActivity;
 import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
+import utils.Font;
 import utils.OsUtility;
+import utils.ViewUtility;
 
 import static accounts.AccountManager.getTotalAvailableBalance;
 import static accounts.AccountManager.getTotalBudget;
@@ -44,6 +46,8 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
     @Override
     public void onInitialize(Bundle bundle) {
+        Font.setFont(Font.RobotoRegular, this, R.id.txt_toolbar);
+
         accountManager = getApp().getAccountManager();
         transactionList = (ListView) findViewById(R.id.list_transaction);
 
@@ -124,6 +128,14 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         TextView overviewBudget = (TextView) accountOverview.findViewById(R.id.txt_overview_budget);
         TextView overviewTotalExpense = (TextView) accountOverview.findViewById(R.id.txt_total_expenses);
 
+        Font.setFont(Font.RobotoRegular, accountOverview, R.id.txt_month, R.id.txt_total_available_balance,
+                R.id.txt_saving, R.id.txt_total_income_preview, R.id.txt_budget,
+                R.id.txt_total_expenses_preview);
+
+        Font.setFont(Font.RobotoRegular, accountOverview, R.id.txt_overview_month, R.id.txt_total_balance,
+                R.id.txt_overview_savings, R.id.txt_total_income, R.id.txt_overview_budget,
+                R.id.txt_total_expenses);
+
         if (transactionList != null) {
             if (transactionList.getHeaderViewsCount() < 1) {
                 transactionList.addHeaderView(accountOverview);
@@ -153,17 +165,17 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         else
             overviewTotalBalance.setTextColor(getColorFrom(R.color.indigo_500));
 
-        overviewTotalBalance.setText(String.valueOf(currency + " " + makeRoundedValue(totalAvailableBalance)));
-        if (totalSaving < 1)
+        overviewTotalBalance.setText(currency + " " + ViewUtility.getFormattedNumber(totalAvailableBalance));
+        if (totalSaving < 1) {
             overviewSavingsAmount.setText(R.string.none);
-        else
-            overviewSavingsAmount.setText(String.valueOf(currency + " " + makeRoundedValue(totalSaving)));
 
-        overviewTotalIncome.setText(String.valueOf(currency + " " + makeRoundedValue(totalIncomeOfTheMonth)));
-        overviewBudget.setText(totalBudget < 1 ?
-                getString(R.string.none) : String.valueOf(currency + " " + totalBudget));
+        } else {
+            overviewSavingsAmount.setText(currency + " " + ViewUtility.getFormattedNumber(totalSaving));
+        }
 
-        overviewTotalExpense.setText(currency + " " + makeRoundedValue(totalExpensesOfTheMonth));
+        overviewTotalIncome.setText(currency + " " + ViewUtility.getFormattedNumber(totalIncomeOfTheMonth));
+        overviewBudget.setText(totalBudget < 1 ? getString(R.string.none) : currency + " " + ViewUtility.getFormattedNumber(totalBudget));
+        overviewTotalExpense.setText(currency + " " + ViewUtility.getFormattedNumber(totalExpensesOfTheMonth));
     }
 
 

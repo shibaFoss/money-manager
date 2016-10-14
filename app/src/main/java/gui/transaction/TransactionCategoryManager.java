@@ -1,6 +1,9 @@
 package gui.transaction;
 
+import android.content.Context;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -9,6 +12,7 @@ import java.util.ArrayList;
 import accounts.AccountManager;
 import accounts.Transaction;
 import in.mobi_space.money_manager.R;
+import utils.Font;
 
 class TransactionCategoryManager {
     public TransactionActivity activity;
@@ -33,6 +37,7 @@ class TransactionCategoryManager {
                     final TextView categoryItemChild = (TextView) View.inflate(activity, R.layout
                             .activity_transaction_category_card_category_item, null);
                     if (categoryItemChild != null) {
+                        categoryItemChild.setTypeface(Font.RobotoLight);
                         categoryItemChild.setText(name);
                         categoryContainer.addView(categoryItemChild);
                         categoryItemChild.setOnClickListener(new View.OnClickListener() {
@@ -45,9 +50,21 @@ class TransactionCategoryManager {
                                                 0, 0, R.drawable.ic_white_box, 0);
                                     }
                                 }
+                                if (name.equals("Other")) {
+                                    activity.findViewById(R.id.edit_category_other).setVisibility(View.VISIBLE);
+                                    EditText categoryOtherEditText = (EditText) activity.findViewById(R.id.edit_category_other);
+                                    categoryOtherEditText.requestFocus();
+                                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    imm.showSoftInput(categoryOtherEditText, InputMethodManager.SHOW_IMPLICIT);
+
+                                } else {
+                                    activity.findViewById(R.id.edit_category_other).setVisibility(View.GONE);
+                                }
+
                                 categoryItemChild.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0,
                                         R.drawable.ic_action_done, 0);
                                 transaction.transactionCategory = name;
+
                             }
                         });
                     }

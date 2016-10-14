@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,6 +20,7 @@ import core.App;
 import gui.BaseActivity;
 import in.mobi_space.money_manager.R;
 import utils.FileUtils;
+import utils.Font;
 
 public class TransactionActivity extends BaseActivity {
 
@@ -38,6 +41,14 @@ public class TransactionActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
+        Font.setFont(Font.RobotoRegular, this, R.id.txt_toolbar, R.id.txt_date,
+                R.id.txt_total_amount, R.id.txt_transaction_note, R.id.txt_category, R.id.txt_memo);
+
+        Font.setFont(Font.RobotoRegular, this, R.id.txt_transaction_date, R.id.txt_transaction_amount, R.id.edit_category_other);
+        Font.setFont(Font.RobotoRegular, this, R.id.bnt_memo_photo_taker);
+        Font.setFont(Font.RobotoRegularItalic, this, R.id.edit_transaction_note);
+
+
         AccountManager accountManager = getApp().getAccountManager();
 
         Intent intent = getIntent();
@@ -102,10 +113,22 @@ public class TransactionActivity extends BaseActivity {
         }
 
         transaction.transactionNote = cashManager.getTransactionNote();
+        if (transaction.transactionCategory.equals("Other")) {
+            EditText categoryName = (EditText) findViewById(R.id.edit_category_other);
+            if (categoryName != null) {
+                String enteredCategory = categoryName.getText().toString();
+                if (enteredCategory.length() > 1) {
+                    transaction.transactionCategory = enteredCategory;
+                }
+            }
+        }
+
         Account account = getApp().getAccountManager().getAccountByName(transaction.accountName);
         account.addNewTransaction(transaction);
         getApp().getAccountManager().write(getApp());
         finish();
+
+        Log.d("Category", transaction.transactionCategory);
     }
 
 

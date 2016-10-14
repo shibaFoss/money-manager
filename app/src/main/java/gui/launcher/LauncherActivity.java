@@ -21,7 +21,7 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
-        Font.setFont(Font.LatoMedium, this, R.id.txt_company_name);
+        Font.setFont(Font.RobotoRegular, this, R.id.txt_company_name);
 
         //the account manager is not set yet. so initialize it first.
         if (getApp().getAccountManager() == null) {

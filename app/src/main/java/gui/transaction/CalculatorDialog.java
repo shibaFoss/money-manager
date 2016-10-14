@@ -8,13 +8,11 @@ import android.widget.TextView;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-
 import gui.BaseActivity;
 import in.mobi_space.money_manager.R;
 import utils.DialogUtility;
+import utils.Font;
+import utils.ViewUtility;
 
 /**
  * The class shows a calculator dialog to the user, where user can calculate basic maths.
@@ -88,8 +86,14 @@ class CalculatorDialog implements View.OnClickListener {
         View[] views = new View[]{bntClear, bnt1, bnt2, bnt3, bnt4, bnt5, bnt6, bnt7, bnt8, bnt9, bnt0,
                 bntDot, bntMinus, bntPlus, bntMultiply, bntDivision, bntEqual, bntCancel, bntDone};
 
-        for (View view : views)
+        for (View view : views) {
+            if (view instanceof TextView)
+                ((TextView) view).setTypeface(Font.RobotoLight);
+
             view.setOnClickListener(this);
+        }
+
+        preview.setTypeface(Font.RobotoRegular);
 
         bntClear.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -147,7 +151,7 @@ class CalculatorDialog implements View.OnClickListener {
         if (id == bntDone.getId() || id == bntEqual.getId()) {
             try {
                 Expression expression = new ExpressionBuilder(preview.getText().toString()).build();
-                double result = expression.evaluate();
+                double result = Double.parseDouble(expression.evaluate() + "");
 
                 if (id == bntDone.getId()) {
                     dismiss();
@@ -155,9 +159,7 @@ class CalculatorDialog implements View.OnClickListener {
                         resultListener.onSubmitResult(result, dialog);
 
                 } else {
-                    DecimalFormat df = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-                    df.setMaximumFractionDigits(340); //340 = DecimalFormat.DOUBLE_FRACTION_DIGITS
-                    preview.setText(df.format(result));
+                    preview.setText(ViewUtility.getFullNumber(result));
                 }
 
             } catch (Exception err) {

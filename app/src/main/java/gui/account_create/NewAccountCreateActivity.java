@@ -11,6 +11,7 @@ import accounts.Transaction;
 import gui.BaseActivity;
 import gui.home.HomeActivity;
 import in.mobi_space.money_manager.R;
+import utils.Font;
 
 public class NewAccountCreateActivity extends BaseActivity {
 
@@ -23,6 +24,7 @@ public class NewAccountCreateActivity extends BaseActivity {
 
     @Override
     public void onInitialize(Bundle bundle) {
+        initFonts();
         accountName = (EditText) findViewById(R.id.edit_account_name);
         accountBalance = (EditText) findViewById(R.id.edit_starting_balance);
     }
@@ -58,9 +60,7 @@ public class NewAccountCreateActivity extends BaseActivity {
 
         String enteredAmount = accountBalance.getText().toString();
         if (enteredAmount.length() > 1) {
-            double result = Double.valueOf(enteredAmount);
-            result = Math.floor(result * 100) / 100;
-            transaction.transactionAmount = result;
+            transaction.transactionAmount = Double.parseDouble(enteredAmount);
         } else {
             transaction.transactionAmount = 0;
         }
@@ -80,6 +80,13 @@ public class NewAccountCreateActivity extends BaseActivity {
             startActivity(HomeActivity.class);
 
         finish();
+    }
+
+    private void initFonts() {
+        int[] ids = new int[]{R.id.txt_account_name, R.id.edit_account_name, R.id.txt_currency, R.id
+                .currency_selector_spinner, R.id.txt_current_balance, R.id.edit_starting_balance};
+        Font.setFont(Font.RobotoRegular, this, ids);
+        Font.setFont(Font.RobotoRegular, this, R.id.txt_toolbar);
     }
 
     private String getCurrencySymbolByTimeZone() {

@@ -109,4 +109,5 @@
     <string name="initial_balance">Initial balance.</string>
     <string name="starting_balance">Starting Balance</string>
     <string name="choose_option">Choose option</string>
+    <string name="other">Other</string>
 </resources>

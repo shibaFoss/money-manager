@@ -93,7 +93,7 @@ class TransactionMainCashManager implements View.OnClickListener {
         transactionDatePreview.setText(String.valueOf(transaction.dayCode + "/" + (transaction.monthCode + 1) + "/" +
                 transaction.yearCode));
         String currency = activity.getApp().getAccountManager().getAccountByName(transaction.accountName).currencySymbol;
-        transactionAmountPreview.setText(String.valueOf(currency + " " + makeRoundedValue(transaction.transactionAmount)));
+        transactionAmountPreview.setText(String.valueOf(currency + " " + ViewUtility.getFormattedNumber(transaction.transactionAmount)));
 
         if (transaction.isExpense)
             transactionAmountPreview.setTextColor(activity.getColorFrom(R.color.md_red_600));
