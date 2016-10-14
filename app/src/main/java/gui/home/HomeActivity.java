@@ -14,6 +14,7 @@ import java.util.Calendar;
 import accounts.Account;
 import accounts.AccountManager;
 import accounts.Transaction;
+import core.App;
 import gui.BaseActivity;
 import gui.home.TransactionListAdapter.OnTransactionClick;
 import gui.transaction.TransactionActivity;
@@ -28,7 +29,6 @@ import static accounts.AccountManager.getTotalAvailableBalance;
 import static accounts.AccountManager.getTotalBudget;
 import static accounts.AccountManager.getTotalExpenses;
 import static accounts.AccountManager.getTotalIncome;
-import static utils.ViewUtility.makeRoundedValue;
 
 public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
@@ -54,6 +54,8 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         month = Calendar.getInstance().get(Calendar.MONTH);
         year = Calendar.getInstance().get(Calendar.YEAR);
         updateTransactions(month, year);
+
+        AccountManager.writeObject(getApp().getAccountManager(), App.appDirectory, AccountManager.ACCOUNT_JSON_FILE_NAME);
     }
 
 

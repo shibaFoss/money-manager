@@ -110,4 +110,10 @@
     <string name="starting_balance">Starting Balance</string>
     <string name="choose_option">Choose option</string>
     <string name="other">Other</string>
+    <string name="pic_a_choice">Pic a choice</string>
+    <string name="select_file_to_upload">Select a File to Upload</string>
+    <string name="restore_data_from_sdcard">Restore data from sdcard</string>
+    <string name="i_am_new_user">I am a new user</string>
+    <string name="please_install_a_file_mager">Please install a File Manager.</string>
+    <string name="item_is_not_valid_database_file">The selected item is not a valid database file.</string>
 </resources>

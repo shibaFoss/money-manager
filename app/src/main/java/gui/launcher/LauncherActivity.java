@@ -1,15 +1,27 @@
 package gui.launcher;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.io.File;
 
 import accounts.AccountManager;
 import gui.BaseActivity;
-import gui.account_create.NewAccountCreateActivity;
 import gui.home.HomeActivity;
 import in.mobi_space.money_manager.R;
+import utils.FileUtils;
 import utils.Font;
+import utils.WritableObject;
+
+import static gui.launcher.InitialDialog.FILE_SELECT_CODE;
 
 public class LauncherActivity extends BaseActivity {
 
@@ -42,21 +54,59 @@ public class LauncherActivity extends BaseActivity {
         finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case FILE_SELECT_CODE:
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    try {
+                        String path = FileUtils.getPath(this, uri);
+                        if (path != null) {
+                            File database = new File(path);
+                            if (database.exists()) {
+                                WritableObject wo = AccountManager.readObjectFromSdcard(database);
+                                if (wo != null) {
+                                    AccountManager am = (AccountManager) wo;
+                                    getApp().setAccountManager(am);
+                                    am.write(getApp());
+                                    showSimpleHtmlMessageBox(getString(R.string.restart_app_for_effect),
+                                            new MaterialDialog.SingleButtonCallback() {
+                                                @Override
+                                                public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                    finish();
+                                                }
+                                            });
+                                } else {
+                                    vibrate(20);
+                                    toast(R.string.item_is_not_valid_database_file);
+                                    startNextActivity();
+                                }
+                            }
+                        }
+                    } catch (Throwable error) {
+                        error.printStackTrace();
+                        toast(R.string.item_is_not_valid_database_file);
+                        startNextActivity();
+                    }
+                }
+                break;
+        }
 
-    private void startNextActivity() {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void startNextActivity() {
         AccountManager am = getApp().getAccountManager();
         if (am != null) {
             if (am.accounts.size() == 0) {
-                Intent intent = new Intent(LauncherActivity.this, NewAccountCreateActivity.class);
-                intent.putExtra("isLauncherFired", true);
-                startActivity(intent);
-
+                new InitialDialog(this);
             } else {
                 startActivity(HomeActivity.class);
+                finish();
             }
         }
-
-        finish();
     }
 
 }

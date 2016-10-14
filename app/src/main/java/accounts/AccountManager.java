@@ -14,7 +14,7 @@ import utils.WritableObject;
 public class AccountManager extends WritableObject {
     private static final long serialVersionUID = 296984946043256L;
 
-    private static final String ACCOUNT_JSON_FILE_NAME = "account_manager.db";
+    public static final String ACCOUNT_JSON_FILE_NAME = "account_manager.db";
 
     public ArrayList<Account> accounts = new ArrayList<>();
 
