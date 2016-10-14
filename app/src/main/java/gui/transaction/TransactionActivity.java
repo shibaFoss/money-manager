@@ -61,7 +61,7 @@ public class TransactionActivity extends BaseActivity {
         Account account = accountManager.accounts.get(accountPosition);
         transaction = new Transaction();
         transaction.accountName = account.accountName;
-        transaction.uniqueId = account.getNewTransactionUniqueId();
+        transaction.uniqueId = account.getNewTransactionUniqueId(accountManager);
         transaction.isExpense = isExpenseTransaction;
         transaction.updateTransactionTime();
 

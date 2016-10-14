@@ -53,7 +53,7 @@ public class NewAccountCreateActivity extends BaseActivity {
 
         //---------------------------------------------------------------//
         Transaction transaction = new Transaction();
-        transaction.uniqueId = account.getNewTransactionUniqueId();
+        transaction.uniqueId = account.getNewTransactionUniqueId(getApp().getAccountManager());
         transaction.accountName = account.accountName;
         transaction.associateAccountId = account.uniqueId;
         transaction.isExpense = false;
