@@ -14,12 +14,13 @@ import java.util.Calendar;
 import accounts.Account;
 import accounts.AccountManager;
 import accounts.Transaction;
-import core.App;
 import gui.BaseActivity;
+import gui.home.AccountSwitcherPopupMenu.OnAccountSelection;
 import gui.home.TransactionListAdapter.OnTransactionClick;
 import gui.transaction.TransactionActivity;
 import gui.transaction_viewer.TransactionViewerActivity;
 import in.mobi_space.money_manager.R;
+import libs.Remember;
 import utils.DialogUtility;
 import utils.Font;
 import utils.OsUtility;
@@ -32,9 +33,12 @@ import static accounts.AccountManager.getTotalIncome;
 
 public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
+    public static final String DEFAULT_ACCOUNT_INDEX = "DEFAULT_ACCOUNT_INDEX";
+
     private ListView transactionList;
     private View overviewHeaderLayout;
     private AccountManager accountManager;
+    private AccountSwitcherPopupMenu accountSwitcherPopupMenu;
     private int month, year;
 
 
@@ -50,19 +54,41 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
         accountManager = getApp().getAccountManager();
         transactionList = (ListView) findViewById(R.id.list_transaction);
+        accountSwitcherPopupMenu = new AccountSwitcherPopupMenu(this);
+        new NavigationDrawer(this);
 
         month = Calendar.getInstance().get(Calendar.MONTH);
         year = Calendar.getInstance().get(Calendar.YEAR);
-        updateTransactions(month, year);
 
-        AccountManager.writeObject(getApp().getAccountManager(), App.appDirectory, AccountManager.ACCOUNT_JSON_FILE_NAME);
+        //First we need to select the default account that user has been saved as his default account to be
+        //shown at the overview cards. But we don't find any default account then we will show all account's
+        //total information on the overview cards.
+        //-------------------------------------------------------------------------------//
+        TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
+        int accIndex = Remember.getInt(DEFAULT_ACCOUNT_INDEX, -1);
+
+        if (accIndex == -1) { //it means we need to show all account's total overview.
+            updateTransactions(accountManager.accounts, month, year);
+            toolbar.setText(getString(R.string.all_accounts));
+
+        } else {
+            Account acc = accountManager.accounts.get(accIndex);
+            if (acc != null) {
+                ArrayList<Account> accounts;
+                accounts = new ArrayList<>();
+                accounts.add(acc);
+                updateTransactions(accounts, month, year);
+                toolbar.setText(acc.accountName);
+            }
+        }
+
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        updateTransactions(month, year);
+
     }
 
 
@@ -72,6 +98,48 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
     }
 
 
+    public void onAccountSwitcher(final View view) {
+        //We need to add an extra option called "All Accounts" before all other acc.
+        //---------------------------------------------------------------------//
+        String[] options = new String[1 + accountManager.accounts.size()];
+        for (int i = 0; i < options.length; i++) {
+            if (i == 0) options[i] = getString(R.string.all_accounts) + "                  ";
+            else options[i] = accountManager.accounts.get(i - 1).accountName;
+        }
+
+
+        //Building the dialog and show to user.
+        //---------------------------------------------------------------------//
+        accountSwitcherPopupMenu.setAccountSelectionListener(new OnAccountSelection() {
+            @Override
+            public void onSelect(String accountName) {
+                Account account = accountManager.getAccountByName(accountName);
+                if (account != null) {
+                    ArrayList<Account> accounts = new ArrayList<>();
+                    accounts.add(account);
+
+                    TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
+                    toolbar.setText(accountName);
+                    updateTransactions(accounts, month, year);
+
+                    //we need to save the account as the default account.
+                    Remember.putInt(DEFAULT_ACCOUNT_INDEX, accountManager.getAccountIndexByName(accountName));
+
+                } else {
+                    TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
+                    toolbar.setText(getString(R.string.all_accounts));
+                    updateTransactions(accountManager.accounts, month, year);
+
+                    //we need to save the account as the default account.
+                    Remember.putInt(DEFAULT_ACCOUNT_INDEX, -1);
+                }
+            }
+        });
+        accountSwitcherPopupMenu.setAnchorView(findViewById(R.id.txt_toolbar));
+        accountSwitcherPopupMenu.addItems(options);
+        accountSwitcherPopupMenu.show();
+    }
+
     public void onAddExpense(View view) {
         addNewTransaction(true);
     }
@@ -79,6 +147,12 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
     public void onAddIncome(View view) {
         addNewTransaction(false);
+    }
+
+    public void updateTransactions(ArrayList<Account> accounts, int month, int year) {
+        updateOverviewHeader(accounts, month, year);
+        TransactionListAdapter adapter = new TransactionListAdapter(this, accounts, month, year);
+        transactionList.setAdapter(adapter);
     }
 
 
@@ -100,18 +174,6 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
                         dialog.dismiss();
                     }
                 }).show();
-    }
-
-
-    public void updateTransactions(int month, int year) {
-        updateOverviewInformation(accountManager.accounts, month, year);
-    }
-
-
-    public void updateOverviewInformation(ArrayList<Account> accounts, int month, int year) {
-        updateOverviewHeader(accounts, month, year);
-        TransactionListAdapter adapter = new TransactionListAdapter(this, accounts, month, year);
-        transactionList.setAdapter(adapter);
     }
 
 

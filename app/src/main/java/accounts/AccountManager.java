@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import core.App;
 import utils.WritableObject;
 
+@SuppressWarnings("WeakerAccess")
 public class AccountManager extends WritableObject {
     private static final long serialVersionUID = 296984946043256L;
 
@@ -162,5 +163,15 @@ public class AccountManager extends WritableObject {
                 return ac;
 
         return null;
+    }
+
+    public int getAccountIndexByName(String accountName) {
+        for (int index = 0; index < accounts.size(); index++) {
+            Account acc = accounts.get(index);
+            if (acc.accountName.equals(accountName))
+                return index;
+        }
+
+        return -1;
     }
 }

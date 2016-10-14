@@ -53,6 +53,7 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="start"
                     android:hint="@string/atm_card"
+                    android:maxLength="14"
                     android:inputType="text" />
 
             </LinearLayout>
