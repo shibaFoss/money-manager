@@ -36,6 +36,7 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
     public static final String DEFAULT_ACCOUNT_INDEX = "DEFAULT_ACCOUNT_INDEX";
 
     private ListView transactionList;
+    private TransactionListAdapter transactionListAdapter;
     private View overviewHeaderLayout;
     private AccountManager accountManager;
     private AccountSwitcherPopupMenu accountSwitcherPopupMenu;
@@ -88,7 +89,8 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
     @Override
     public void onResume() {
         super.onResume();
-
+        if (transactionListAdapter != null)
+            transactionListAdapter.notifyDataSetChanged();
     }
 
 
@@ -98,9 +100,16 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
     }
 
 
+    @Override
+    public void onTransactionClick(Transaction transaction, int listPosition) {
+        Intent intent = new Intent(this, TransactionViewerActivity.class);
+        intent.putExtra(TransactionViewerActivity.TRANSACTION_KEY, transaction);
+        startActivity(intent);
+    }
+
+
     public void onAccountSwitcher(final View view) {
         //We need to add an extra option called "All Accounts" before all other acc.
-        //---------------------------------------------------------------------//
         String[] options = new String[1 + accountManager.accounts.size()];
         for (int i = 0; i < options.length; i++) {
             if (i == 0) options[i] = getString(R.string.all_accounts) + "                  ";
@@ -109,36 +118,41 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
 
         //Building the dialog and show to user.
-        //---------------------------------------------------------------------//
         accountSwitcherPopupMenu.setAccountSelectionListener(new OnAccountSelection() {
             @Override
             public void onSelect(String accountName) {
-                Account account = accountManager.getAccountByName(accountName);
-                if (account != null) {
-                    ArrayList<Account> accounts = new ArrayList<>();
-                    accounts.add(account);
-
-                    TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
-                    toolbar.setText(accountName);
-                    updateTransactions(accounts, month, year);
-
-                    //we need to save the account as the default account.
-                    Remember.putInt(DEFAULT_ACCOUNT_INDEX, accountManager.getAccountIndexByName(accountName));
-
-                } else {
-                    TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
-                    toolbar.setText(getString(R.string.all_accounts));
-                    updateTransactions(accountManager.accounts, month, year);
-
-                    //we need to save the account as the default account.
-                    Remember.putInt(DEFAULT_ACCOUNT_INDEX, -1);
-                }
+                setDefaultAccountToBeOverviewFirst(accountName);
             }
         });
         accountSwitcherPopupMenu.setAnchorView(findViewById(R.id.txt_toolbar));
         accountSwitcherPopupMenu.addItems(options);
         accountSwitcherPopupMenu.show();
     }
+
+
+    private void setDefaultAccountToBeOverviewFirst(String accountName) {
+        Account account = accountManager.getAccountByName(accountName);
+        if (account != null) {
+            ArrayList<Account> accounts = new ArrayList<>();
+            accounts.add(account);
+
+            TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
+            toolbar.setText(accountName);
+            updateTransactions(accounts, month, year);
+
+            //we need to save the account as the default account.
+            Remember.putInt(DEFAULT_ACCOUNT_INDEX, accountManager.getAccountIndexByName(accountName));
+
+        } else {
+            TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
+            toolbar.setText(getString(R.string.all_accounts));
+            updateTransactions(accountManager.accounts, month, year);
+
+            //we need to save the account as the default account.
+            Remember.putInt(DEFAULT_ACCOUNT_INDEX, -1);
+        }
+    }
+
 
     public void onAddExpense(View view) {
         addNewTransaction(true);
@@ -149,37 +163,50 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         addNewTransaction(false);
     }
 
-    public void updateTransactions(ArrayList<Account> accounts, int month, int year) {
-        updateOverviewHeader(accounts, month, year);
-        TransactionListAdapter adapter = new TransactionListAdapter(this, accounts, month, year);
-        transactionList.setAdapter(adapter);
+
+    private void addNewTransaction(final boolean isExpense) {
+        int accountIndex = Remember.getInt(DEFAULT_ACCOUNT_INDEX, -1);
+        if (accountIndex == -1) {
+            String accNames[] = new String[accountManager.accounts.size()];
+            for (int i = 0; i < accNames.length; i++)
+                accNames[i] = accountManager.accounts.get(i).accountName;
+
+            promptUserToChooseTransactionAccount(isExpense, accNames);
+        } else {
+            startTransactionActivity(accountIndex, isExpense);
+        }
     }
 
 
-    private void addNewTransaction(final boolean isExpense) {
-        String accountNameArray[] = new String[accountManager.accounts.size()];
-        for (int i = 0; i < accountNameArray.length; i++)
-            accountNameArray[i] = accountManager.accounts.get(i).accountName;
-
+    private void promptUserToChooseTransactionAccount(final boolean isExpense, CharSequence[] accountNameArray) {
         DialogUtility.getDefaultBuilder(this)
-                .title(R.string.select_account)
-                .items((CharSequence[]) accountNameArray)
+                .title(isExpense ? getString(R.string.choose_expense_account) : getString(R.string.choose_income_account))
+                .items(accountNameArray)
                 .itemsCallback(new MaterialDialog.ListCallback() {
                     @Override
                     public void onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        Intent intent = new Intent(HomeActivity.this, TransactionActivity.class);
-                        intent.putExtra(TransactionActivity.ACCOUNT_ARRAY_POSITION, which);
-                        intent.putExtra(TransactionActivity.IS_EXPENSE, isExpense);
-                        startActivity(intent);
+                        startTransactionActivity(which, isExpense);
                         dialog.dismiss();
                     }
                 }).show();
     }
 
 
-    /**
-     * Build a header view and update the view's property with the newest transactions info.
-     */
+    private void startTransactionActivity(int which, boolean isExpense) {
+        Intent intent = new Intent(HomeActivity.this, TransactionActivity.class);
+        intent.putExtra(TransactionActivity.ACCOUNT_ARRAY_POSITION, which);
+        intent.putExtra(TransactionActivity.IS_EXPENSE, isExpense);
+        startActivity(intent);
+    }
+
+
+    public void updateTransactions(ArrayList<Account> accounts, int month, int year) {
+        updateOverviewHeader(accounts, month, year);
+        transactionListAdapter = new TransactionListAdapter(this, accounts, month, year);
+        transactionList.setAdapter(transactionListAdapter);
+    }
+
+
     private void updateOverviewHeader(ArrayList<Account> accounts, int month, int year) {
         if (overviewHeaderLayout == null)
             overviewHeaderLayout = View.inflate(this, R.layout.activity_home_overview, null);
@@ -242,12 +269,5 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         overviewTotalExpense.setText(currency + " " + ViewUtility.getFormattedNumber(totalExpensesOfTheMonth));
     }
 
-
-    @Override
-    public void onTransactionClick(Transaction transaction, int listPosition) {
-        Intent intent = new Intent(this, TransactionViewerActivity.class);
-        intent.putExtra(TransactionViewerActivity.TRANSACTION_KEY, transaction);
-        startActivity(intent);
-    }
 
 }

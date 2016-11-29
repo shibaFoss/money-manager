@@ -44,7 +44,8 @@ public class TransactionActivity extends BaseActivity {
         Font.setFont(Font.RobotoRegular, this, R.id.txt_toolbar, R.id.txt_date,
                 R.id.txt_total_amount, R.id.txt_transaction_note, R.id.txt_category, R.id.txt_memo);
 
-        Font.setFont(Font.RobotoRegular, this, R.id.txt_transaction_date, R.id.txt_transaction_amount, R.id.edit_category_other);
+        Font.setFont(Font.RobotoRegular, this, R.id.txt_transaction_date, R.id.txt_transaction_amount, R.id.edit_category_other,
+                R.id.txt_transaction_account, R.id.txt_account);
         Font.setFont(Font.RobotoRegular, this, R.id.bnt_memo_photo_taker);
         Font.setFont(Font.RobotoRegularItalic, this, R.id.edit_transaction_note);
 

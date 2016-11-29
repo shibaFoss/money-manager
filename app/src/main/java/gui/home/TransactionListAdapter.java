@@ -22,11 +22,15 @@ class TransactionListAdapter extends BaseAdapter {
     private BaseActivity activity;
     private OnTransactionClick onTransactionClick;
     private ArrayList<Item> items = new ArrayList<>();
+    private int month, year;
+    private ArrayList<Account> accounts;
 
     TransactionListAdapter(HomeActivity homeActivity, ArrayList<Account> accounts, int month, int year) {
         this.onTransactionClick = homeActivity;
         this.activity = homeActivity;
-        setTransactions(accounts, month, year);
+        this.accounts = accounts;
+        this.month = month;
+        this.year = year;
     }
 
     private void setTransactions(ArrayList<Account> accounts, int month, int year) {
@@ -55,6 +59,7 @@ class TransactionListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+        setTransactions(accounts, month, year);
         return items.size();
     }
 

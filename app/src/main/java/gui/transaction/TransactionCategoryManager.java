@@ -50,14 +50,16 @@ class TransactionCategoryManager {
                                                 0, 0, R.drawable.ic_white_box, 0);
                                     }
                                 }
+                                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
                                 if (name.equals("Other")) {
                                     activity.findViewById(R.id.edit_category_other).setVisibility(View.VISIBLE);
                                     EditText categoryOtherEditText = (EditText) activity.findViewById(R.id.edit_category_other);
                                     categoryOtherEditText.requestFocus();
-                                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
                                     imm.showSoftInput(categoryOtherEditText, InputMethodManager.SHOW_IMPLICIT);
 
                                 } else {
+                                    EditText categoryOtherEditText = (EditText) activity.findViewById(R.id.edit_category_other);
+                                    imm.hideSoftInputFromInputMethod(categoryOtherEditText.getWindowToken(), InputMethodManager.SHOW_IMPLICIT);
                                     activity.findViewById(R.id.edit_category_other).setVisibility(View.GONE);
                                 }
 

@@ -45,7 +45,7 @@ public class LauncherActivity extends BaseActivity {
             public void run() {
                 startNextActivity();
             }
-        }, 1500);
+        }, 500);
     }
 
 

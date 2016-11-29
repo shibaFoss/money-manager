@@ -174,4 +174,13 @@ public class AccountManager extends WritableObject {
 
         return -1;
     }
+
+    public static String[] getAllAccountNames(AccountManager accountManager) {
+        String[] accountNames = new String[accountManager.accounts.size()];
+        for (int i = 0; i < accountNames.length; i++) {
+            accountNames[i] = accountManager.accounts.get(i).accountName;
+        }
+
+        return accountNames;
+    }
 }

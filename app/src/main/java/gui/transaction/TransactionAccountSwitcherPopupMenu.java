@@ -1,7 +1,6 @@
-package gui.home;
+package gui.transaction;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,10 +12,10 @@ import android.widget.TextView;
 import in.mobi_space.money_manager.R;
 import utils.Font;
 
-class AccountSwitcherPopupMenu implements View.OnClickListener {
+class TransactionAccountSwitcherPopupMenu implements View.OnClickListener {
 
     private PopupWindow popupWindow;
-    private HomeActivity activity;
+    private TransactionActivity activity;
     private View anchorView;
     private View popupView;
     private OnAccountSelection accountSelectionListener;
@@ -25,7 +24,7 @@ class AccountSwitcherPopupMenu implements View.OnClickListener {
         void onSelect(String accountName);
     }
 
-    AccountSwitcherPopupMenu(HomeActivity activity) {
+    TransactionAccountSwitcherPopupMenu(TransactionActivity activity) {
         this.activity = activity;
         initialize();
     }
@@ -39,10 +38,10 @@ class AccountSwitcherPopupMenu implements View.OnClickListener {
     }
 
     public void show() {
-        popupWindow.showAtLocation(anchorView, Gravity.TOP, 0, anchorView.getHeight() / 2);
+        popupWindow.showAsDropDown(anchorView, 0, anchorView.getHeight() / 2);
     }
 
-    public void close() {
+    void close() {
         popupWindow.dismiss();
     }
 
@@ -100,6 +99,5 @@ class AccountSwitcherPopupMenu implements View.OnClickListener {
                 itemContainer.addView(itemMenu);
             }
         }
-
     }
 }

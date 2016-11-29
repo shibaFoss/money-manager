@@ -4,6 +4,51 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <TextView
+        android:id="@+id/txt_transaction_account"
+        style="@style/textBodyStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="start"
+        android:text="@string/transaction_account"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_8"
+        android:background="?android:attr/textColorSecondary" />
+
+    <TextView
+        android:id="@+id/txt_account"
+        style="@style/SubHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_6"
+
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableEnd="@drawable/ic_arrow_down_indicator"
+
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableStart="@drawable/ic_bank"
+        android:gravity="center_vertical"
+
+        android:padding="@dimen/dp_5"
+        android:text="@string/atm_card"
+        android:textStyle="normal" />
+
+
     <TextView
         android:id="@+id/txt_transaction_note"
         style="@style/textBodyStyle"
