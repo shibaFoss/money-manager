@@ -35,11 +35,15 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
     public static final String DEFAULT_ACCOUNT_INDEX = "DEFAULT_ACCOUNT_INDEX";
 
+    private TextView toolbar;
     private ListView transactionList;
-    private TransactionListAdapter transactionListAdapter;
     private View overviewHeaderLayout;
+
     private AccountManager accountManager;
+    private TransactionListAdapter transactionListAdapter;
+    private NavigationDrawer navigationDrawer;
     private AccountSwitcherPopupMenu accountSwitcherPopupMenu;
+
     private int month, year;
 
 
@@ -55,8 +59,9 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
         accountManager = getApp().getAccountManager();
         transactionList = (ListView) findViewById(R.id.list_transaction);
+        toolbar = (TextView) findViewById(R.id.txt_toolbar);
         accountSwitcherPopupMenu = new AccountSwitcherPopupMenu(this);
-        new NavigationDrawer(this);
+        navigationDrawer = new NavigationDrawer(this);
 
         month = Calendar.getInstance().get(Calendar.MONTH);
         year = Calendar.getInstance().get(Calendar.YEAR);
@@ -66,31 +71,18 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         //total information on the overview cards.
         //-------------------------------------------------------------------------------//
         TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
-        int accIndex = Remember.getInt(DEFAULT_ACCOUNT_INDEX, -1);
-
-        if (accIndex == -1) { //it means we need to show all account's total overview.
-            updateTransactions(accountManager.accounts, month, year);
-            toolbar.setText(getString(R.string.all_accounts));
-
-        } else {
-            Account acc = accountManager.accounts.get(accIndex);
-            if (acc != null) {
-                ArrayList<Account> accounts;
-                accounts = new ArrayList<>();
-                accounts.add(acc);
-                updateTransactions(accounts, month, year);
-                toolbar.setText(acc.accountName);
-            }
-        }
-
+        int defaultAccountIndex = Remember.getInt(DEFAULT_ACCOUNT_INDEX, -1);
+        updateUI(getAccountsByIndexId(defaultAccountIndex), month, year);
+        toolbar.setText((defaultAccountIndex == -1) ?
+                getString(R.string.all_accounts) :
+                getAccountsByIndexId(defaultAccountIndex).get(0).accountName);
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        if (transactionListAdapter != null)
-            transactionListAdapter.notifyDataSetChanged();
+        updateUIOnResume();
     }
 
 
@@ -130,6 +122,23 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
     }
 
 
+    private ArrayList<Account> getAccountsByIndexId(int accountIndexId) {
+        if (accountIndexId == -1) { //it means we need to show all account's total overview.
+            return accountManager.accounts;
+
+        } else {
+            Account acc = accountManager.accounts.get(accountIndexId);
+            if (acc != null) {
+                ArrayList<Account> accounts = new ArrayList<>();
+                accounts.add(acc);
+                return accounts;
+            }
+        }
+
+        return accountManager.accounts;
+    }
+
+
     private void setDefaultAccountToBeOverviewFirst(String accountName) {
         Account account = accountManager.getAccountByName(accountName);
         if (account != null) {
@@ -138,7 +147,7 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
 
             TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
             toolbar.setText(accountName);
-            updateTransactions(accounts, month, year);
+            updateUI(accounts, month, year);
 
             //we need to save the account as the default account.
             Remember.putInt(DEFAULT_ACCOUNT_INDEX, accountManager.getAccountIndexByName(accountName));
@@ -146,10 +155,49 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
         } else {
             TextView toolbar = (TextView) findViewById(R.id.txt_toolbar);
             toolbar.setText(getString(R.string.all_accounts));
-            updateTransactions(accountManager.accounts, month, year);
+            updateUI(accountManager.accounts, month, year);
 
             //we need to save the account as the default account.
             Remember.putInt(DEFAULT_ACCOUNT_INDEX, -1);
+        }
+    }
+
+
+    /**
+     * Update the transaction list information after activity get resumed. This
+     * function is used if any new transaction got listed in account and need to update
+     * in the list view.
+     */
+    private void updateUIOnResume() {
+        if (toolbar == null)
+            toolbar = (TextView) findViewById(R.id.txt_toolbar);
+
+        int defaultAccount = Remember.getInt(DEFAULT_ACCOUNT_INDEX, -1);
+        if (defaultAccount == -1) { //-1 represent for all accounts.
+            updateListAdapter(accountManager.accounts);
+            toolbar.setText(getString(R.string.all_accounts));
+
+        } else {
+            Account acc = accountManager.accounts.get(defaultAccount);
+            if (acc != null) {
+                ArrayList<Account> accounts = new ArrayList<>();
+                accounts.add(acc);
+                updateListAdapter(accounts);
+                toolbar.setText(acc.accountName);
+            }
+        }
+    }
+
+
+    private void updateListAdapter(ArrayList<Account> accounts) {
+        updateHeaderView(accounts, month, year);
+        if (transactionListAdapter != null) {
+            transactionListAdapter.setAccounts(accounts, month, year);
+            transactionListAdapter.notifyDataSetChanged();
+
+        } else {
+            vibrate(10);
+            updateUI(accounts, month, year);
         }
     }
 
@@ -200,38 +248,39 @@ public class HomeActivity extends BaseActivity implements OnTransactionClick {
     }
 
 
-    public void updateTransactions(ArrayList<Account> accounts, int month, int year) {
-        updateOverviewHeader(accounts, month, year);
-        transactionListAdapter = new TransactionListAdapter(this, accounts, month, year);
+    public void updateUI(ArrayList<Account> accounts, int month, int year) {
+        updateHeaderView(accounts, month, year);
+        if (transactionListAdapter == null)
+            transactionListAdapter = new TransactionListAdapter(this);
+
+        transactionListAdapter.setAccounts(accounts, month, year);
         transactionList.setAdapter(transactionListAdapter);
     }
 
 
-    private void updateOverviewHeader(ArrayList<Account> accounts, int month, int year) {
+    private void updateHeaderView(ArrayList<Account> accounts, int month, int year) {
         if (overviewHeaderLayout == null)
             overviewHeaderLayout = View.inflate(this, R.layout.activity_home_overview, null);
 
-        View accountOverview = overviewHeaderLayout;
-        TextView overviewDate = (TextView) accountOverview.findViewById(R.id.txt_overview_month);
-        TextView overviewTotalBalance = (TextView) accountOverview.findViewById(R.id.txt_total_balance);
-        TextView overviewSavingsAmount = (TextView) accountOverview.findViewById(R.id.txt_overview_savings);
-        TextView overviewTotalIncome = (TextView) accountOverview.findViewById(R.id.txt_total_income);
-        TextView overviewBudget = (TextView) accountOverview.findViewById(R.id.txt_overview_budget);
-        TextView overviewTotalExpense = (TextView) accountOverview.findViewById(R.id.txt_total_expenses);
+        View headerView = overviewHeaderLayout;
+        TextView overviewDate = (TextView) headerView.findViewById(R.id.txt_overview_month);
+        TextView overviewTotalBalance = (TextView) headerView.findViewById(R.id.txt_total_balance);
+        TextView overviewSavingsAmount = (TextView) headerView.findViewById(R.id.txt_overview_savings);
+        TextView overviewTotalIncome = (TextView) headerView.findViewById(R.id.txt_total_income);
+        TextView overviewBudget = (TextView) headerView.findViewById(R.id.txt_overview_budget);
+        TextView overviewTotalExpense = (TextView) headerView.findViewById(R.id.txt_total_expenses);
 
-        Font.setFont(Font.RobotoRegular, accountOverview, R.id.txt_month, R.id.txt_total_available_balance,
+        Font.setFont(Font.RobotoRegular, headerView, R.id.txt_month, R.id.txt_total_available_balance,
                 R.id.txt_saving, R.id.txt_total_income_preview, R.id.txt_budget,
                 R.id.txt_total_expenses_preview);
 
-        Font.setFont(Font.RobotoRegular, accountOverview, R.id.txt_overview_month, R.id.txt_total_balance,
+        Font.setFont(Font.RobotoRegular, headerView, R.id.txt_overview_month, R.id.txt_total_balance,
                 R.id.txt_overview_savings, R.id.txt_total_income, R.id.txt_overview_budget,
                 R.id.txt_total_expenses);
 
-        if (transactionList != null) {
-            if (transactionList.getHeaderViewsCount() < 1) {
-                transactionList.addHeaderView(accountOverview);
-            }
-        }
+        if (transactionList != null)
+            if (transactionList.getHeaderViewsCount() < 1)
+                transactionList.addHeaderView(headerView);
 
         //----------------------------------------------------------------------------------------//
         String currency = accounts.get(0).currencySymbol;

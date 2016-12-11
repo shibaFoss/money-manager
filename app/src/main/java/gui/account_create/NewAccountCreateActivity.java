@@ -90,6 +90,11 @@ public class NewAccountCreateActivity extends BaseActivity {
     }
 
     private String getCurrencySymbolByTimeZone() {
-        return "₹";
+        EditText input = (EditText) findViewById(R.id.currency_selector_spinner);
+        String txt = input.getText().toString();
+        if (txt.length() > 0)
+            return  txt;
+
+        return  "$";
     }
 }

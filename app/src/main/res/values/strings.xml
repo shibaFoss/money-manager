@@ -120,4 +120,7 @@
     <string name="transaction_account">Transaction Account</string>
     <string name="choose_expense_account">Choose Expense Account</string>
     <string name="choose_income_account">Choose Income Account</string>
+    <string name="currency_symbol">Currency Symbol</string>
+    <string name="_usd_symbol">$</string>
+    <string name="_0_usd">$ 0</string>
 </resources>

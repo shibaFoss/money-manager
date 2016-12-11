@@ -25,13 +25,19 @@ class TransactionListAdapter extends BaseAdapter {
     private int month, year;
     private ArrayList<Account> accounts;
 
-    TransactionListAdapter(HomeActivity homeActivity, ArrayList<Account> accounts, int month, int year) {
+
+    TransactionListAdapter(HomeActivity homeActivity) {
         this.onTransactionClick = homeActivity;
         this.activity = homeActivity;
+    }
+
+
+    public void setAccounts(ArrayList<Account> accounts, int month, int year) {
         this.accounts = accounts;
         this.month = month;
         this.year = year;
     }
+
 
     private void setTransactions(ArrayList<Account> accounts, int month, int year) {
         items.clear();
@@ -57,21 +63,25 @@ class TransactionListAdapter extends BaseAdapter {
 
     }
 
+
     @Override
     public int getCount() {
         setTransactions(accounts, month, year);
         return items.size();
     }
 
+
     @Override
     public Object getItem(int i) {
         return items.get(i);
     }
 
+
     @Override
     public long getItemId(int i) {
         return 0;
     }
+
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
@@ -134,6 +144,7 @@ class TransactionListAdapter extends BaseAdapter {
         return view;
     }
 
+
     private void inflateView(View view, ViewHolder viewHolder) {
         viewHolder.transactionLayout = view.findViewById(R.id.transaction_layout);
         viewHolder.transactionNote = (TextView) view.findViewById(R.id.txt_transaction_note);
@@ -142,6 +153,7 @@ class TransactionListAdapter extends BaseAdapter {
         viewHolder.transactionCategory = (TextView) view.findViewById(R.id.txt_transaction_category);
         view.setTag(viewHolder);
     }
+
 
     interface OnTransactionClick {
         void onTransactionClick(Transaction transaction, int listPosition);
